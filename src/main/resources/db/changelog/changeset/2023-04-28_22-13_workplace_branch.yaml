@@ -1,0 +1,69 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-workplace
+      author: Aleksandra
+      changes:
+        - createTable:
+            tableName: workplace
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: workplace_PK
+                    nullable: false
+              - column:
+                  name: name
+                  type: text
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: branch_id
+                  type: bigint
+
+  - changeSet:
+      id: create-branch
+      author: Aleksandra
+      changes:
+        - createTable:
+            tableName: branch
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: branch_PK
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: address
+                  type: text
+              - column:
+                  name: phone
+                  type: text
+              - column:
+                  name: company_id
+                  type: bigint
+  - changeSet:
+      id: create-connection-workplace_branch
+      author: Aleksandra
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: workplace
+            baseColumnNames: branch_id
+            referencedTableName: branch
+            referencedColumnNames: id
+            constraintName: workplace_branch_fk

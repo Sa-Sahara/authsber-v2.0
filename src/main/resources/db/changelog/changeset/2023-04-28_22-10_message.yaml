@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-message
+      author: Aleksandra
+      changes:
+        - createTable:
+            tableName: message
+            columns:
+            - column:
+                name: id
+                type: BIGINT
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  primaryKeyName: message_PK
+                  nullable: false
+            - column:
+                name: type
+                type: varchar(255)
+                constraints:
+                  nullable: false
+            - column:
+                name: accessCode
+                type: varchar(255)
+                constraints:
+                  nullable: false
+            - column:
+                name: user_id
+                type: BIGINT
+                constraints:
+                  nullable: false
+            - column:
+                name: create_time_millis
+                type: BIGINT
+                constraints:
+                  nullable: false

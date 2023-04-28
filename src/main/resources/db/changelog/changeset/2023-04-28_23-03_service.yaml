@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-service
+      author: Aleksandra
+      changes:
+        - createTable:
+            tableName: service
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: service_PK
+                    nullable: false
+              - column:
+                  name: name
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: price
+                  type: int
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create-order_service
+      author: Aleksandra
+      changes:
+        - createTable:
+            tableName: order_service
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    foreignKeyName: order_service_fk
+                    referencedTableName: order
+                    referencedColumnNames: id
+                  name: order_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    foreignKeyName: service_order_fk
+                    referencedTableName: service
+                    referencedColumnNames: id
+                  name: service_id
+                  type: BIGINT
+  - changeSet:
+      id: add_PK-order_service
+      author: Aleksandra
+      changes:
+        - addPrimaryKey:
+            columnNames: order_id, service_id
+            tableName: order_service

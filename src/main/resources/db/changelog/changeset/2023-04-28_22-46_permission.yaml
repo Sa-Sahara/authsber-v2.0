@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-permission
+      author: Aleksandra
+      changes:
+        - createTable:
+            tableName: permission
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: permissions_PK
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: slug
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: description
+                  type: clob
+  - changeSet:
+      id: create-role_permission
+      author: Aleksandra
+      changes:
+        - createTable:
+            tableName: role_permission
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    foreignKeyName: role_permission_fk
+                    referencedTableName: role
+                    referencedColumnNames: id
+                  name: role_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    foreignKeyName: permission_role_fk
+                    referencedTableName: permission
+                    referencedColumnNames: id
+                  name: permission_id
+                  type: BIGINT
+  - changeSet:
+      id: add_PK-role_permission
+      author: Aleksandra
+      changes:
+        - addPrimaryKey:
+            columnNames: role_id, permission_id
+            tableName: role_permission

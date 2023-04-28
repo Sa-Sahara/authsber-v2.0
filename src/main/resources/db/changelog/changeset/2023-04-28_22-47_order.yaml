@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-order
+      author: Aleksandra
+      changes:
+        - createTable:
+            tableName: order
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: order_PK
+                    nullable: false
+              - column:
+                  name: date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_start
+                  type: time without time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_finish
+                  type: time without time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: worker_id
+                  type: bigint
+              - column:
+                  name: workplace_id
+                  type: bigint
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: client_id
+                  type: bigint
+  - changeSet:
+      id: create-connection-order_workplace
+      author: Aleksandra
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: order
+            baseColumnNames: workplace_id
+            referencedTableName: workplace
+            referencedColumnNames: id
+            constraintName: order_workplace_fk

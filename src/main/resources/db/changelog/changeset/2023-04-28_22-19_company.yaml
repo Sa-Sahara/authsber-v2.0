@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-company
+      author: Aleksandra
+      changes:
+        - createTable:
+            tableName: company
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: company_PK
+                    nullable: false
+              - column:
+                  name: full_name
+                  type: text
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: short_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: address
+                  type: text
+              - column:
+                  name: phone
+                  type: text
+
+  - changeSet:
+      id: create-connection-branch_company
+      author: Aleksandra
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: branch
+            baseColumnNames: company_id
+            referencedTableName: company
+            referencedColumnNames: id
+            constraintName: branch_company_fk

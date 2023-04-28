@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-worktime
+      author: Aleksandra
+      changes:
+        - createTable:
+            tableName: worktime
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: worktime_PK
+                    nullable: false
+              - column:
+                  name: date
+                  type: date
+              - column:
+                  name: start
+                  type: time without time zone
+              - column:
+                  name: finish
+                  type: time without time zone
+              - column:
+                  name: workplace_id
+                  type: bigint
+              - column:
+                  name: user_id
+                  type: bigint
+  - changeSet:
+      id: create-connection-workplace_worktime
+      author: Aleksandra
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: worktime
+            baseColumnNames: workplace_id
+            referencedTableName: workplace
+            referencedColumnNames: id
+            constraintName: workplace_worktime_fk
+  - changeSet:
+      id: create-connection-user_worktime
+      author: Aleksandra
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: worktime
+            baseColumnNames: user_id
+            referencedTableName: user
+            referencedColumnNames: id
+            constraintName: user_worktime_fk

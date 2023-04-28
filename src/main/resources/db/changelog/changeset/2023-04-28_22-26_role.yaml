@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-role
+      author: Aleksandra
+      changes:
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: role_PK
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: slug
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: description
+                  type: clob
+              - column:
+                  name: level
+                  type: integer
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: create-user_role
+      author: Aleksandra
+      changes:
+        - createTable:
+            tableName: user_role
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    foreignKeyName: user_role_fk
+                    referencedTableName: user
+                    referencedColumnNames: id
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    foreignKeyName: role_user_fk
+                    referencedTableName: role
+                    referencedColumnNames: id
+                  name: role_id
+                  type: BIGINT
+  - changeSet:
+      id: add_PK-user_role
+      author: Aleksandra
+      changes:
+        - addPrimaryKey:
+            columnNames: user_id, role_id
+            tableName: user_role
