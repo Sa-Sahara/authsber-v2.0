@@ -12,7 +12,7 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    primaryKeyName: permissions_PK
+                    primaryKeyName: permission_PK
                     nullable: false
               - column:
                   name: name
