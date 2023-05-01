@@ -12,7 +12,7 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-#                    primaryKeyName: worktime_PK
+                    primaryKeyName: worktime_PK
                     nullable: false
               - column:
                   name: date
