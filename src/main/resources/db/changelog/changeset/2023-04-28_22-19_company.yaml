@@ -35,14 +35,6 @@ databaseChangeLog:
               - column:
                   name: phone
                   type: text
-
-  - changeSet:
-      id: create-connection-branch_company
-      author: Aleksandra
-      changes:
-        - addForeignKeyConstraint:
-            baseTableName: branch
-            baseColumnNames: company_id
-            referencedTableName: company
-            referencedColumnNames: id
-            constraintName: branch_company_fk
+              - column:
+                  name: parent_division_id
+                  type: bigint

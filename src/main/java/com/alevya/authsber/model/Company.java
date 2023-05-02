@@ -36,10 +36,19 @@ public final class Company {
 
     private String phone;
 
+    @ManyToOne
+    @JoinColumn(name = "parent_division_id")/*(fetch = FetchType.EAGER)*/
+    private Company parentDivision;
     @JsonIgnore
     @Singular
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "company")
-    private Set<Branch> branches = new HashSet<>();
+    @OneToMany(mappedBy = "parentDivision", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private Set<Company> childDivisions = new HashSet<>();
+
+    @JsonIgnore
+    @Singular
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "parent")
+    private Set<Workplace> workplaces = new HashSet<>();
+
 
     public Company(String fullName,
                    String shortName,

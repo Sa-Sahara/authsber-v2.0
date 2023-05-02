@@ -27,8 +27,8 @@ public final class Workplace {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
-    @JoinColumn(name = "branch_id")
-    private Branch branch;
+    @JoinColumn(name = "company_id")
+    private Company parent;
 
     @JsonIgnore
     @Singular
@@ -42,32 +42,32 @@ public final class Workplace {
 
     public Workplace(String name,
                      String description,
-                     Branch branch) {
+                     Company company) {
         this.name = name;
         this.description = description;
-        this.branch = branch;
+        this.parent = company;
     }
 
     public Workplace(Long id,
                      String name,
                      String description,
-                     Branch branch) {
+                     Company company) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.branch = branch;
+        this.parent = company;
     }
 
     public Workplace(
             Long id,
             String name,
             String description,
-            Branch branch,
+            Company company,
             HashSet<WorkTime> workTimes) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.branch = branch;
+        this.parent = company;
         this.workTimes = workTimes;
     }
 
@@ -79,13 +79,13 @@ public final class Workplace {
         Workplace workplace = (Workplace) o;
 
         if (!Objects.equals(name, workplace.name)) return false;
-        return Objects.equals(branch, workplace.branch);
+        return Objects.equals(parent, workplace.parent);
     }
 
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (branch != null ? branch.hashCode() : 0);
+        result = 31 * result + (parent != null ? parent.hashCode() : 0);
         return result;
     }
 
@@ -95,7 +95,7 @@ public final class Workplace {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", branchId=" + branch.getId() +
+                ", companyId=" + parent.getId() +
                 '}';
     }
 }
