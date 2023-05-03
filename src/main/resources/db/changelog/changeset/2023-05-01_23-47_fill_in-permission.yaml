@@ -1,0 +1,419 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill_in-permission
+      author: Aleksandra
+      changes:
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "CREATE_COMPANY"
+              - column:
+                  name: description
+                  value: "create company"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_COMPANY"
+              - column:
+                  name: description
+                  value: "Get company by id"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_COMPANIES"
+              - column:
+                  name: description
+                  value: "Get all companies"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "UPDATE_COMPANY"
+              - column:
+                  name: description
+                  value: "update company"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "DELETE_COMPANY"
+              - column:
+                  name: description
+                  value: "delete company"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "CREATE_BRANCH"
+              - column:
+                  name: description
+                  value: "create brunch"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_BRANCH"
+              - column:
+                  name: description
+                  value: "Get branch by id"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_BRANCHES"
+              - column:
+                  name: description
+                  value: "Get all branches"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "UPDATE_BRANCH"
+              - column:
+                  name: description
+                  value: "update brunch"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "DELETE_BRANCH"
+              - column:
+                  name: description
+                  value: "delete brunch"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "CREATE_WORKPLACE"
+              - column:
+                  name: description
+                  value: "create workplace"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_WORKPLACE"
+              - column:
+                  name: description
+                  value: "Get workplace by id"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_WORKPLACES"
+              - column:
+                  name: description
+                  value: "Get all workplaces"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "UPDATE_WORKPLACE"
+              - column:
+                  name: description
+                  value: "update workplace"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "DELETE_WORKPLACE"
+              - column:
+                  name: description
+                  value: "delete workplace"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "CREATE_ROLE"
+              - column:
+                  name: description
+                  value: "create role"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_ROLE"
+              - column:
+                  name: description
+                  value: "get role"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_ROLES"
+              - column:
+                  name: description
+                  value: "get all role"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "UPDATE_ROLE"
+              - column:
+                  name: description
+                  value: "Update role"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "DELETE_ROLE"
+              - column:
+                  name: description
+                  value: "Delete role"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "CREATE_PERMISSION"
+              - column:
+                  name: description
+                  value: "create permission"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_PERMISSION"
+              - column:
+                  name: description
+                  value: "get permission"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_PERMISSIONS"
+              - column:
+                  name: description
+                  value: "get all permissions"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "UPDATE_PERMISSION"
+              - column:
+                  name: description
+                  value: "Update permission"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "DELETE_PERMISSION"
+              - column:
+                  name: description
+                  value: "Delete permission"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "CREATE_ORDER"
+              - column:
+                  name: description
+                  value: "create order"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_ORDER"
+              - column:
+                  name: description
+                  value: "get order"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_ORDERS"
+              - column:
+                  name: description
+                  value: "get all orders"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "UPDATE_ORDER"
+              - column:
+                  name: description
+                  value: "Update order"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "DELETE_ORDER"
+              - column:
+                  name: description
+                  value: "Delete order"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "CREATE_MESSAGE"
+              - column:
+                  name: description
+                  value: "create message"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_MESSAGE"
+              - column:
+                  name: description
+                  value: "get message"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_MESSAGES"
+              - column:
+                  name: description
+                  value: "get all message"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "UPDATE_MESSAGE"
+              - column:
+                  name: description
+                  value: "Update message"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "DELETE_MESSAGE"
+              - column:
+                  name: description
+                  value: "Delete message"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "CREATE_USER"
+              - column:
+                  name: description
+                  value: "create user"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_USER"
+              - column:
+                  name: description
+                  value: "get user"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_MYUSER"
+              - column:
+                  name: description
+                  value: "Get My User for change profile"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_USERS"
+              - column:
+                  name: description
+                  value: "get all user"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "UPDATE_USER"
+              - column:
+                  name: description
+                  value: "Update user"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "DELETE_USER"
+              - column:
+                  name: description
+                  value: "Delete user"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "CREATE_WORKTIME"
+              - column:
+                  name: description
+                  value: "create worktime"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_WORKTIME"
+              - column:
+                  name: description
+                  value: "get worktime"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "GET_WORKTIMES"
+              - column:
+                  name: description
+                  value: "get all worktime"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "UPDATE_WORKTIME"
+              - column:
+                  name: description
+                  value: "Update worktime"
+        - insert:
+            tableName: permission
+            columns:
+              - column:
+                  name: name
+                  value: "DELETE_WORKTIME"
+              - column:
+                  name: description
+                  value: "Delete worktime"

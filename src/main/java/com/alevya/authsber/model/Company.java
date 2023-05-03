@@ -2,6 +2,7 @@ package com.alevya.authsber.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "company")
+//do soft delete
+@SQLDelete(sql = "update company set deleted = true where id =?")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -49,6 +52,11 @@ public final class Company {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "parent")
     private Set<Workplace> workplaces = new HashSet<>();
 
+    /**
+     * Soft delete: true - deleted, false - not deleted.
+     */
+    @Column(name = "deleted", nullable = false, columnDefinition = "boolean default false")
+    private Boolean deleted = false;
 
     public Company(String fullName,
                    String shortName,

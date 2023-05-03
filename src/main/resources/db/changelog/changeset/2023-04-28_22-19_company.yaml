@@ -22,7 +22,7 @@ databaseChangeLog:
                     unique: true
               - column:
                   name: short_name
-                  type: varchar(255)
+                  type: text
                   constraints:
                     nullable: false
                     unique: true
@@ -38,3 +38,9 @@ databaseChangeLog:
               - column:
                   name: parent_division_id
                   type: bigint
+              - column:
+                  name: deleted
+                  type: boolean
+                  defaultValue: false
+                  constraints:
+                    nullable: false

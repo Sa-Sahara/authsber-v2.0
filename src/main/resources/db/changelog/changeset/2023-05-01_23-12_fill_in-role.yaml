@@ -1,0 +1,113 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill_in-role
+      author: Aleksandra
+      changes:
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: "ADMIN"
+              - column:
+                  name: description
+                  value: "full access rights: crud for company, branch, workplace, users, messages"
+              - column:
+                  name: level
+                  value: "1"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: "DIRECTOR"
+              - column:
+                  name: description
+                  value: "???"
+              - column:
+                  name: level
+                  value: "5"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: "MANAGER"
+              - column:
+                  name: description
+                  value: "personnel management"
+              - column:
+                  name: level
+                  value: "10"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: "STAFF"
+              - column:
+                  name: description
+                  value: "personnel administrator"
+              - column:
+                  name: level
+                  value: "11"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: "AUDITOR"
+              - column:
+                  name: description
+                  value: "For audit check without rights to change"
+              - column:
+                  name: level
+                  value: "12"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: "WORKER"
+              - column:
+                  name: description
+                  value: "simple worker"
+              - column:
+                  name: level
+                  value: "15"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: "VERIFIED USER"
+              - column:
+                  name: description
+                  value: "make service purchases"
+              - column:
+                  name: level
+                  value: "20"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: "NOT VERIFIED USER"
+              - column:
+                  name: description
+                  value: "registration, log in, password recovery"
+              - column:
+                  name: level
+                  value: "30"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: "GUEST"
+              - column:
+                  name: description
+                  value: "watch company page, branches list"
+              - column:
+                  name: level
+                  value: "40"

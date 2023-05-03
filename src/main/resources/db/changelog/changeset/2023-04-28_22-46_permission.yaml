@@ -21,12 +21,6 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: slug
-                  type: varchar(50)
-                  constraints:
-                    nullable: false
-                    unique: true
-              - column:
                   name: description
                   type: clob
   - changeSet:

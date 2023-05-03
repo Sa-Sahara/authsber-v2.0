@@ -1,0 +1,395 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill_in-company
+      author: Aleksandra
+      changes:
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "ООО Моечные комплексы"
+              - column:
+                  name: short_name
+                  value: "СамМой"
+              - column:
+                  name: description
+                  value: "Современные моечные комплексы самообслуживания."
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Карла Маркса, д.143"
+              - column:
+                  name: phone
+                  value: "8(2424)555666"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Корпорация СБЕР"
+              - column:
+                  name: short_name
+                  value: "СберМойки"
+              - column:
+                  name: description
+                  value: "Автомойки СБЕР."
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Ленина, д.55"
+              - column:
+                  name: phone
+                  value: "8(2424)666777"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "ПАО Газпром Транс Нефть"
+              - column:
+                  name: short_name
+                  value: "Любимые мойки"
+              - column:
+                  name: description
+                  value: "Автомойки Газпром Транс Нефть."
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Пушкина, д.65"
+              - column:
+                  name: phone
+                  value: "8(2424)888777"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Компания 4"
+              - column:
+                  name: short_name
+                  value: "Компания 4"
+              - column:
+                  name: description
+                  value: "Автомойки Компания 4"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Пушкина, д.1"
+              - column:
+                  name: phone
+                  value: "8(2424)888777"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Компания 5"
+              - column:
+                  name: short_name
+                  value: "Компания 5"
+              - column:
+                  name: description
+                  value: "Автомойки Компания 5"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Пушкина, д.5"
+              - column:
+                  name: phone
+                  value: "8(2424)888777"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Компания 6"
+              - column:
+                  name: short_name
+                  value: "Компания 6"
+              - column:
+                  name: description
+                  value: "Автомойки Компания 6"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Пушкина, д.6"
+              - column:
+                  name: phone
+                  value: "8(2424)888777"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Компания 7"
+              - column:
+                  name: short_name
+                  value: "Компания 7"
+              - column:
+                  name: description
+                  value: "Автомойки Компания 7"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Пушкина, д.7"
+              - column:
+                  name: phone
+                  value: "8(2424)888777"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Компания 8"
+              - column:
+                  name: short_name
+                  value: "Компания 8"
+              - column:
+                  name: description
+                  value: "Автомойки Компания 8"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Пушкина, д.8"
+              - column:
+                  name: phone
+                  value: "8(2424)888777"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Компания 9"
+              - column:
+                  name: short_name
+                  value: "Компания 9"
+              - column:
+                  name: description
+                  value: "Автомойки Компания 9"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Пушкина, д.9"
+              - column:
+                  name: phone
+                  value: "8(2424)888777"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Компания 10"
+              - column:
+                  name: short_name
+                  value: "Компания 10"
+              - column:
+                  name: description
+                  value: "Автомойки Компания 10"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Пушкина, д.10"
+              - column:
+                  name: phone
+                  value: "8(2424)888777"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Филиал СамМой №1"
+              - column:
+                  name: short_name
+                  value: "СамМой №1"
+              - column:
+                  name: description
+                  value: "СамМой на проспекте."
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Проспект Победы, д.65"
+              - column:
+                  name: phone
+                  value: "8(2424)111111"
+              - column:
+                  name: parent_division_id
+                  value: "2"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Филиал СберМойка №1"
+              - column:
+                  name: short_name
+                  value: "СберМойка №1"
+              - column:
+                  name: description
+                  value: "СберМойка по ул.Шелеста"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Шелеста, д.265"
+              - column:
+                  name: phone
+                  value: "8(2424)111222"
+              - column:
+                  name: parent_division_id
+                  value: "2"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Филиал СберМойка №2"
+              - column:
+                  name: short_name
+                  value: "СберМойка №2"
+              - column:
+                  name: description
+                  value: "СберМойка по ул.Ягодная"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Ягодная, д.43"
+              - column:
+                  name: phone
+                  value: "8(2424)111333"
+              - column:
+                  name: parent_division_id
+                  value: "3"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Филиал СберМойка №3"
+              - column:
+                  name: short_name
+                  value: "СберМойка №3"
+              - column:
+                  name: description
+                  value: "СберМойка по ул.Гайдара"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Гайдара, д.131"
+              - column:
+                  name: phone
+                  value: "8(2424)111444"
+              - column:
+                  name: parent_division_id
+                  value: "3"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Филиал Любимая мойка"
+              - column:
+                  name: short_name
+                  value: "Любимая мойка"
+              - column:
+                  name: description
+                  value: "Любимая мойка по ул.Покуса"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Покуса, д.63"
+              - column:
+                  name: phone
+                  value: "8(2424)111444"
+              - column:
+                  name: parent_division_id
+                  value: "13"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Филиал Представительтво 6"
+              - column:
+                  name: short_name
+                  value: "Представительтво 6"
+              - column:
+                  name: description
+                  value: "Мойка Представительтво 6"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Покуса, д.6"
+              - column:
+                  name: phone
+                  value: "8(2424)111444"
+              - column:
+                  name: parent_division_id
+                  value: "13"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Филиал Представительтво 7"
+              - column:
+                  name: short_name
+                  value: "Представительтво 7"
+              - column:
+                  name: description
+                  value: "Мойка Представительтво 7"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Покуса, д.7"
+              - column:
+                  name: phone
+                  value: "8(2424)111444"
+              - column:
+                  name: parent_division_id
+                  value: "4"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Филиал Представительтво 8"
+              - column:
+                  name: short_name
+                  value: "Представительтво 8"
+              - column:
+                  name: description
+                  value: "Мойка Представительтво 8"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Покуса, д.8"
+              - column:
+                  name: phone
+                  value: "8(2424)111444"
+              - column:
+                  name: parent_division_id
+                  value: "4"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Филиал Представительтво 9"
+              - column:
+                  name: short_name
+                  value: "Представительтво 9"
+              - column:
+                  name: description
+                  value: "Мойка Представительтво 9"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Покуса, д.9"
+              - column:
+                  name: phone
+                  value: "8(2424)111444"
+              - column:
+                  name: parent_division_id
+                  value: "4"
+        - insert:
+            tableName: company
+            columns:
+              - column:
+                  name: full_name
+                  value: "Филиал Представительтво 10"
+              - column:
+                  name: short_name
+                  value: "Представительтво 10"
+              - column:
+                  name: description
+                  value: "Мойка Представительтво 10"
+              - column:
+                  name: address
+                  value: "г.Новосибирск, ул.Покуса, д.10"
+              - column:
+                  name: phone
+                  value: "8(2424)111444"
+              - column:
+                  name: parent_division_id
+                  value: "4"

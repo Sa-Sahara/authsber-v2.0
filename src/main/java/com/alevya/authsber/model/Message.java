@@ -19,7 +19,6 @@ public final class Message {
     @Id
     @SequenceGenerator(name = "default_generator",
             sequenceName = "message_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pet_seq")
     private Long id;
 
     @NotNull

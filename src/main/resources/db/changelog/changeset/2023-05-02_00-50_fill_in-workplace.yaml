@@ -1,0 +1,173 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill_in-workplace
+      author: Aleksandra
+      changes:
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост №1"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "1"
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост №2"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "1"
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост №3"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "11"
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост №1"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "11"
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост №2"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "12"
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост №3"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "12"
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост №1"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "15"
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост №2"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "15"
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост №1"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "16"
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост №2"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "16"
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост №3"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "14"
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост А"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "15"
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост Б"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "15"
+        - insert:
+            tableName: workplace
+            columns:
+              - column:
+                  name: name
+                  value: "Пост В"
+              - column:
+                  name: description
+                  value: "Мойка, комплексная мойка"
+              - column:
+                  name: company_id
+                  value: "15"

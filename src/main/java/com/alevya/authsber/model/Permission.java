@@ -24,9 +24,6 @@ public final class Permission {
     @Column(nullable=false, unique = true)
     private String name;
 
-    @Column(nullable=false, unique = true)
-    private String slug;
-
     private String description;
 
     @ManyToMany(mappedBy = "permissions", fetch = FetchType.LAZY)
@@ -34,9 +31,8 @@ public final class Permission {
     @Singular
     private Set<Role> roles = new HashSet<>();
 
-    public Permission(String name, String slug) {
+    public Permission(String name) {
         this.name = name;
-        this.slug = slug;
     }
 
     @Override
@@ -46,15 +42,12 @@ public final class Permission {
 
         Permission permission = (Permission) o;
 
-        if (!Objects.equals(name, permission.name)) return false;
-        return Objects.equals(slug, permission.slug);
+        return Objects.equals(name, permission.name);
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (slug != null ? slug.hashCode() : 0);
-        return result;
+        return name != null ? name.hashCode() : 0;
     }
 
     @Override
@@ -62,7 +55,6 @@ public final class Permission {
         return "Permission{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", slug='" + slug + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

@@ -23,9 +23,6 @@ public final class Role {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false, unique = true)
-    private String slug;
-
     private String description;
 
     @Column(nullable = false)
@@ -49,12 +46,10 @@ public final class Role {
 
     public Role(Long id,
                 String name,
-                String slug,
                 String description,
                 Integer level) {
         this.id = id;
         this.name = name;
-        this.slug = slug;
         this.description = description;
         this.level = level;
     }
@@ -67,7 +62,6 @@ public final class Role {
         Role role = (Role) o;
 
         if (!Objects.equals(name, role.name)) return false;
-        if (!Objects.equals(slug, role.slug)) return false;
         if (!Objects.equals(description, role.description)) return false;
         return Objects.equals(level, role.level);
     }
@@ -75,7 +69,6 @@ public final class Role {
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (slug != null ? slug.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (level != null ? level.hashCode() : 0);
         return result;
@@ -86,7 +79,6 @@ public final class Role {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", slug='" + slug + '\'' +
                 ", description='" + description + '\'' +
                 ", level=" + level +
                 '}';
