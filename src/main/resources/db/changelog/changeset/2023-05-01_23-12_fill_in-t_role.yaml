@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Aleksandra
       changes:
         - insert:
-            tableName: role
+            tableName: t_role
             columns:
               - column:
                   name: name
@@ -16,7 +16,7 @@ databaseChangeLog:
                   name: level
                   value: "1"
         - insert:
-            tableName: role
+            tableName: t_role
             columns:
               - column:
                   name: name
@@ -28,7 +28,7 @@ databaseChangeLog:
                   name: level
                   value: "5"
         - insert:
-            tableName: role
+            tableName: t_role
             columns:
               - column:
                   name: name
@@ -40,7 +40,7 @@ databaseChangeLog:
                   name: level
                   value: "10"
         - insert:
-            tableName: role
+            tableName: t_role
             columns:
               - column:
                   name: name
@@ -52,7 +52,7 @@ databaseChangeLog:
                   name: level
                   value: "11"
         - insert:
-            tableName: role
+            tableName: t_role
             columns:
               - column:
                   name: name
@@ -64,7 +64,7 @@ databaseChangeLog:
                   name: level
                   value: "12"
         - insert:
-            tableName: role
+            tableName: t_role
             columns:
               - column:
                   name: name
@@ -76,7 +76,7 @@ databaseChangeLog:
                   name: level
                   value: "15"
         - insert:
-            tableName: role
+            tableName: t_role
             columns:
               - column:
                   name: name
@@ -88,7 +88,7 @@ databaseChangeLog:
                   name: level
                   value: "20"
         - insert:
-            tableName: role
+            tableName: t_role
             columns:
               - column:
                   name: name

@@ -1,5 +1,17 @@
 databaseChangeLog:
   - changeSet:
+      id: create-sequence_order
+      author: Aleksandra
+      changes:
+        - createSequence:
+            sequenceName: order_seq
+            cycle: true
+            minValue: 50
+            maxValue: 9223372036854775807
+            startValue: 50
+            incrementBy: 1
+            cacheSize: 70
+  - changeSet:
       id: create-t_order
       author: Aleksandra
       changes:
@@ -48,6 +60,6 @@ databaseChangeLog:
         - addForeignKeyConstraint:
             baseTableName: t_order
             baseColumnNames: workplace_id
-            referencedTableName: workplace
+            referencedTableName: t_workplace
             referencedColumnNames: id
-            constraintName: t_order_workplace_fk
+            constraintName: order_workplace_fk

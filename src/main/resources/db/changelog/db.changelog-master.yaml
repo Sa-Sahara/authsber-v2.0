@@ -1,30 +1,30 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/changeset/2023-04-28_22-10_message.yaml
+      file: db/changelog/changeset/2023-04-28_22-10_t_message.yaml
   - include:
-      file: db/changelog/changeset/2023-04-28_22-19_company.yaml
+      file: db/changelog/changeset/2023-04-28_22-19_t_company.yaml
   - include:
-      file: db/changelog/changeset/2023-04-28_22-20_workplace.yaml
+      file: db/changelog/changeset/2023-04-28_22-20_t_workplace.yaml
   - include:
       file: db/changelog/changeset/2023-04-28_22-22_t_user.yaml
   - include:
-      file: db/changelog/changeset/2023-04-28_22-24_worktime.yaml
+      file: db/changelog/changeset/2023-04-28_22-24_t_worktime.yaml
   - include:
-      file: db/changelog/changeset/2023-04-28_22-26_role.yaml
+      file: db/changelog/changeset/2023-04-28_22-26_t_role.yaml
   - include:
-      file: db/changelog/changeset/2023-04-28_22-46_permission.yaml
+      file: db/changelog/changeset/2023-04-28_22-46_t_permission.yaml
   - include:
       file: db/changelog/changeset/2023-04-28_22-47_t_order.yaml
   - include:
-      file: db/changelog/changeset/2023-04-28_23-03_service.yaml
+      file: db/changelog/changeset/2023-04-28_23-03_t_service.yaml
   - include:
-      file: db/changelog/changeset/2023-05-01_23-12_fill_in-role.yaml
+      file: db/changelog/changeset/2023-05-01_23-12_fill_in-t_role.yaml
   - include:
-      file: db/changelog/changeset/2023-05-01_23-47_fill_in-permission.yaml
+      file: db/changelog/changeset/2023-05-01_23-47_fill_in-t_permission.yaml
   - include:
-      file: db/changelog/changeset/2023-05-02_00-13_fill_in-company.yaml
+      file: db/changelog/changeset/2023-05-02_00-13_fill_in-t_company.yaml
   - include:
-      file: db/changelog/changeset/2023-05-02_00-50_fill_in-workplace.yaml
+      file: db/changelog/changeset/2023-05-02_00-50_fill_in-t_workplace.yaml
   - include:
       file: db/changelog/changeset/2023-05-04_23-37_fill_in-t_user.yaml
 #  - include:

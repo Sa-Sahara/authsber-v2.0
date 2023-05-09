@@ -17,9 +17,8 @@ import java.util.Set;
 public final class Order {
 
     @Id
-    @SequenceGenerator(name = "default_generator",
-            sequenceName = "order_seq",
-            allocationSize = 20)
+    @SequenceGenerator(name = "order_seq", sequenceName = "order_seq", allocationSize = 1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="order_seq")
     private Long id;
 
     @NotNull

@@ -1,10 +1,22 @@
 databaseChangeLog:
   - changeSet:
-      id: create-company
+      id: create-sequence_company
+      author: Aleksandra
+      changes:
+        - createSequence:
+            sequenceName: company_seq
+            cycle: false
+            minValue: 50
+            maxValue: 9223372036854775807
+            startValue: 50
+            incrementBy: 1
+            cacheSize: 10
+  - changeSet:
+      id: create-t_company
       author: Aleksandra
       changes:
         - createTable:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: id

@@ -14,9 +14,8 @@ import java.util.Objects;
 public final class Message {
 
     @Id
-    @SequenceGenerator(name = "default_generator",
-            sequenceName = "message_seq")
-    @Setter
+    @SequenceGenerator(name = "message_seq", sequenceName = "message_seq", allocationSize = 1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="message_seq")
     private Long id;
 
     @NotNull

@@ -1,10 +1,22 @@
 databaseChangeLog:
   - changeSet:
-      id: create-permission
+      id: create-sequence_role
+      author: Aleksandra
+      changes:
+        - createSequence:
+            sequenceName: role_seq
+            cycle: false
+            minValue: 50
+            maxValue: 9223372036854775807
+            startValue: 50
+            incrementBy: 1
+            cacheSize: 10
+  - changeSet:
+      id: create-t_role
       author: Aleksandra
       changes:
         - createTable:
-            tableName: permission
+            tableName: t_role
             columns:
               - column:
                   name: id
@@ -12,7 +24,7 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    primaryKeyName: permission_PK
+                    primaryKeyName: role_PK
                     nullable: false
               - column:
                   name: name
@@ -23,33 +35,38 @@ databaseChangeLog:
               - column:
                   name: description
                   type: clob
+              - column:
+                  name: level
+                  type: integer
+                  constraints:
+                    nullable: false
   - changeSet:
-      id: create-role_permission
+      id: create-user_role
       author: Aleksandra
       changes:
         - createTable:
-            tableName: role_permission
+            tableName: t_user_role
             columns:
               - column:
                   constraints:
                     nullable: false
-                    foreignKeyName: role_permission_fk
-                    referencedTableName: role
+                    foreignKeyName: user_role_fk
+                    referencedTableName: t_user
                     referencedColumnNames: id
-                  name: role_id
+                  name: user_id
                   type: BIGINT
               - column:
                   constraints:
                     nullable: false
-                    foreignKeyName: permission_role_fk
-                    referencedTableName: permission
+                    foreignKeyName: role_user_fk
+                    referencedTableName: t_role
                     referencedColumnNames: id
-                  name: permission_id
+                  name: role_id
                   type: BIGINT
   - changeSet:
-      id: add_PK-role_permission
+      id: add_PK-user_role
       author: Aleksandra
       changes:
         - addPrimaryKey:
-            columnNames: role_id, permission_id
-            tableName: role_permission
+            columnNames: user_id, role_id
+            tableName: t_user_role

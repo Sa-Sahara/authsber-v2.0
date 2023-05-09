@@ -1,10 +1,22 @@
 databaseChangeLog:
   - changeSet:
-      id: create-role
+      id: create-sequence_service
+      author: Aleksandra
+      changes:
+        - createSequence:
+            sequenceName: service_seq
+            cycle: false
+            minValue: 50
+            maxValue: 9223372036854775807
+            startValue: 50
+            incrementBy: 1
+            cacheSize: 50
+  - changeSet:
+      id: create-service
       author: Aleksandra
       changes:
         - createTable:
-            tableName: role
+            tableName: t_service
             columns:
               - column:
                   name: id
@@ -12,49 +24,49 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    primaryKeyName: role_PK
+                    primaryKeyName: service_PK
                     nullable: false
               - column:
                   name: name
-                  type: varchar(255)
+                  type: text
                   constraints:
                     nullable: false
-                    unique: true
               - column:
                   name: description
-                  type: clob
+                  type: text
               - column:
-                  name: level
-                  type: integer
+                  name: price
+                  type: int
                   constraints:
                     nullable: false
+
   - changeSet:
-      id: create-user_role
+      id: create-t_order_service
       author: Aleksandra
       changes:
         - createTable:
-            tableName: user_role
+            tableName: t_order_service
             columns:
               - column:
                   constraints:
                     nullable: false
-                    foreignKeyName: user_role_fk
-                    referencedTableName: t_user
+                    foreignKeyName: order_service_fk
+                    referencedTableName: t_order
                     referencedColumnNames: id
-                  name: user_id
+                  name: order_id
                   type: BIGINT
               - column:
                   constraints:
                     nullable: false
-                    foreignKeyName: role_user_fk
-                    referencedTableName: role
+                    foreignKeyName: service_order_fk
+                    referencedTableName: t_service
                     referencedColumnNames: id
-                  name: role_id
+                  name: service_id
                   type: BIGINT
   - changeSet:
-      id: add_PK-user_role
+      id: add_PK-order_service
       author: Aleksandra
       changes:
         - addPrimaryKey:
-            columnNames: user_id, role_id
-            tableName: user_role
+            columnNames: order_id, service_id
+            tableName: t_order_service

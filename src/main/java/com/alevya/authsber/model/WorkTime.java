@@ -24,7 +24,8 @@ import java.util.Objects;
 public final class WorkTime {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "worktime_seq", sequenceName = "worktime_seq", allocationSize = 1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="worktime_seq")
     private Long id;
 
     @NotNull

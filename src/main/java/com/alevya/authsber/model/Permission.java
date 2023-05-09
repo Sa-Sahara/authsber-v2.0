@@ -15,7 +15,8 @@ import java.util.Set;
 public final class Permission {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "permission_seq", sequenceName = "permission_seq", allocationSize = 1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="permission_seq")
     private Long id;
 
     @Column(nullable=false, unique = true)

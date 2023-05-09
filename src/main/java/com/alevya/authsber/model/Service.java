@@ -10,13 +10,14 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "service")
+@Table(name = "t_service")
 @Getter
 @Setter
 public final class Service {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "service_seq", sequenceName = "service_seq", allocationSize = 1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="service_seq")
     private Long id;
 
     @Column(unique = true)

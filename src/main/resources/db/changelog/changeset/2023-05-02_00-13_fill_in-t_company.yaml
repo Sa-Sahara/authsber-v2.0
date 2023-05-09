@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Aleksandra
       changes:
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -22,7 +22,7 @@ databaseChangeLog:
                   name: phone
                   value: "8(2424)555666"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -40,7 +40,7 @@ databaseChangeLog:
                   name: phone
                   value: "8(2424)666777"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -58,7 +58,7 @@ databaseChangeLog:
                   name: phone
                   value: "8(2424)888777"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -76,7 +76,7 @@ databaseChangeLog:
                   name: phone
                   value: "8(2424)888777"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -94,7 +94,7 @@ databaseChangeLog:
                   name: phone
                   value: "8(2424)888777"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -112,7 +112,7 @@ databaseChangeLog:
                   name: phone
                   value: "8(2424)888777"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -130,7 +130,7 @@ databaseChangeLog:
                   name: phone
                   value: "8(2424)888777"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -148,7 +148,7 @@ databaseChangeLog:
                   name: phone
                   value: "8(2424)888777"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -166,7 +166,7 @@ databaseChangeLog:
                   name: phone
                   value: "8(2424)888777"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -184,7 +184,7 @@ databaseChangeLog:
                   name: phone
                   value: "8(2424)888777"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -205,7 +205,7 @@ databaseChangeLog:
                   name: parent_division_id
                   value: "2"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -226,7 +226,7 @@ databaseChangeLog:
                   name: parent_division_id
                   value: "2"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -247,7 +247,7 @@ databaseChangeLog:
                   name: parent_division_id
                   value: "3"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -268,7 +268,7 @@ databaseChangeLog:
                   name: parent_division_id
                   value: "3"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -289,7 +289,7 @@ databaseChangeLog:
                   name: parent_division_id
                   value: "13"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -310,7 +310,7 @@ databaseChangeLog:
                   name: parent_division_id
                   value: "13"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -331,7 +331,7 @@ databaseChangeLog:
                   name: parent_division_id
                   value: "4"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -352,7 +352,7 @@ databaseChangeLog:
                   name: parent_division_id
                   value: "4"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name
@@ -373,7 +373,7 @@ databaseChangeLog:
                   name: parent_division_id
                   value: "4"
         - insert:
-            tableName: company
+            tableName: t_company
             columns:
               - column:
                   name: full_name

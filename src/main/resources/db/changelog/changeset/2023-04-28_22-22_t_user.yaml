@@ -1,5 +1,17 @@
 databaseChangeLog:
   - changeSet:
+      id: create-sequence_user
+      author: Aleksandra
+      changes:
+        - createSequence:
+            sequenceName: user_seq
+            cycle: false
+            minValue: 50
+            maxValue: 9223372036854775807
+            startValue: 50
+            incrementBy: 1
+            cacheSize: 50
+  - changeSet:
       id: create-t_user
       author: Aleksandra
       changes:
@@ -12,7 +24,7 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    primaryKeyName: t_user_PK
+                    primaryKeyName: user_PK
                     nullable: false
               - column:
                   name: name

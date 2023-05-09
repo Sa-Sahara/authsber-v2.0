@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Aleksandra
       changes:
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name
@@ -16,7 +16,7 @@ databaseChangeLog:
                   name: company_id
                   value: "1"
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name
@@ -28,7 +28,7 @@ databaseChangeLog:
                   name: company_id
                   value: "1"
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name
@@ -40,7 +40,7 @@ databaseChangeLog:
                   name: company_id
                   value: "11"
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name
@@ -52,7 +52,7 @@ databaseChangeLog:
                   name: company_id
                   value: "11"
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name
@@ -64,7 +64,7 @@ databaseChangeLog:
                   name: company_id
                   value: "12"
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name
@@ -76,7 +76,7 @@ databaseChangeLog:
                   name: company_id
                   value: "12"
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name
@@ -88,7 +88,7 @@ databaseChangeLog:
                   name: company_id
                   value: "15"
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name
@@ -100,7 +100,7 @@ databaseChangeLog:
                   name: company_id
                   value: "15"
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name
@@ -112,7 +112,7 @@ databaseChangeLog:
                   name: company_id
                   value: "16"
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name
@@ -124,7 +124,7 @@ databaseChangeLog:
                   name: company_id
                   value: "16"
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name
@@ -136,7 +136,7 @@ databaseChangeLog:
                   name: company_id
                   value: "14"
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name
@@ -148,7 +148,7 @@ databaseChangeLog:
                   name: company_id
                   value: "15"
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name
@@ -160,7 +160,7 @@ databaseChangeLog:
                   name: company_id
                   value: "15"
         - insert:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: name

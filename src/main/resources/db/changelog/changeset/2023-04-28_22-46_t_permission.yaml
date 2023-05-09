@@ -1,10 +1,22 @@
 databaseChangeLog:
   - changeSet:
-      id: create-service
+      id: create-sequence_permission
+      author: Aleksandra
+      changes:
+        - createSequence:
+            sequenceName: permission_seq
+            cycle: false
+            minValue: 100
+            maxValue: 9223372036854775807
+            startValue: 100
+            incrementBy: 1
+            cacheSize: 10
+  - changeSet:
+      id: create-t_permission
       author: Aleksandra
       changes:
         - createTable:
-            tableName: service
+            tableName: t_permission
             columns:
               - column:
                   name: id
@@ -12,49 +24,44 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    primaryKeyName: service_PK
+                    primaryKeyName: permission_PK
                     nullable: false
               - column:
                   name: name
-                  type: text
+                  type: varchar(255)
                   constraints:
                     nullable: false
+                    unique: true
               - column:
                   name: description
-                  type: text
-              - column:
-                  name: price
-                  type: int
-                  constraints:
-                    nullable: false
-
+                  type: clob
   - changeSet:
-      id: create-t_order_service
+      id: create-role_permission
       author: Aleksandra
       changes:
         - createTable:
-            tableName: t_order_service
+            tableName: t_role_permission
             columns:
               - column:
                   constraints:
                     nullable: false
-                    foreignKeyName: t_order_service_fk
-                    referencedTableName: t_order
+                    foreignKeyName: role_permission_fk
+                    referencedTableName: t_role
                     referencedColumnNames: id
-                  name: t_order_id
+                  name: role_id
                   type: BIGINT
               - column:
                   constraints:
                     nullable: false
-                    foreignKeyName: service_t_order_fk
-                    referencedTableName: service
+                    foreignKeyName: permission_role_fk
+                    referencedTableName: t_permission
                     referencedColumnNames: id
-                  name: service_id
+                  name: permission_id
                   type: BIGINT
   - changeSet:
-      id: add_PK-t_order_service
+      id: add_PK-role_permission
       author: Aleksandra
       changes:
         - addPrimaryKey:
-            columnNames: t_order_id, service_id
-            tableName: t_order_service
+            columnNames: role_id, permission_id
+            tableName: t_role_permission

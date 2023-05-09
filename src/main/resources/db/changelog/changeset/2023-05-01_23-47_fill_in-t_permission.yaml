@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Aleksandra
       changes:
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -13,7 +13,7 @@ databaseChangeLog:
                   name: description
                   value: "create company"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -22,7 +22,7 @@ databaseChangeLog:
                   name: description
                   value: "Get company by id"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -31,7 +31,7 @@ databaseChangeLog:
                   name: description
                   value: "Get all companies"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -40,7 +40,7 @@ databaseChangeLog:
                   name: description
                   value: "update company"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -49,7 +49,7 @@ databaseChangeLog:
                   name: description
                   value: "delete company"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -58,7 +58,7 @@ databaseChangeLog:
                   name: description
                   value: "create workplace"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -67,7 +67,7 @@ databaseChangeLog:
                   name: description
                   value: "Get workplace by id"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -76,7 +76,7 @@ databaseChangeLog:
                   name: description
                   value: "Get all workplaces"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -85,7 +85,7 @@ databaseChangeLog:
                   name: description
                   value: "update workplace"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -94,7 +94,7 @@ databaseChangeLog:
                   name: description
                   value: "delete workplace"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -103,7 +103,7 @@ databaseChangeLog:
                   name: description
                   value: "create role"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -112,7 +112,7 @@ databaseChangeLog:
                   name: description
                   value: "get role"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -121,7 +121,7 @@ databaseChangeLog:
                   name: description
                   value: "get all role"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -130,7 +130,7 @@ databaseChangeLog:
                   name: description
                   value: "Update role"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -139,7 +139,7 @@ databaseChangeLog:
                   name: description
                   value: "Delete role"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -148,7 +148,7 @@ databaseChangeLog:
                   name: description
                   value: "create permission"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -157,7 +157,7 @@ databaseChangeLog:
                   name: description
                   value: "get permission"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -166,7 +166,7 @@ databaseChangeLog:
                   name: description
                   value: "get all permissions"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -175,7 +175,7 @@ databaseChangeLog:
                   name: description
                   value: "Update permission"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -184,7 +184,7 @@ databaseChangeLog:
                   name: description
                   value: "Delete permission"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -193,7 +193,7 @@ databaseChangeLog:
                   name: description
                   value: "create order"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -202,7 +202,7 @@ databaseChangeLog:
                   name: description
                   value: "get order"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -211,7 +211,7 @@ databaseChangeLog:
                   name: description
                   value: "get all orders"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -220,7 +220,7 @@ databaseChangeLog:
                   name: description
                   value: "Update order"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -229,7 +229,7 @@ databaseChangeLog:
                   name: description
                   value: "Delete order"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -238,7 +238,7 @@ databaseChangeLog:
                   name: description
                   value: "create message"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -247,7 +247,7 @@ databaseChangeLog:
                   name: description
                   value: "get message"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -256,7 +256,7 @@ databaseChangeLog:
                   name: description
                   value: "get all message"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -265,7 +265,7 @@ databaseChangeLog:
                   name: description
                   value: "Update message"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -274,7 +274,7 @@ databaseChangeLog:
                   name: description
                   value: "Delete message"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -283,7 +283,7 @@ databaseChangeLog:
                   name: description
                   value: "create user"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -292,7 +292,7 @@ databaseChangeLog:
                   name: description
                   value: "get user"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -301,7 +301,7 @@ databaseChangeLog:
                   name: description
                   value: "Get My User for change profile"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -310,7 +310,7 @@ databaseChangeLog:
                   name: description
                   value: "get all user"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -319,7 +319,7 @@ databaseChangeLog:
                   name: description
                   value: "Update user"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -328,7 +328,7 @@ databaseChangeLog:
                   name: description
                   value: "Delete user"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -337,7 +337,7 @@ databaseChangeLog:
                   name: description
                   value: "create worktime"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -346,7 +346,7 @@ databaseChangeLog:
                   name: description
                   value: "get worktime"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -355,7 +355,7 @@ databaseChangeLog:
                   name: description
                   value: "get all worktime"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name
@@ -364,7 +364,7 @@ databaseChangeLog:
                   name: description
                   value: "Update worktime"
         - insert:
-            tableName: permission
+            tableName: t_permission
             columns:
               - column:
                   name: name

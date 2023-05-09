@@ -1,10 +1,22 @@
 databaseChangeLog:
   - changeSet:
-      id: create-message
+      id: create-sequence_message
+      author: Aleksandra
+      changes:
+        - createSequence:
+            sequenceName: message_seq
+            cycle: true
+            minValue: 50
+            maxValue: 9223372036854775807
+            startValue: 100
+            incrementBy: 1
+            cacheSize: 100
+  - changeSet:
+      id: create-t_message
       author: Aleksandra
       changes:
         - createTable:
-            tableName: message
+            tableName: t_message
             columns:
             - column:
                 name: id

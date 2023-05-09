@@ -1,10 +1,22 @@
 databaseChangeLog:
   - changeSet:
-      id: create-worktime
+      id: create-sequence_worktime
+      author: Aleksandra
+      changes:
+        - createSequence:
+            sequenceName: worktime_seq
+            cycle: true
+            minValue: 50
+            maxValue: 9223372036854775807
+            startValue: 50
+            incrementBy: 1
+            cacheSize: 70
+  - changeSet:
+      id: create-t_worktime
       author: Aleksandra
       changes:
         - createTable:
-            tableName: worktime
+            tableName: t_worktime
             columns:
               - column:
                   name: id
@@ -34,9 +46,9 @@ databaseChangeLog:
       author: Aleksandra
       changes:
         - addForeignKeyConstraint:
-            baseTableName: worktime
+            baseTableName: t_worktime
             baseColumnNames: workplace_id
-            referencedTableName: workplace
+            referencedTableName: t_workplace
             referencedColumnNames: id
             constraintName: workplace_worktime_fk
   - changeSet:
@@ -44,7 +56,7 @@ databaseChangeLog:
       author: Aleksandra
       changes:
         - addForeignKeyConstraint:
-            baseTableName: worktime
+            baseTableName: t_worktime
             baseColumnNames: user_id
             referencedTableName: t_user
             referencedColumnNames: id

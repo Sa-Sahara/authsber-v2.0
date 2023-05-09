@@ -1,10 +1,22 @@
 databaseChangeLog:
   - changeSet:
-      id: create-workplace
+      id: create-sequence_workplace
+      author: Aleksandra
+      changes:
+        - createSequence:
+            sequenceName: workplace_seq
+            cycle: false
+            minValue: 50
+            maxValue: 9223372036854775807
+            startValue: 50
+            incrementBy: 1
+            cacheSize: 10
+  - changeSet:
+      id: create-t_workplace
       author: Aleksandra
       changes:
         - createTable:
-            tableName: workplace
+            tableName: t_workplace
             columns:
               - column:
                   name: id
@@ -29,8 +41,8 @@ databaseChangeLog:
       author: Aleksandra
       changes:
         - addForeignKeyConstraint:
-            baseTableName: workplace
+            baseTableName: t_workplace
             baseColumnNames: company_id
-            referencedTableName: company
+            referencedTableName: t_company
             referencedColumnNames: id
             constraintName: workplace_company_fk
