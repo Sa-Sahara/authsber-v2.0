@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 @Tag(name = "Company controller",
         description = "Give CRUD functions for company: " +
@@ -45,17 +45,24 @@ public class CompanyController {
     }
 
     //    @Secured("GET_COMPANY")
-    @Operation(summary = "Get company by name")
-    @GetMapping(value = "/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CompanyDtoResponse> getCompanyByFullName(@PathVariable String name) {
-        return ResponseEntity.ok(companyService.getCompanyByName(name));
+    @Operation(summary = "Get company by full name")
+    @GetMapping(value = "/fullName/{fullName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CompanyDtoResponse> getCompanyByFullName(@PathVariable String fullName) {
+        return ResponseEntity.ok(companyService.getCompanyByFullName(fullName));
+    }
+
+    //    @Secured("GET_COMPANY")
+    @Operation(summary = "Get company by short name")
+    @GetMapping(value = "/shortName/{shortName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CompanyDtoResponse> getCompanyByShortName(@PathVariable String shortName) {
+        return ResponseEntity.ok(companyService.getCompanyByShortName(shortName));
     }
 
     //    @Secured("GET_COMPANIES")
     @Operation(summary = "Get all companies")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<CompanyDtoResponse> getAllCompanies() {
+    public Set<CompanyDtoResponse> getAllCompanies() {
         return companyService.getAllCompanies();
     }
 
@@ -76,8 +83,8 @@ public class CompanyController {
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CompanyDtoResponse> updateCompany(@PathVariable Long id
             , @RequestBody @Validated CompanyDtoRequest companyDtoRequest) {
-        return ResponseEntity.ok(companyService.updateCompany(id, companyDtoRequest));
-    }
+        return ResponseEntity.ok(companyService.updateCompany(companyDtoRequest));
+    } //todo - divide general info and Sets
 
     //    @Secured("DELETE_COMPANY")
     @Operation(summary = "Delete company")

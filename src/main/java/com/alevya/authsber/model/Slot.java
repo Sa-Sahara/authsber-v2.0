@@ -6,9 +6,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Getter
 @Setter
 public final class Slot {
@@ -18,7 +15,27 @@ public final class Slot {
     private Long workerId;
     private Long workplaceId;
     private Long serviceId;
-    private String description;
+    private String comment;
+
+    public Slot() {
+    }
+
+    @Builder
+    public Slot(LocalDate date,
+                LocalTime timeStart,
+                LocalTime timeFinish,
+                Long workerId,
+                Long workplaceId,
+                Long serviceId,
+                String comment) {
+        this.date = date;
+        this.timeStart = timeStart;
+        this.timeFinish = timeFinish;
+        this.workerId = workerId;
+        this.workplaceId = workplaceId;
+        this.serviceId = serviceId;
+        this.comment = comment;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -37,13 +54,14 @@ public final class Slot {
 
     @Override
     public int hashCode() {
-        int result = date != null ? date.hashCode() : 0;
-        result = 31 * result + (timeStart != null ? timeStart.hashCode() : 0);
-        result = 31 * result + (timeFinish != null ? timeFinish.hashCode() : 0);
-        result = 31 * result + (workerId != null ? workerId.hashCode() : 0);
-        result = 31 * result + (workplaceId != null ? workplaceId.hashCode() : 0);
-        result = 31 * result + (serviceId != null ? serviceId.hashCode() : 0);
-        return result;
+        return Objects.hash(
+                date,
+                timeStart,
+                timeFinish,
+                workerId,
+                workplaceId,
+                serviceId
+        );
     }
 
     @Override
@@ -55,7 +73,7 @@ public final class Slot {
                 ", workerId=" + workerId +
                 ", workplaceId=" + workplaceId +
                 ", serviceId=" + serviceId +
-                ", description='" + description + '\'' +
+                ", description='" + comment + '\'' +
                 '}';
     }
 }

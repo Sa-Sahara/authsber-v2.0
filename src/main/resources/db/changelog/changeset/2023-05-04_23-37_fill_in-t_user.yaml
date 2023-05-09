@@ -1,0 +1,817 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill_in-t_user
+      author: Aleksandra
+      changes:
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Александр"
+              - column:
+                  name: surname
+                  value: "Александров"
+              - column:
+                  name: patronymic
+                  value: "Александрович"
+              - column:
+                  name: password
+                  value: "$2a$10$4chjm0wIOjrUuRWvbC4KfOpRxMJyqmSvuOOt/mEfmBDPJlrXJFBNC"
+              - column:
+                  name: email
+                  value: "alexander_admin@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111111"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Василий"
+              - column:
+                  name: surname
+                  value: "Васильев"
+              - column:
+                  name: patronymic
+                  value: "Васильевич"
+              - column:
+                  name: password
+                  value: "$2a$10$4chjm0wIOjrUuRWvbC4KfOpRxMJyqmSvuOOt/mEfmBDPJlrXJFBNC"
+              - column:
+                  name: email
+                  value: "vasy@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111112"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Джамшут"
+              - column:
+                  name: surname
+                  value: "Джамшутов"
+              - column:
+                  name: patronymic
+                  value: ""
+              - column:
+                  name: password
+                  value: "$2a$10$4chjm0wIOjrUuRWvbC4KfOpRxMJyqmSvuOOt/mEfmBDPJlrXJFBNC"
+              - column:
+                  name: email
+                  value: "81111111115@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111113"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Вазген"
+              - column:
+                  name: surname
+                  value: "Джамали"
+              - column:
+                  name: patronymic
+                  value: ""
+              - column:
+                  name: password
+                  value: "123456"
+              - column:
+                  name: email
+                  value: "8111111115@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111114"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Иван"
+              - column:
+                  name: surname
+                  value: "Иванов"
+              - column:
+                  name: patronymic
+                  value: "Иванович"
+              - column:
+                  name: password
+                  value: "123456"
+              - column:
+                  name: email
+                  value: "811rr@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111115"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Джо"
+              - column:
+                  name: surname
+                  value: "Байден"
+              - column:
+                  name: patronymic
+                  value: ""
+              - column:
+                  name: password
+                  value: "123456"
+              - column:
+                  name: email
+                  value: "8111145@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111116"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Моника"
+              - column:
+                  name: surname
+                  value: "Белуччи"
+              - column:
+                  name: patronymic
+                  value: ""
+              - column:
+                  name: password
+                  value: "123456"
+              - column:
+                  name: email
+                  value: "811err@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111117"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Джастин"
+              - column:
+                  name: surname
+                  value: "Тимберлейк"
+              - column:
+                  name: patronymic
+                  value: ""
+              - column:
+                  name: password
+                  value: "123456"
+              - column:
+                  name: email
+                  value: "8661115@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111118"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Джеки"
+              - column:
+                  name: surname
+                  value: "Чан"
+              - column:
+                  name: patronymic
+                  value: ""
+              - column:
+                  name: password
+                  value: "123456"
+              - column:
+                  name: email
+                  value: "8124525@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111119"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Ваздан"
+              - column:
+                  name: surname
+                  value: "Джимбло"
+              - column:
+                  name: patronymic
+                  value: ""
+              - column:
+                  name: password
+                  value: "123456"
+              - column:
+                  name: email
+                  value: "8113434115@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111120"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Дональд"
+              - column:
+                  name: surname
+                  value: "Трамп"
+              - column:
+                  name: patronymic
+                  value: ""
+              - column:
+                  name: password
+                  value: "123456"
+              - column:
+                  name: email
+                  value: "8168686@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111121"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Принц"
+              - column:
+                  name: surname
+                  value: "Чарльз"
+              - column:
+                  name: patronymic
+                  value: ""
+              - column:
+                  name: password
+                  value: "123456"
+              - column:
+                  name: email
+                  value: "534636@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111122"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Дональд"
+              - column:
+                  name: surname
+                  value: "Дак"
+              - column:
+                  name: patronymic
+                  value: ""
+              - column:
+                  name: password
+                  value: "123456"
+              - column:
+                  name: email
+                  value: "453748999885@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111123"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Барак"
+              - column:
+                  name: surname
+                  value: "Обмама"
+              - column:
+                  name: patronymic
+                  value: ""
+              - column:
+                  name: password
+                  value: "123456"
+              - column:
+                  name: email
+                  value: "854788535@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111124"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "Борис"
+              - column:
+                  name: surname
+                  value: "Джонс"
+              - column:
+                  name: patronymic
+                  value: ""
+              - column:
+                  name: password
+                  value: "123456"
+              - column:
+                  name: email
+                  value: "10485768@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111125"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "user1"
+              - column:
+                  name: surname
+                  value: "user1"
+              - column:
+                  name: patronymic
+                  value: "user1"
+              - column:
+                  name: password
+                  value: "0"
+              - column:
+                  name: email
+                  value: "6586894300@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111126"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "user2"
+              - column:
+                  name: surname
+                  value: "user2"
+              - column:
+                  name: patronymic
+                  value: "user2"
+              - column:
+                  name: password
+                  value: "0"
+              - column:
+                  name: email
+                  value: "81111111112@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "true"
+              - column:
+                  name: phone
+                  value: "81111111112"
+              - column:
+                  name: phone_verified
+                  value: "true"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"
+
+        - insert:
+            tableName: t_user
+            columns:
+              - column:
+                  name: name
+                  value: "user3_not_verified"
+              - column:
+                  name: surname
+                  value: "user3_not_verified"
+              - column:
+                  name: patronymic
+                  value: "user3_not_verified"
+              - column:
+                  name: password
+                  value: "0"
+              - column:
+                  name: email
+                  value: "81111111113@gmail.com"
+              - column:
+                  name: email_verified
+                  value: "false"
+              - column:
+                  name: phone
+                  value: "81111111113"
+              - column:
+                  name: phone_verified
+                  value: "false"
+              - column:
+                  name: address
+                  value: "162390, Вологодская область, г. Великий Устюг, пер. Октябрьский, 1а"
+              - column:
+                  name: birthday
+                  value: "2003-01-08 00:00:00"
+              - column:
+                  name: is_blocked
+                  value: "false"
+              - column:
+                  name: create_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: modify_date
+                  value: "2023-01-08 04:05:06"
+              - column:
+                  name: deleted
+                  value: "false"

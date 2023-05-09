@@ -10,9 +10,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "permission")
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Getter
 @Setter
 public final class Permission {
@@ -31,8 +28,30 @@ public final class Permission {
     @Singular
     private Set<Role> roles = new HashSet<>();
 
+    public Permission() {
+    }
+
     public Permission(String name) {
         this.name = name;
+    }
+
+    @Builder
+    public Permission(Long id,
+                      String name,
+                      String description,
+                      Set<Role> roles) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.roles = roles;
+    }
+
+    public boolean addRole(Role role) {
+        return roles.add(role);
+    }
+
+    public boolean removeRole(Role role) {
+        return roles.remove(role);
     }
 
     @Override
@@ -47,7 +66,7 @@ public final class Permission {
 
     @Override
     public int hashCode() {
-        return name != null ? name.hashCode() : 0;
+        return name.hashCode();
     }
 
     @Override

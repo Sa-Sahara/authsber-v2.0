@@ -32,6 +32,8 @@ databaseChangeLog:
               - column:
                   name: address
                   type: text
+                  constraints:
+                    nullable: false
               - column:
                   name: phone
                   type: text
@@ -41,6 +43,6 @@ databaseChangeLog:
               - column:
                   name: deleted
                   type: boolean
-                  defaultValue: false
+                  defaultValue: "false"
                   constraints:
                     nullable: false

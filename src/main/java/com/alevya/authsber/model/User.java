@@ -12,21 +12,19 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "t_user")
 //do soft delete
-@SQLDelete(sql = "update user set deleted = true where id =?")
+@SQLDelete(sql = "update t_user set deleted = true where id =?")
 @Where(clause = "deleted = false")
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Getter
 @Setter
+@SequenceGenerator(name = "default_generator",
+        sequenceName = "user_seq",
+        allocationSize = 10)
 public final class User {
 
     @Id
-    @SequenceGenerator(name = "default_generator",
-            sequenceName = "user_seq",
-            allocationSize = 10)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="user_seq")
     private Long id;
 
     @Column(nullable = false)
@@ -97,13 +95,16 @@ public final class User {
     @Singular
     private Set<WorkTime> workTimes = new HashSet<>();
 
-    public User(
-            Long id,
-            String name,
-            String password,
-            String email,
-            String phone,
-            Set<WorkTime> workTimes) {
+    public User() {
+    }
+
+    @Builder
+    public User(Long id,
+                String name,
+                String password,
+                String email,
+                String phone,
+                Set<WorkTime> workTimes) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -112,6 +113,7 @@ public final class User {
         this.workTimes = workTimes;
     }
 
+    @Builder
     public User(Long id,
                 String name,
                 String surname,
@@ -142,28 +144,76 @@ public final class User {
         this.workTimes = workTimes;
     }
 
+    @Builder
+    public User(Long id,
+                String name,
+                String surname,
+                String patronymic,
+                String password,
+                String email,
+                Boolean emailVerified,
+                String phone,
+                Boolean phoneVerified,
+                String address,
+                LocalDate birthday,
+                Boolean blocked,
+                Set<Role> roles,
+                Date createDate,
+                Date modifyDate,
+                Boolean deleted,
+                Set<WorkTime> workTimes) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.patronymic = patronymic;
+        this.password = password;
+        this.email = email;
+        this.emailVerified = emailVerified;
+        this.phone = phone;
+        this.phoneVerified = phoneVerified;
+        this.address = address;
+        this.birthday = birthday;
+        this.blocked = blocked;
+        this.roles = roles;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.deleted = deleted;
+        this.workTimes = workTimes;
+    }
+
+    public boolean addRole(Role role) {
+        return roles.add(role);
+    }
+
+    public boolean addRoles(Set<Role> newRoles) {
+        return roles.addAll(newRoles);
+    }
+
+    public boolean removeRole(Role role) {
+        return roles.remove(role);
+    }
+
+    public boolean addWorkTime(WorkTime workTime) {
+        return workTimes.add(workTime);
+    }
+
+    public boolean removeWorkTime(WorkTime workTime) {
+        return workTimes.remove(workTime);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Workplace)) return false;
+        if (!(o instanceof User)) return false;
 
         User user = (User) o;
 
-        if (!Objects.equals(name, user.name)) return false;
-        if (!Objects.equals(surname, user.surname)) return false;
-        if (!Objects.equals(email, user.email)) return false;
-        if (!Objects.equals(phone, user.phone)) return false;
-        return Objects.equals(createDate, user.createDate);
+        return Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (surname != null ? surname.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
-        return result;
+        return Objects.hash(email);
     }
 
     @Override

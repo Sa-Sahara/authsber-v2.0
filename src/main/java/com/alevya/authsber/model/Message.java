@@ -9,9 +9,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "message")
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Getter
 @Setter
 public final class Message {
@@ -19,6 +16,7 @@ public final class Message {
     @Id
     @SequenceGenerator(name = "default_generator",
             sequenceName = "message_seq")
+    @Setter
     private Long id;
 
     @NotNull
@@ -36,11 +34,16 @@ public final class Message {
     @NotNull
     Long createTime;
 
-    public Message(
-            MessageType type,
-            String accessCode,
-            Long userId,
-            Long createTime) {
+    public Message() {
+    }
+
+    @Builder
+    public Message(Long id,
+                   MessageType type,
+                   String accessCode,
+                   Long userId,
+                   Long createTime) {
+        this.id = id;
         this.type = type;
         this.accessCode = accessCode;
         this.userId = userId;
@@ -62,11 +65,7 @@ public final class Message {
 
     @Override
     public int hashCode() {
-        int result = type != null ? type.hashCode() : 0;
-        result = 31 * result + (accessCode != null ? accessCode.hashCode() : 0);
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
-        return result;
+        return Objects.hash(type, accessCode, userId, createTime);
     }
 
     @Override

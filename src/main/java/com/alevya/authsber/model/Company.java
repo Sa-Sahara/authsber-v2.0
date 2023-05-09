@@ -1,5 +1,6 @@
 package com.alevya.authsber.model;
 
+import com.alevya.authsber.exception.BadRequestException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -14,9 +15,6 @@ import java.util.Set;
 @Table(name = "company")
 //do soft delete
 @SQLDelete(sql = "update company set deleted = true where id =?")
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Getter
 @Setter
 public final class Company {
@@ -25,16 +23,19 @@ public final class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+//    should not be changed
     @Column(name = "full_name", unique = true)
     @NotNull
     private String fullName;
 
+//    should not be changed
     @Column(name = "short_name", unique = true)
     @NotNull
     private String shortName;
 
     private String description;
 
+    @NotNull
     private String address;
 
     private String phone;
@@ -49,7 +50,7 @@ public final class Company {
 
     @JsonIgnore
     @Singular
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "parent")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "company")
     private Set<Workplace> workplaces = new HashSet<>();
 
     /**
@@ -58,17 +59,74 @@ public final class Company {
     @Column(name = "deleted", nullable = false, columnDefinition = "boolean default false")
     private Boolean deleted = false;
 
+    public Company() {
+    }
+
+    @Builder
     public Company(String fullName,
                    String shortName,
                    String description,
                    String address,
-                   String phone) {
+                   String phone,
+                   Company parentDivision) {
         this.fullName = fullName;
         this.shortName = shortName;
         this.description = description;
         this.address = address;
         this.phone = phone;
+        this.parentDivision = parentDivision;
     }
+
+    @Builder
+    public Company(Long id,
+                   String fullName,
+                   String shortName,
+                   String description,
+                   String address,
+                   String phone,
+                   Company parentDivision,
+                   Set<Company> childDivisions,
+                   Set<Workplace> workplaces,
+                   Boolean deleted) {
+        this.id = id;
+        this.fullName = fullName;
+        this.shortName = shortName;
+        this.description = description;
+        this.address = address;
+        this.phone = phone;
+        this.parentDivision = parentDivision;
+        this.childDivisions = childDivisions;
+        this.workplaces = workplaces;
+        this.deleted = deleted;
+    }
+
+    public boolean addChildCompany(Company company) {
+        return childDivisions.add(company);
+    }
+
+    public boolean removeChildCompany(Company company) {
+        return childDivisions.remove(company);
+    }
+
+    public boolean addWorkplace(Workplace workplace) {
+        return workplaces.add(workplace);
+    }
+
+    public boolean removeWorkplace(Workplace workplace) {
+        return workplaces.remove(workplace);
+    }
+
+    public void setFullName(String fullName) {
+        if (this.fullName == null || this.fullName.equals(fullName)) {
+            this.fullName = fullName;
+        } else throw new BadRequestException("fullName cannot be changed");
+    }
+//
+//    public void setShortName(String shortName) {
+//        if (this.shortName == null) {
+//            this.shortName = shortName;
+//        } else throw new BadRequestException("shortName cannot be changed");
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -77,15 +135,12 @@ public final class Company {
 
         Company company = (Company) o;
 
-        if (!Objects.equals(fullName, company.fullName)) return false;
-        return Objects.equals(shortName, company.shortName);
+        return Objects.equals(fullName, company.fullName);
     }
 
     @Override
     public int hashCode() {
-        int result = fullName != null ? fullName.hashCode() : 0;
-        result = 31 * result + (shortName != null ? shortName.hashCode() : 0);
-        return result;
+        return Objects.hash(fullName);
     }
 
     @Override

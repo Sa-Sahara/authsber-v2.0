@@ -29,32 +29,32 @@ databaseChangeLog:
                     nullable: false
 
   - changeSet:
-      id: create-order_service
+      id: create-t_order_service
       author: Aleksandra
       changes:
         - createTable:
-            tableName: order_service
+            tableName: t_order_service
             columns:
               - column:
                   constraints:
                     nullable: false
-                    foreignKeyName: order_service_fk
-                    referencedTableName: order
+                    foreignKeyName: t_order_service_fk
+                    referencedTableName: t_order
                     referencedColumnNames: id
-                  name: order_id
+                  name: t_order_id
                   type: BIGINT
               - column:
                   constraints:
                     nullable: false
-                    foreignKeyName: service_order_fk
+                    foreignKeyName: service_t_order_fk
                     referencedTableName: service
                     referencedColumnNames: id
                   name: service_id
                   type: BIGINT
   - changeSet:
-      id: add_PK-order_service
+      id: add_PK-t_order_service
       author: Aleksandra
       changes:
         - addPrimaryKey:
-            columnNames: order_id, service_id
-            tableName: order_service
+            columnNames: t_order_id, service_id
+            tableName: t_order_service

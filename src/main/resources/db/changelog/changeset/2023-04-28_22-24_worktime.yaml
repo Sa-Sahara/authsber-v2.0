@@ -46,6 +46,6 @@ databaseChangeLog:
         - addForeignKeyConstraint:
             baseTableName: worktime
             baseColumnNames: user_id
-            referencedTableName: user
+            referencedTableName: t_user
             referencedColumnNames: id
-            constraintName: user_worktime_fk
+            constraintName: t_user_worktime_fk

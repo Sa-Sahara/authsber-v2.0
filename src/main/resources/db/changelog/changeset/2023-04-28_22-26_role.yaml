@@ -39,7 +39,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     foreignKeyName: user_role_fk
-                    referencedTableName: user
+                    referencedTableName: t_user
                     referencedColumnNames: id
                   name: user_id
                   type: BIGINT

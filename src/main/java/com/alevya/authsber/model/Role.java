@@ -10,8 +10,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "role")
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public final class Role {
@@ -44,6 +42,10 @@ public final class Role {
     @Singular
     private Set<Permission> permissions = new HashSet<>();
 
+    public Role() {
+    }
+
+    @Builder
     public Role(Long id,
                 String name,
                 String description,
@@ -52,6 +54,37 @@ public final class Role {
         this.name = name;
         this.description = description;
         this.level = level;
+    }
+
+    @Builder
+    public Role(Long id,
+                String name,
+                String description,
+                Integer level,
+                Set<User> users,
+                Set<Permission> permissions) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.level = level;
+        this.users = users;
+        this.permissions = permissions;
+    }
+
+    public boolean addUser(User user) {
+        return users.add(user);
+    }
+
+    public boolean removeUser(User user) {
+        return users.remove(user);
+    }
+
+    public boolean addPermission(Permission permission) {
+        return permissions.add(permission);
+    }
+
+    public boolean removePermission(Permission permission) {
+        return permissions.remove(permission);
     }
 
     @Override
@@ -68,10 +101,7 @@ public final class Role {
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (level != null ? level.hashCode() : 0);
-        return result;
+        return Objects.hash(name);
     }
 
     @Override

@@ -11,7 +11,7 @@ databaseChangeLog:
                   value: "ADMIN"
               - column:
                   name: description
-                  value: "full access rights: crud for company, branch, workplace, users, messages"
+                  value: "full access rights: crud for company, workplace, users, messages"
               - column:
                   name: level
                   value: "1"
@@ -92,22 +92,10 @@ databaseChangeLog:
             columns:
               - column:
                   name: name
-                  value: "NOT VERIFIED USER"
+                  value: "GUEST"
               - column:
                   name: description
                   value: "registration, log in, password recovery"
               - column:
                   name: level
                   value: "30"
-        - insert:
-            tableName: role
-            columns:
-              - column:
-                  name: name
-                  value: "GUEST"
-              - column:
-                  name: description
-                  value: "watch company page, branches list"
-              - column:
-                  name: level
-                  value: "40"

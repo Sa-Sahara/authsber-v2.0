@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-order
+      id: create-t_order
       author: Aleksandra
       changes:
         - createTable:
-            tableName: order
+            tableName: t_order
             columns:
               - column:
                   name: id
@@ -12,7 +12,7 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    primaryKeyName: order_PK
+                    primaryKeyName: t_order_PK
                     nullable: false
               - column:
                   name: date
@@ -36,18 +36,18 @@ databaseChangeLog:
                   name: workplace_id
                   type: bigint
               - column:
-                  name: description
+                  name: comment
                   type: text
               - column:
                   name: client_id
                   type: bigint
   - changeSet:
-      id: create-connection-order_workplace
+      id: create-connection-t_order_workplace
       author: Aleksandra
       changes:
         - addForeignKeyConstraint:
-            baseTableName: order
+            baseTableName: t_order
             baseColumnNames: workplace_id
             referencedTableName: workplace
             referencedColumnNames: id
-            constraintName: order_workplace_fk
+            constraintName: t_order_workplace_fk

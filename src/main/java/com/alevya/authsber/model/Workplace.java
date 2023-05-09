@@ -1,5 +1,6 @@
 package com.alevya.authsber.model;
 
+import com.alevya.authsber.exception.BadRequestException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -28,7 +29,7 @@ public final class Workplace {
     @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
     @JoinColumn(name = "company_id")
-    private Company parent;
+    private Company company;
 
     @JsonIgnore
     @Singular
@@ -37,38 +38,13 @@ public final class Workplace {
 
     @JsonIgnore
     @Singular
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "workplace")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "workplace")
     private Set<Order> orders = new HashSet<>();
 
-    public Workplace(String name,
-                     String description,
-                     Company company) {
-        this.name = name;
-        this.description = description;
-        this.parent = company;
-    }
-
-    public Workplace(Long id,
-                     String name,
-                     String description,
-                     Company company) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.parent = company;
-    }
-
-    public Workplace(
-            Long id,
-            String name,
-            String description,
-            Company company,
-            HashSet<WorkTime> workTimes) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.parent = company;
-        this.workTimes = workTimes;
+    public void setName(String name) {
+        if (this.name == null) {
+            this.name = name;
+        } else throw new BadRequestException("Name cannot be changed");
     }
 
     @Override
@@ -78,15 +54,12 @@ public final class Workplace {
 
         Workplace workplace = (Workplace) o;
 
-        if (!Objects.equals(name, workplace.name)) return false;
-        return Objects.equals(parent, workplace.parent);
+        return Objects.equals(name, workplace.name);
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (parent != null ? parent.hashCode() : 0);
-        return result;
+        return Objects.hash(name);
     }
 
     @Override
@@ -95,7 +68,7 @@ public final class Workplace {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", companyId=" + parent.getId() +
+                ", companyId=" + company.getId() +
                 '}';
     }
 }

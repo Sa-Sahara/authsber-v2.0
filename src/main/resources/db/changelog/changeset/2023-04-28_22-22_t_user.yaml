@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-user
+      id: create-t_user
       author: Aleksandra
       changes:
         - createTable:
-            tableName: user
+            tableName: t_user
             columns:
               - column:
                   name: id
@@ -12,7 +12,7 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    primaryKeyName: user_PK
+                    primaryKeyName: t_user_PK
                     nullable: false
               - column:
                   name: name
@@ -41,7 +41,7 @@ databaseChangeLog:
               - column:
                   name: email_verified
                   type: boolean
-                  defaultValue: false
+                  defaultValue: "false"
                   constraints:
                     nullable: false
               - column:
@@ -50,7 +50,7 @@ databaseChangeLog:
               - column:
                   name: phone_verified
                   type: boolean
-                  defaultValue: false
+                  defaultValue: "false"
                   constraints:
                       nullable: false
               - column:
@@ -62,7 +62,7 @@ databaseChangeLog:
               - column:
                   name: is_blocked
                   type: boolean
-                  defaultValue: false
+                  defaultValue: "false"
                   constraints:
                     nullable: false
               - column:
@@ -78,6 +78,6 @@ databaseChangeLog:
               - column:
                   name: deleted
                   type: boolean
-                  defaultValue: false
+                  defaultValue: "false"
                   constraints:
                     nullable: false

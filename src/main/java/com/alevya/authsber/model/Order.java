@@ -10,12 +10,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-
 @Entity
-@Table(name = "order")
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Table(name = "t_order")
 @Getter
 @Setter
 public final class Order {
@@ -49,13 +45,45 @@ public final class Order {
             name = "order_service",
             joinColumns = @JoinColumn(name = "service_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
-    @Singular
+    @Singular("service")
     private Set<Service> services = new HashSet<>();
 
     private String comment;
 
     @Column(name = "client_id")
     private Long clientId;
+
+    public Order() {
+    }
+
+    @Builder
+    public Order(Long id,
+                 LocalDate date,
+                 LocalTime timeStart,
+                 LocalTime timeFinish,
+                 Long workerId,
+                 Workplace workplace,
+                 Set<Service> services,
+                 String comment,
+                 Long clientId) {
+        this.id = id;
+        this.date = date;
+        this.timeStart = timeStart;
+        this.timeFinish = timeFinish;
+        this.workerId = workerId;
+        this.workplace = workplace;
+        this.services = services;
+        this.comment = comment;
+        this.clientId = clientId;
+    }
+
+    public boolean addService(Service service) {
+        return services.add(service);
+    }
+
+    public boolean removeService(Service service) {
+        return services.remove(service);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -74,13 +102,13 @@ public final class Order {
 
     @Override
     public int hashCode() {
-        int result = date != null ? date.hashCode() : 0;
-        result = 31 * result + (timeStart != null ? timeStart.hashCode() : 0);
-        result = 31 * result + (timeFinish != null ? timeFinish.hashCode() : 0);
-        result = 31 * result + (workerId != null ? workerId.hashCode() : 0);
-        result = 31 * result + (workplace != null ? workplace.hashCode() : 0);
-        result = 31 * result + (clientId != null ? clientId.hashCode() : 0);
-        return result;
+        return Objects.hash(
+                date,
+                timeStart,
+                timeFinish,
+                workerId,
+                workplace,
+                clientId);
     }
 
     @Override

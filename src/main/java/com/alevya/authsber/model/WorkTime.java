@@ -61,12 +61,7 @@ public final class WorkTime {
 
     @Override
     public int hashCode() {
-        int result = date != null ? date.hashCode() : 0;
-        result = 31 * result + (start != null ? start.hashCode() : 0);
-        result = 31 * result + (finish != null ? finish.hashCode() : 0);
-        result = 31 * result + (workplace != null ? workplace.hashCode() : 0);
-        result = 31 * result + (worker != null ? worker.hashCode() : 0);
-        return result;
+        return Objects.hash(date, start, finish, workplace, worker);
     }
 
     @Override
