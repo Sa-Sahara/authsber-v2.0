@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
-@Table(name = "message")
+@Table(name = "t_message")
 @Getter
 @Setter
 public final class Message {

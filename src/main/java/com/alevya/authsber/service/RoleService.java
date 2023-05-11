@@ -23,7 +23,7 @@ public class RoleService {
     private static final Log log = LogFactory.getLog(RoleService.class);
     private static final int MAX_LENGTH = 255;
 
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     public RoleService(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;

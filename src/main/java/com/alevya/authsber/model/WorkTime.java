@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 
 @Entity
-@Table(name = "worktime")
+@Table(name = "t_worktime")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

@@ -41,7 +41,7 @@ public final class Order {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "order_service",
+            name = "t_order_service",
             joinColumns = @JoinColumn(name = "service_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
     @Singular("service")

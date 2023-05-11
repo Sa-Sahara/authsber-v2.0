@@ -81,10 +81,10 @@ public class CompanyController {
     //    @Secured("UPDATE_COMPANY")
     @Operation(summary = "Update company")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CompanyDtoResponse> updateCompany(@PathVariable Long id
-            , @RequestBody @Validated CompanyDtoRequest companyDtoRequest) {
-        return ResponseEntity.ok(companyService.updateCompany(companyDtoRequest));
-    } //todo - divide general info and Sets
+    public ResponseEntity<CompanyDtoResponse> updateCompany(@PathVariable Long id,
+            @RequestBody @Validated CompanyDtoRequest companyDtoRequest) {
+        return ResponseEntity.ok(companyService.updateCompany(id, companyDtoRequest));
+    }
 
     //    @Secured("DELETE_COMPANY")
     @Operation(summary = "Delete company")

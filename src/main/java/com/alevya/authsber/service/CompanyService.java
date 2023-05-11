@@ -20,7 +20,7 @@ public class CompanyService {
 
     private static final int MAX_LENGTH = 255;
 
-    private CompanyRepository companyRepository;
+    private final CompanyRepository companyRepository;
 
     public CompanyService(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
@@ -28,29 +28,13 @@ public class CompanyService {
 
     public CompanyDtoResponse createCompany(CompanyDtoRequest dto) {
         //checking fields
-        if (dto == null) {
-            throw new BadRequestException("Invalid company");
-        }
-        if (StringUtils.isBlank(dto.getShortName())) {
-            throw new BadRequestException("Invalid company short name");
-        }
-        if (dto.getShortName().length() > MAX_LENGTH) {
-            throw new BadRequestException("Too long company name");
-        }
-        if (companyRepository.existsByShortName(dto.getShortName())) {
-            throw new BadRequestException("Exist company with this name");
-        }
-        if (StringUtils.isBlank(dto.getFullName())) {
-            throw new BadRequestException("Invalid company full name");
-        }
+        checkFields(dto);
+
         if (companyRepository.existsByFullName(dto.getFullName())) {
             throw new BadRequestException("Exist company with this full name");
         }
-        if (StringUtils.isBlank(dto.getDescription())) {
-            throw new BadRequestException("Invalid company description");
-        }
-        if (StringUtils.isBlank(dto.getAddress())) {
-            throw new BadRequestException("Invalid company Address");
+        if (companyRepository.existsByShortName(dto.getShortName())) {
+            throw new BadRequestException("Exist company with this short name");
         }
         //save in DB
         return mapToDto(companyRepository.save(mapToCompany(dto)));
@@ -92,23 +76,47 @@ public class CompanyService {
                 .collect(Collectors.toSet());
     }
 
+    public Set<CompanyDtoResponse> getAllParentCompanies(Long id) {
+        return companyRepository.getThisAndAllParentCompanies(id).stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<CompanyDtoResponse> getAllChildCompanies(Long id) {
+        return companyRepository.getThisAndAllChildCompanies(id).stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<CompanyDtoResponse> getAllRelativeCompanyIds(Long parentId) {
+        Set<CompanyDtoResponse> result = getAllParentCompanies(parentId);
+        result.addAll(getAllChildCompanies(parentId));
+        return result;
+    }
+
     public Page<CompanyDtoResponse> findAllCompaniesPageable(Pageable pageable) {
         Page<Company> page = companyRepository.findAll(pageable);
         return new PageImpl<>(page.stream().map(this::mapToDto)
                 .collect(Collectors.toList()), page.getPageable(), page.getTotalElements());
     }
 
-    public CompanyDtoResponse updateCompany(CompanyDtoRequest dto) {
-        if (dto == null || !companyRepository.existsByFullName(dto.getFullName())) {
+    public CompanyDtoResponse updateCompany(Long id, CompanyDtoRequest dto) {
+        checkFields(dto);
+
+        if (!companyRepository.existsByFullName(dto.getFullName())) {
             throw new BadRequestException("Invalid company");
         }
-        Company oldCompany = companyRepository.findByFullName(dto.getFullName());
+
+        Company oldCompany = companyRepository.findById(id)
+                .orElseThrow(()
+                        -> new NotFoundException("Company not found!"));
+
+        //full name should not be changed
 
         //short name
-        if (StringUtils.isBlank(dto.getShortName())) {
-            throw new BadRequestException("Invalid company short name");
-        } else if (companyRepository.existsByShortName(dto.getShortName())) {
-            throw new BadRequestException("Not unique company short name");
+        if (!dto.getShortName().equals(oldCompany.getShortName()) &&
+                companyRepository.existsByShortName(dto.getShortName())) {
+            throw new BadRequestException("Not unique short name");
         }
         oldCompany.setShortName(dto.getShortName());
 
@@ -126,6 +134,25 @@ public class CompanyService {
         //phone
         oldCompany.setPhone(dto.getPhone());
 
+        //parentCompany
+        Company oldParent = oldCompany.getParentCompany();
+        Company newParent = new Company();
+        if (dto.getParentCompanyId() != null) {
+            newParent = companyRepository.findById(dto.getParentCompanyId()).orElseThrow(()
+                    -> new NotFoundException("Company not found!"));
+        }
+
+        if (oldCompany.getChildCompanies().size() != 1
+                && getAllChildCompanies(oldCompany.getId()).contains(mapToDto(newParent))) {
+            throw new BadRequestException("Company inheritance cycle, invalid parent");
+        }
+
+        if (newParent.getFullName() == null && oldParent != null) {
+            throw new BadRequestException("Child company`s parent could not be null");
+        } else {
+            oldCompany.setParentCompany(newParent);
+        }
+
         return mapToDto(companyRepository.saveAndFlush(oldCompany));
     }
 
@@ -136,6 +163,27 @@ public class CompanyService {
         companyRepository.deleteById(id);
     }
 
+    private void checkFields(CompanyDtoRequest dto) {
+        if (dto == null) {
+            throw new BadRequestException("Invalid company");
+        }
+        if (StringUtils.isBlank(dto.getShortName())) {
+            throw new BadRequestException("Invalid company short name");
+        }
+        if (dto.getShortName().length() > MAX_LENGTH) {
+            throw new BadRequestException("Too long company short name");
+        }
+        if (StringUtils.isBlank(dto.getFullName())) {
+            throw new BadRequestException("Invalid company full name");
+        }
+        if (dto.getFullName().length() > MAX_LENGTH) {
+            throw new BadRequestException("Too long company full name");
+        }
+        if (StringUtils.isBlank(dto.getAddress())) {
+            throw new BadRequestException("Invalid company Address");
+        }
+    }
+
     public CompanyDtoResponse mapToDto(Company company) {
         CompanyDtoResponse dto = CompanyDtoResponse.builder()
                 .id(company.getId())
@@ -144,17 +192,21 @@ public class CompanyService {
                 .description(company.getDescription())
                 .address(company.getAddress())
                 .phone(company.getPhone())
+                .parentCompanyId(company.getParentCompany() == null ? null : company.getParentCompany().getId())
                 .build();
         return dto;
     }
 
-    public Company mapToCompany(CompanyDtoRequest companyDtoRequest) {
+    public Company mapToCompany(CompanyDtoRequest dto) {
         Company company = new Company();
-        company.setShortName(companyDtoRequest.getShortName());
-        company.setFullName(companyDtoRequest.getFullName());
-        company.setDescription(companyDtoRequest.getDescription());
-        company.setAddress(companyDtoRequest.getAddress());
-        company.setPhone(companyDtoRequest.getPhone());
+        company.setShortName(dto.getShortName());
+        company.setFullName(dto.getFullName());
+        company.setDescription(dto.getDescription());
+        company.setAddress(dto.getAddress());
+        company.setPhone(dto.getPhone());
+        company.setParentCompany(dto.getParentCompanyId() == null
+                ? null
+                : companyRepository.getReferenceById(dto.getParentCompanyId()));
         return company;
     }
 }

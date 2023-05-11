@@ -23,7 +23,7 @@ public class PermissionService{
     private static final Log log = LogFactory.getLog(PermissionService.class);
     private static final int MAX_LENGTH = 255;
 
-    private PermissionRepository permissionRepository;
+    private final PermissionRepository permissionRepository;
 
     public PermissionService(PermissionRepository permissionRepository) {
         this.permissionRepository = permissionRepository;

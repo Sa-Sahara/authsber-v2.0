@@ -22,9 +22,9 @@ import java.util.List;
 public class SlotService {
     private static final Log log = LogFactory.getLog(SlotService.class);
 
-    private WorkplaceRepository workplaceRepository;
-    private WorkTimeRepository workTimeRepository;
-    private OrderRepository orderRepository;
+    private final WorkplaceRepository workplaceRepository;
+    private final WorkTimeRepository workTimeRepository;
+    private final OrderRepository orderRepository;
 
     public SlotService(WorkplaceRepository workplaceRepository,
                        WorkTimeRepository workTimeRepository

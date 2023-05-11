@@ -1,17 +1,16 @@
 package com.alevya.authsber.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Getter
 @ToString
-public class CompanyDtoResponse {
+public class CompanyDtoResponse extends CompanyDtoRequest {
     private Long id;
-    private String fullName;
-    private String shortName;
-    private String description;
-    private String address;
-    private String phone;
 }

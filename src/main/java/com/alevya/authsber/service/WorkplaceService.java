@@ -21,7 +21,7 @@ public class WorkplaceService {
 
     private static final Log log = LogFactory.getLog(WorkplaceService.class);
 
-    private WorkplaceRepository workplaceRepository;
+    private final WorkplaceRepository workplaceRepository;
 
     public WorkplaceService(WorkplaceRepository workplaceRepository) {
         this.workplaceRepository = workplaceRepository;

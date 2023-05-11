@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 public class MessageService {
     private static final Log log = LogFactory.getLog(MessageService.class);
-    private MessageRepository messageRepository;
+    private final MessageRepository messageRepository;
 
     public MessageService(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
@@ -43,7 +43,7 @@ public class MessageService {
             throw new BadRequestException("Invalid user id");
         }
         log.info("createCheckMessage: " + messageDtoRequest);
-        messageRepository.deleteAllByUserIdAndType(messageDtoRequest.getUserId(), messageDtoRequest.getType());
+        messageRepository.deleteAllByUserIdAndType(messageDtoRequest.getUserId(), messageDtoRequest.getType()); //todo too many functions for 1 method
         return mapToMessageDto(messageRepository.save(mapToMessage(messageDtoRequest)));
     }
 

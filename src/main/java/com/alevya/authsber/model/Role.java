@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "role")
+@Table(name = "t_role")
 @Getter
 @Setter
 public final class Role {
@@ -37,7 +37,7 @@ public final class Role {
      */
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "role_permission",
+            name = "t_role_permission",
             joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id", referencedColumnName = "id"))
     @Singular

@@ -5,7 +5,6 @@ import com.alevya.authsber.dto.OrderDtoResponse;
 import com.alevya.authsber.exception.BadRequestException;
 import com.alevya.authsber.exception.NotFoundException;
 import com.alevya.authsber.model.Order;
-//import com.alevya.authsber.model.Service;
 import com.alevya.authsber.model.Slot;
 import com.alevya.authsber.model.Workplace;
 import com.alevya.authsber.repository.OrderRepository;
@@ -28,9 +27,9 @@ public class OrderService {
 
     private static final Log log = LogFactory.getLog(OrderService.class);
 
-    private OrderRepository orderRepository;
-    private WorkplaceRepository workplaceRepository;
-    private ServiceRepository serviceRepository;
+    private final OrderRepository orderRepository;
+    private final WorkplaceRepository workplaceRepository;
+    private final ServiceRepository serviceRepository;
 
     public OrderService(OrderRepository orderRepository,
                         WorkplaceRepository workplaceRepository,

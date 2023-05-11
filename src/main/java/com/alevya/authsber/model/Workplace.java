@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
-@Table(name = "workplace")
+@Table(name = "t_workplace")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

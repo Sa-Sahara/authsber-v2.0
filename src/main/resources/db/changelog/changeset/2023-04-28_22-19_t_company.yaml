@@ -28,13 +28,13 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: full_name
-                  type: text
+                  type: varchar(255)
                   constraints:
                     nullable: false
                     unique: true
               - column:
                   name: short_name
-                  type: text
+                  type: varchar(255)
                   constraints:
                     nullable: false
                     unique: true

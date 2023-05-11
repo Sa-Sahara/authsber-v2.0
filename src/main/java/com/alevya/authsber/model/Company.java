@@ -12,24 +12,23 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "company")
+@Table(name = "t_company")
 //do soft delete
-@SQLDelete(sql = "update company set deleted = true where id =?")
+@SQLDelete(sql = "update t_company set deleted = true where id =?")
 @Getter
 @Setter
 public final class Company {
 
     @Id
     @SequenceGenerator(name = "company_seq", sequenceName = "company_seq", allocationSize = 1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="company_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company_seq")
     private Long id;
 
-//    should not be changed
+    //    should not be changed
     @Column(name = "full_name", unique = true)
     @NotNull
     private String fullName;
 
-//    should not be changed
     @Column(name = "short_name", unique = true)
     @NotNull
     private String shortName;
@@ -43,11 +42,11 @@ public final class Company {
 
     @ManyToOne
     @JoinColumn(name = "parent_division_id")/*(fetch = FetchType.EAGER)*/
-    private Company parentDivision;
+    private Company parentCompany;
     @JsonIgnore
     @Singular
-    @OneToMany(mappedBy = "parentDivision", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private Set<Company> childDivisions = new HashSet<>();
+    @OneToMany(mappedBy = "parentCompany", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private Set<Company> childCompanies = new HashSet<>();
 
     @JsonIgnore
     @Singular
@@ -69,13 +68,13 @@ public final class Company {
                    String description,
                    String address,
                    String phone,
-                   Company parentDivision) {
+                   Company parentCompany) {
         this.fullName = fullName;
         this.shortName = shortName;
         this.description = description;
         this.address = address;
         this.phone = phone;
-        this.parentDivision = parentDivision;
+        this.parentCompany = parentCompany;
     }
 
     @Builder
@@ -85,8 +84,8 @@ public final class Company {
                    String description,
                    String address,
                    String phone,
-                   Company parentDivision,
-                   Set<Company> childDivisions,
+                   Company parentCompany,
+                   Set<Company> childCompanies,
                    Set<Workplace> workplaces,
                    Boolean deleted) {
         this.id = id;
@@ -95,18 +94,21 @@ public final class Company {
         this.description = description;
         this.address = address;
         this.phone = phone;
-        this.parentDivision = parentDivision;
-        this.childDivisions = childDivisions;
+        this.parentCompany = parentCompany;
+        this.childCompanies = childCompanies;
         this.workplaces = workplaces;
         this.deleted = deleted;
     }
 
     public boolean addChildCompany(Company company) {
-        return childDivisions.add(company);
+        if (!this.equals(company)) {
+            return false;
+        }
+        return childCompanies.add(company);
     }
 
     public boolean removeChildCompany(Company company) {
-        return childDivisions.remove(company);
+        return childCompanies.remove(company);
     }
 
     public boolean addWorkplace(Workplace workplace) {
@@ -122,12 +124,6 @@ public final class Company {
             this.fullName = fullName;
         } else throw new BadRequestException("fullName cannot be changed");
     }
-//
-//    public void setShortName(String shortName) {
-//        if (this.shortName == null) {
-//            this.shortName = shortName;
-//        } else throw new BadRequestException("shortName cannot be changed");
-//    }
 
     @Override
     public boolean equals(Object o) {
