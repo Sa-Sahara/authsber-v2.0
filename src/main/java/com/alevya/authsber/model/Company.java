@@ -120,7 +120,7 @@ public final class Company {
     }
 
     public void setFullName(String fullName) {
-        if (this.fullName == null || this.fullName.equals(fullName)) {
+        if (this.fullName == null || Objects.equals(this.fullName, fullName)) {
             this.fullName = fullName;
         } else throw new BadRequestException("fullName cannot be changed");
     }

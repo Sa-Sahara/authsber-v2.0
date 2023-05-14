@@ -13,8 +13,8 @@ public class AuthDtoResponse {
     public AuthDtoResponse() {
     }
 
-    public AuthDtoResponse(String token
-            , String error) {
+    public AuthDtoResponse(String token,
+             String error) {
         this.token = token;
         this.error = error;
     }

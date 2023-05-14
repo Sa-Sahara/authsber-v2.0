@@ -75,8 +75,8 @@ public class PermissionController {
     //    @Secured("UPDATE_PERMISSION")
     @Operation(summary = "Update permission")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PermissionDtoResponse> updatePermission(@PathVariable Long id
-            , @RequestBody @Validated PermissionDtoRequest permissionDtoRequest) {
+    public ResponseEntity<PermissionDtoResponse> updatePermission(@PathVariable Long id,
+             @RequestBody @Validated PermissionDtoRequest permissionDtoRequest) {
         log.info("updatePermission id: " + id + " permissionDtoRequest: " + permissionDtoRequest);
         return ResponseEntity.ok(permissionService.updatePermission(id, permissionDtoRequest));
     }

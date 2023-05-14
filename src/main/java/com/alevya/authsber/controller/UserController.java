@@ -1,8 +1,9 @@
 package com.alevya.authsber.controller;
 
-import com.alevya.authsber.dto.UserDtoRequest;
-import com.alevya.authsber.dto.UserDtoResponse;
-import com.alevya.authsber.dto.UserRegistrationDto;
+import com.alevya.authsber.dto.UserGeneralInfoDtoRequest;
+import com.alevya.authsber.dto.UserGeneralInfoDtoResponse;
+import com.alevya.authsber.dto.UserWithSettingsDtoRequest;
+import com.alevya.authsber.dto.UserWithSettingsDtoResponse;
 import com.alevya.authsber.security.JwtTokenProvider;
 import com.alevya.authsber.security.UserDetailsServiceImpl;
 import com.alevya.authsber.security.UserPrincipal;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,45 +38,53 @@ public class UserController {
     private final JwtTokenProvider jwtTokenProvider;
     private static final Log log = LogFactory.getLog(UserController.class);
 
-    public UserController(UserService userService
-            , UserDetailsServiceImpl userDetailsService
-            , JwtTokenProvider jwtTokenProvider) {
+    public UserController(UserService userService,
+             UserDetailsServiceImpl userDetailsService,
+             JwtTokenProvider jwtTokenProvider) {
         this.userService = userService;
         this.userDetailsService = userDetailsService;
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-//    @Secured("CREATE_USER")
+    //    @Secured("MYUSER")
     @Operation(summary = "Create User")
+    @PostMapping(value = "/my", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserGeneralInfoDtoResponse> createUserWithoutSettings(@RequestBody UserGeneralInfoDtoRequest userGeneralInfoDto) {
+        log.info("registrationUser userDtoRequest: " + userGeneralInfoDto);
+        return ResponseEntity.ok(userService.createMyUser(userGeneralInfoDto));
+    }
+
+//    @Secured("CREATE_USER")
+    @Operation(summary = "Create User With Settings")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDtoResponse> createUser (@RequestBody UserDtoRequest userDtoRequest) {
-        log.info("createUser userDtoRequest: " + userDtoRequest);
-        return ResponseEntity.ok(userService.createUser(userDtoRequest));
+    public ResponseEntity<UserWithSettingsDtoResponse> createUserWithSettings(@RequestBody UserWithSettingsDtoRequest userWithSettingsDtoRequest) {
+        log.info("createUser userDtoRequest: " + userWithSettingsDtoRequest);
+        return ResponseEntity.ok(userService.createUserWithSettings(userWithSettingsDtoRequest));
     }
 
 //    @Secured("GET_USER")
     @Operation(summary = "Get User By Id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDtoResponse> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserWithSettingsDtoResponse> getUserById(@PathVariable Long id) {
         log.info("getUserById id: " + id);
         return  ResponseEntity.ok(userService.getUserById(id));
     }
 
-//    @Secured("GET_MYUSER")
+//    @Secured("MYUSER")
     @Operation(summary = "Get My User for change profile")
     @GetMapping(value = "/my", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserRegistrationDto> getMyUser(@RequestHeader("Authorization") String jwtToken) {
+    public ResponseEntity<UserGeneralInfoDtoResponse> getMyUser(@RequestHeader("Authorization") String jwtToken) {
         log.info("getMyUser jwtToken:" + jwtToken);
         UserPrincipal userPrincipal = (UserPrincipal) userDetailsService
                 .loadUserByUsername(jwtTokenProvider.getPhoneEmail(jwtToken));
-        return  ResponseEntity.ok(userService.mapToUserRegistrationDto(userPrincipal.getUser()));
+        return  ResponseEntity.ok(userService.mapToUserGeneralInfoDto(userPrincipal.getUser()));
     }
 
 //    @Secured("GET_USERS")
     @Operation(summary = "Get All Users")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<UserDtoResponse> getAllUsers() {
+    public List<UserWithSettingsDtoResponse> getAllUsers() {
         log.info("getAllUsers");
         return userService.getAllUsers();
     }
@@ -83,22 +93,35 @@ public class UserController {
     @Operation(summary = "Get All Users Page")
     @GetMapping(value = "/pages", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Page<UserDtoResponse> getAllUsersPage(@RequestParam(defaultValue = "1") int page,
-                                                 @RequestParam(defaultValue = "10") int size,
-                                                 @RequestParam(defaultValue = "DESC") Sort.Direction sortDirection,
-                                                 @RequestParam(defaultValue = "id") String sort
+    public Page<UserWithSettingsDtoResponse> getAllUsersPage(@RequestParam(defaultValue = "1") int page,
+                                                             @RequestParam(defaultValue = "10") int size,
+                                                             @RequestParam(defaultValue = "DESC") Sort.Direction sortDirection,
+                                                             @RequestParam(defaultValue = "id") String sort
                                                  ) {
         log.info("getAllUsersPage page: " + page + " size: " + size + " sort: " + sort);
         return userService.findAllUsersPageable(PageRequest.of(page, size, sortDirection, sort));
     }
 
+        @Secured("MYUSER") //todo
+    @Operation(summary = "Get My User for change profile")
+    @PutMapping(value = "/my", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserGeneralInfoDtoResponse> updateMyUser(
+            @RequestHeader("Authorization") String jwtToken,
+            @RequestBody @Validated UserGeneralInfoDtoRequest dto) {
+        log.info("getMyUser jwtToken:" + jwtToken);
+        UserPrincipal userPrincipal = (UserPrincipal) userDetailsService
+                .loadUserByUsername(jwtTokenProvider.getPhoneEmail(jwtToken));
+        return  ResponseEntity.ok(userService.updateUserNoSettings(
+                userPrincipal.getUser().getId(), dto));
+    }
+
 //    @Secured("UPDATE_USER")
     @Operation(summary = "Update User")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDtoResponse> updateUser(@PathVariable Long id
-            , @RequestBody @Validated UserDtoRequest userDtoRequest) {
-        log.info("updateUser id: " + id + " userDtoRequest: " + userDtoRequest);
-        return ResponseEntity.ok(userService.updateUser(id, userDtoRequest));
+    public ResponseEntity<UserWithSettingsDtoResponse> updateUser(@PathVariable Long id,
+                                                                  @RequestBody @Validated UserWithSettingsDtoRequest dto) {
+        log.info("updateUser id: " + id + " userDtoRequest: " + dto);
+        return ResponseEntity.ok(userService.updateUserWithSettings(id, dto));
     }
 
 //    @Secured("DELETE_USER")

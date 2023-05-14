@@ -5,6 +5,7 @@ import com.alevya.authsber.dto.WorkplaceDtoResponse;
 import com.alevya.authsber.exception.BadRequestException;
 import com.alevya.authsber.exception.NotFoundException;
 import com.alevya.authsber.model.Workplace;
+import com.alevya.authsber.repository.CompanyRepository;
 import com.alevya.authsber.repository.WorkplaceRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,19 +23,21 @@ public class WorkplaceService {
     private static final Log log = LogFactory.getLog(WorkplaceService.class);
 
     private final WorkplaceRepository workplaceRepository;
+    private final CompanyRepository companyRepository;
 
-    public WorkplaceService(WorkplaceRepository workplaceRepository) {
+    public WorkplaceService(WorkplaceRepository workplaceRepository,
+                            CompanyRepository companyRepository) {
         this.workplaceRepository = workplaceRepository;
+        this.companyRepository = companyRepository;
     }
 
-    public WorkplaceDtoResponse createWorkplace(
-            WorkplaceDtoRequest workplaceDtoRequest) {
-        if (workplaceDtoRequest == null) {
+    public WorkplaceDtoResponse createWorkplace(WorkplaceDtoRequest dto) {
+        if (dto == null) {
             throw new BadRequestException("Invalid workplace");
         }
-        log.info("createWorkplace: " + workplaceDtoRequest);
+        log.info("createWorkplace: " + dto);
         return mapToWorkplaceDto(workplaceRepository.save(
-                mapToWorkplace(workplaceDtoRequest)));
+                mapToWorkplace(dto)));
     }
 
     public WorkplaceDtoResponse getWorkplaceById(Long id) {
@@ -53,20 +56,20 @@ public class WorkplaceService {
                 .collect(Collectors.toList());
     }
 
-    public WorkplaceDtoResponse updateWorkplace(Long id, WorkplaceDtoRequest workplaceDtoRequest) {
-        log.info("updateWorkplace id: " + id + " workplaceDtoRequest: " + workplaceDtoRequest);
-        if (workplaceDtoRequest == null) {
+    public WorkplaceDtoResponse updateWorkplace(Long id, WorkplaceDtoRequest dto) {
+        log.info("updateWorkplace id: " + id + " workplaceDtoRequest: " + dto);
+        if (dto == null) {
             throw new BadRequestException("Invalid workplace");
         }
         Workplace oldWorkplace = workplaceRepository.findById(id).orElseThrow(()
                 -> new NotFoundException("Workplace not found!"));
 
-        if (workplaceDtoRequest.getName() != null) {
-            oldWorkplace.setName(workplaceDtoRequest.getName());
+        if (dto.getName() != null) {
+            oldWorkplace.setName(dto.getName());
         }
-        if (workplaceDtoRequest.getDescription() != null) {
-            oldWorkplace.setDescription(workplaceDtoRequest.getDescription());
-        }
+        oldWorkplace.setDescription(dto.getDescription());
+        oldWorkplace.setCompany(companyRepository.findById(dto.getCompanyId()).orElseThrow(()
+                -> new NotFoundException("Company not found!")));
         return mapToWorkplaceDto(workplaceRepository.saveAndFlush(oldWorkplace));
     }
 
@@ -78,25 +81,28 @@ public class WorkplaceService {
         workplaceRepository.deleteById(id);
     }
 
+    public Page<WorkplaceDtoResponse> findAllWorkplacesPageable(Pageable pageable) {
+        Page<Workplace> page = workplaceRepository.findAll(pageable);
+        return new PageImpl<>(page.stream().map(this::mapToWorkplaceDto)
+                .collect(Collectors.toList()), page.getPageable(), page.getTotalElements());
+    }
+
     public WorkplaceDtoResponse mapToWorkplaceDto(Workplace workplace) {
         WorkplaceDtoResponse dto = WorkplaceDtoResponse.builder()
                 .id(workplace.getId())
                 .name(workplace.getName())
                 .description(workplace.getDescription())
+                .companyId(workplace.getId())
                 .build();
         return dto;
     }
 
-    public Workplace mapToWorkplace(WorkplaceDtoRequest workplaceDtoRequest) {
+    public Workplace mapToWorkplace(WorkplaceDtoRequest dto) {
         Workplace workplace = new Workplace();
-        workplace.setName(workplaceDtoRequest.getName());
-        workplace.setDescription(workplaceDtoRequest.getDescription());
+        workplace.setName(dto.getName());
+        workplace.setDescription(dto.getDescription());
+        workplace.setCompany(companyRepository.findById(dto.getCompanyId()).orElseThrow(()
+                -> new NotFoundException("Company not found!")));
         return workplace;
-    }
-
-    public Page<WorkplaceDtoResponse> findAllWorkplacesPageable(Pageable pageable) {
-        Page<Workplace> page = workplaceRepository.findAll(pageable);
-        return new PageImpl<>(page.stream().map(this::mapToWorkplaceDto)
-                .collect(Collectors.toList()), page.getPageable(), page.getTotalElements());
     }
 }

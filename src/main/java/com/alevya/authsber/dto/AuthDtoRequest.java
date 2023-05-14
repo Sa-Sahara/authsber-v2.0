@@ -10,8 +10,8 @@ public class AuthDtoRequest {
     public AuthDtoRequest() {
     }
 
-    public AuthDtoRequest(String phoneEmail
-            , String password) {
+    public AuthDtoRequest(String phoneEmail,
+             String password) {
         this.phoneEmail = phoneEmail;
         this.password = password;
     }

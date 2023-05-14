@@ -45,8 +45,8 @@ public class SlotController {
     @Operation(summary = "Create order by slot")
     @PostMapping(value = "/order",produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<OrderDtoResponse> createOrder(@RequestHeader("Authorization") String jwtToken
-            , @RequestBody Slot slot) {
+    public ResponseEntity<OrderDtoResponse> createOrder(@RequestHeader("Authorization") String jwtToken,
+             @RequestBody Slot slot) {
         log.info("createOrder by slot: " + slot);
         Long idJwt = jwtTokenProvider.getUserId(jwtToken);
         return ResponseEntity.ok(orderService.createOrderBySlot(slot, idJwt));

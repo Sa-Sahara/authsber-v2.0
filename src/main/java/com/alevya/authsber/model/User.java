@@ -1,5 +1,6 @@
 package com.alevya.authsber.model;
 
+import com.alevya.authsber.exception.BadRequestException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -97,18 +98,22 @@ public final class User {
     }
 
     @Builder
-    public User(Long id,
-                String name,
+    public User(String name,
+                String surname,
+                String patronymic,
                 String password,
                 String email,
                 String phone,
-                Set<WorkTime> workTimes) {
-        this.id = id;
+                LocalDate birthday,
+                String address) {
         this.name = name;
+        this.surname = surname;
+        this.patronymic = patronymic;
         this.password = password;
         this.email = email;
         this.phone = phone;
-        this.workTimes = workTimes;
+        this.birthday = birthday;
+        this.address = address;
     }
 
     @Builder
@@ -190,6 +195,9 @@ public final class User {
     public boolean removeRole(Role role) {
         return roles.remove(role);
     }
+    public void removeAllRoles() {
+        roles.clear();
+    }
 
     public boolean addWorkTime(WorkTime workTime) {
         return workTimes.add(workTime);
@@ -197,6 +205,19 @@ public final class User {
 
     public boolean removeWorkTime(WorkTime workTime) {
         return workTimes.remove(workTime);
+    }
+
+    public void setEmail(String email) {
+        if (this.email == null || this.email.equals(email)) {
+            this.email = email;
+        } else throw new BadRequestException("email cannot be changed");
+    }
+
+    public void setPhone(String phone) {
+        if (!Objects.equals(this.phone, phone)) {
+            setPhoneVerified(false);
+        }
+        this.phone = phone;
     }
 
     @Override

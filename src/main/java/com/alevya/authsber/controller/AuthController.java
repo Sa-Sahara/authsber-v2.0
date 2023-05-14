@@ -30,9 +30,9 @@ public class AuthController{
 
     private static final Log log = LogFactory.getLog(AuthController.class);
 
-    public AuthController(AuthenticationManager authenticationManager
-            , UserService userService
-            , JwtTokenProvider jwtTokenProvider) {
+    public AuthController(AuthenticationManager authenticationManager,
+             UserService userService,
+             JwtTokenProvider jwtTokenProvider) {
         this.authenticationManager = authenticationManager;
         this.userService = userService;
         this.jwtTokenProvider = jwtTokenProvider;

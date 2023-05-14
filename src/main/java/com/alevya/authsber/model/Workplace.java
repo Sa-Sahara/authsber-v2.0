@@ -12,7 +12,6 @@ import java.util.*;
 @Table(name = "t_workplace")
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Getter
 @Setter
 public final class Workplace {
@@ -43,7 +42,7 @@ public final class Workplace {
     private Set<Order> orders = new HashSet<>();
 
     public void setName(String name) {
-        if (this.name == null) {
+        if (this.name == null || Objects.equals(this.name, name)) {
             this.name = name;
         } else throw new BadRequestException("Name cannot be changed");
     }

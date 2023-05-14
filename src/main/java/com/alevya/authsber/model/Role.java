@@ -1,5 +1,6 @@
 package com.alevya.authsber.model;
 
+import com.alevya.authsber.exception.BadRequestException;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -88,6 +89,12 @@ public final class Role {
         return permissions.remove(permission);
     }
 
+    public void setName(String name) {
+        if (this.name == null || Objects.equals(this.name, name)) {
+            this.name = name;
+        } else throw new BadRequestException("name cannot be changed");
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -95,9 +102,7 @@ public final class Role {
 
         Role role = (Role) o;
 
-        if (!Objects.equals(name, role.name)) return false;
-        if (!Objects.equals(description, role.description)) return false;
-        return Objects.equals(level, role.level);
+        return Objects.equals(name, role.name);
     }
 
     @Override

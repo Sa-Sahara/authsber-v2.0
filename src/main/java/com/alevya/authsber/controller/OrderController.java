@@ -31,8 +31,8 @@ public class OrderController {
     private final OrderService orderService;
     private final JwtTokenProvider jwtTokenProvider;
 
-    public OrderController(OrderService orderService
-            , JwtTokenProvider jwtTokenProvider) {
+    public OrderController(OrderService orderService,
+             JwtTokenProvider jwtTokenProvider) {
         this.orderService = orderService;
         this.jwtTokenProvider = jwtTokenProvider;
     }

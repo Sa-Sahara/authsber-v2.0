@@ -17,6 +17,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
@@ -39,41 +40,17 @@ public class WorkTimeService {
         this.userRepository = userRepository;
     }
 
-    public WorkTimeDtoResponse createWorkTime(
-            WorkTimeDtoRequest workTimeDtoRequest) {
-        log.info("createWorkTime workTimeDtoRequest: " + workTimeDtoRequest);
+    public WorkTimeDtoResponse createWorkTime(WorkTimeDtoRequest dto) {
+        log.info("createWorkTime workTimeDtoRequest: " + dto);
         //fields check
-        if (workTimeDtoRequest == null) {
-            throw new BadRequestException("Invalid workTime");
-        }
-        if (workTimeDtoRequest.getDate() == null
-                || workTimeDtoRequest.getDate().isBefore(LocalDate.now())) {
-            throw new BadRequestException("Invalid Date");
-        }
-        if (workTimeDtoRequest.getStart() == null) {
-            throw new BadRequestException("Invalid start of working period");
-        }
-        if (workTimeDtoRequest.getFinish() == null) {
-            throw new BadRequestException("Invalid end of working period");
-        }
-        if (Duration.between(
-                workTimeDtoRequest.getFinish(),
-                workTimeDtoRequest.getStart()).toHours() > MAX_WORK_HOURS) {
-            throw new BadRequestException("Too long working day.");
-        }
-        if (workTimeDtoRequest.getWorkplaceId() == null) {
-            throw new BadRequestException("Invalid Workplace");
-        }
-        if (workTimeDtoRequest.getUserId() == null) {
-            throw new BadRequestException("Invalid Worker");
-        }
+        checkDto(dto);
         // check that this worker has not booked this time
-        checkIfWorkerBusy(workTimeDtoRequest);
+        checkIfWorkerBusy(dto);
         // check that this workplace is not booked
-        checkIfWorkplaceBooked(workTimeDtoRequest);
+        checkIfWorkplaceBooked(dto);
 
         return mapToWorkTimeDto(workTimeRepository.save(
-                mapToWorkTime(workTimeDtoRequest)));
+                mapToWorkTime(dto)));
     }
 
     public WorkTimeDtoResponse getWorkTimeById(Long id) {
@@ -112,46 +89,29 @@ public class WorkTimeService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public WorkTimeDtoResponse updateWorkTime(
             Long id,
-            WorkTimeDtoRequest workTimeDtoRequest) {
-        log.info("updateWorkTime id: " + id + " workTimeDtoRequest: " + workTimeDtoRequest);
+            WorkTimeDtoRequest dto) {
+        log.info("updateWorkTime id: " + id + " workTimeDtoRequest: " + dto);
 
-        if (workTimeDtoRequest == null
-                || workTimeDtoRequest.getDate() == null
-                || workTimeDtoRequest.getStart() == null
-                || workTimeDtoRequest.getFinish() == null
-                || workTimeDtoRequest.getUserId() == null
-                || workTimeDtoRequest.getWorkplaceId() == null
-        ) {
-            throw new BadRequestException("Invalid workTimeDtoRequest");
-        }
+        checkDto(dto);
         WorkTime oldWorkTime = workTimeRepository.findById(id).orElseThrow(()
                 -> new NotFoundException("WorkTime not found!"));
         //date
-        if (workTimeDtoRequest.getDate().isBefore(LocalDate.now())) {
-            throw new BadRequestException("Invalid date");
-        } else {
-            oldWorkTime.setDate(workTimeDtoRequest.getDate());
-        }
+            oldWorkTime.setDate(dto.getDate());
         //start
-        oldWorkTime.setStart(workTimeDtoRequest.getStart());
+        oldWorkTime.setStart(dto.getStart());
         //finish
-        if (Duration.between(
-                workTimeDtoRequest.getFinish(),
-                workTimeDtoRequest.getStart()).toHours() > MAX_WORK_HOURS) {
-            throw new BadRequestException("Too long working day.");
-        } else {
-            oldWorkTime.setFinish(workTimeDtoRequest.getFinish());
-        }
+            oldWorkTime.setFinish(dto.getFinish());
         //workplace
-        checkIfWorkplaceBooked(workTimeDtoRequest);
-        Workplace workplace = workplaceRepository.findById(workTimeDtoRequest.getWorkplaceId()).orElseThrow(()
+        checkIfWorkplaceBooked(dto);
+        Workplace workplace = workplaceRepository.findById(dto.getWorkplaceId()).orElseThrow(()
                 -> new NotFoundException("Workplace not found!"));
         oldWorkTime.setWorkplace(workplace);
         //worker
-        checkIfWorkerBusy(workTimeDtoRequest);
-        User user = userRepository.findById(workTimeDtoRequest.getUserId()).orElseThrow(()
+        checkIfWorkerBusy(dto);
+        User user = userRepository.findById(dto.getUserId()).orElseThrow(()
                 -> new NotFoundException("User not found!"));
         oldWorkTime.setWorker(user);
 
@@ -164,6 +124,33 @@ public class WorkTimeService {
             throw new BadRequestException("Invalid ID");
         }
         workTimeRepository.deleteById(id);
+    }
+
+    private void checkDto(WorkTimeDtoRequest dto) {
+        if (dto == null) {
+            throw new BadRequestException("Invalid workTime");
+        }
+        if (dto.getDate() == null
+                || dto.getDate().isBefore(LocalDate.now())) {
+            throw new BadRequestException("Invalid Date");
+        }
+        if (dto.getStart() == null) {
+            throw new BadRequestException("Invalid start of working period");
+        }
+        if (dto.getFinish() == null) {
+            throw new BadRequestException("Invalid end of working period");
+        }
+        if (Duration.between(
+                dto.getFinish(),
+                dto.getStart()).toHours() > MAX_WORK_HOURS) {
+            throw new BadRequestException("Too long working day.");
+        }
+        if (dto.getWorkplaceId() == null) {
+            throw new BadRequestException("Invalid Workplace");
+        }
+        if (dto.getUserId() == null) {
+            throw new BadRequestException("Invalid Worker");
+        }
     }
 
     public WorkTimeDtoResponse mapToWorkTimeDto(WorkTime workTime) {
@@ -199,14 +186,14 @@ public class WorkTimeService {
                 .collect(Collectors.toList()), page.getPageable(), page.getTotalElements());
     }
 
-    public void checkIfWorkplaceBooked(WorkTimeDtoRequest workTimeDtoRequest) {
+    public void checkIfWorkplaceBooked(WorkTimeDtoRequest dto) {
         List<WorkTime> workTimes2 =
                 workTimeRepository.findAllByWorkplaceAndDate(
-                        workTimeDtoRequest.getWorkplaceId(),
-                        workTimeDtoRequest.getDate());
+                        dto.getWorkplaceId(),
+                        dto.getDate());
         for (WorkTime w : workTimes2) {
-            if (!(w.getFinish().isBefore(workTimeDtoRequest.getStart())
-                    || w.getStart().isAfter(workTimeDtoRequest.getFinish()))) {
+            if (!(w.getFinish().isBefore(dto.getStart())
+                    || w.getStart().isAfter(dto.getFinish()))) {
                 throw new BadRequestException(
                         "Another worker already booked this Workplace for this time.");
             }

@@ -27,8 +27,8 @@ public class SlotService {
     private final OrderRepository orderRepository;
 
     public SlotService(WorkplaceRepository workplaceRepository,
-                       WorkTimeRepository workTimeRepository
-            , OrderRepository orderRepository) {
+                       WorkTimeRepository workTimeRepository,
+             OrderRepository orderRepository) {
         this.workplaceRepository = workplaceRepository;
         this.workTimeRepository = workTimeRepository;
         this.orderRepository = orderRepository;
@@ -48,34 +48,34 @@ public class SlotService {
         for (Workplace workplace : workplaceByCompanyId) {
             List<WorkTime> workTimes = workTimeRepository
                     .findAllByDateBetweenAndWorkplaceId(
-                            LocalDate.now()
-                            , LocalDate.now().plusDays(7)
-                            , workplace.getId()
+                            LocalDate.now(),
+                            LocalDate.now().plusDays(7),
+                            workplace.getId()
                     );
             for (WorkTime workTime : workTimes) {
                 int slotNumber = (workTime.getFinish().getHour() - workTime.getStart().getHour()) * 4;
                 slotNumber += workTime.getFinish().getMinute() / 15;
                 slotNumber -= workTime.getStart().getMinute() / 15;
                 for (int i = 0; i < slotNumber; i++) {
-                    slots.add(new Slot(workTime.getDate()
-                            , workTime.getStart().plusMinutes(i * 15L)
-                            , workTime.getStart().plusMinutes((i + 1) * 15L)
-                            , workTime.getWorker().getId()
-                            , workTime.getWorkplace().getId()
-                            , workplace.getId()
-                            , workplace.getDescription()));
+                    slots.add(new Slot(workTime.getDate(),
+                            workTime.getStart().plusMinutes(i * 15L),
+                            workTime.getStart().plusMinutes((i + 1) * 15L),
+                            workTime.getWorker().getId(),
+                            workTime.getWorkplace().getId(),
+                            workplace.getId(),
+                            workplace.getDescription()));
                 }
                 List<Order> orders = orderRepository.findAllByWorkplaceIdAndDate(
                         workplace.getId()
                         , workTime.getDate());
                 for (Order order : orders) {
-                    slots.remove(new Slot(workTime.getDate()
-                            , order.getTimeStart()
-                            , order.getTimeFinish()
-                            , workTime.getWorker().getId()
-                            , workTime.getWorkplace().getId()
-                            , workplace.getId()
-                            , workplace.getDescription()));
+                    slots.remove(new Slot(workTime.getDate(),
+                            order.getTimeStart(),
+                            order.getTimeFinish(),
+                            workTime.getWorker().getId(),
+                            workTime.getWorkplace().getId(),
+                            workplace.getId(),
+                            workplace.getDescription()));
                 }
             }
         }
