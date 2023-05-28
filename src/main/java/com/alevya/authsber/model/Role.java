@@ -16,6 +16,7 @@ import java.util.Set;
 public final class Role {
 
     @Id
+    @Setter(AccessLevel.NONE)
     @SequenceGenerator(name = "role_seq", sequenceName = "role_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
     private Long id;

@@ -22,6 +22,7 @@ import java.util.*;
 public final class User {
 
     @Id
+    @Setter(AccessLevel.NONE)
     @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="user_seq")
     private Long id;

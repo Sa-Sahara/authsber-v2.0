@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 public class MessageDtoRequest {
     private MessageType type;
-    private String accessCode;
+    private Long accessCode;
     private Long userId;
     private Long createTime;
 }

@@ -20,6 +20,7 @@ import java.util.Set;
 public final class Company {
 
     @Id
+    @Setter(AccessLevel.NONE)
     @SequenceGenerator(name = "company_seq", sequenceName = "company_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company_seq")
     private Long id;

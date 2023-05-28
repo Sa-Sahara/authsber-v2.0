@@ -17,6 +17,7 @@ import java.util.*;
 public final class Workplace {
 
     @Id
+    @Setter(AccessLevel.NONE)
     @SequenceGenerator(name = "workplace_seq", sequenceName = "workplace_seq", allocationSize = 1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="workplace_seq")
     private Long id;

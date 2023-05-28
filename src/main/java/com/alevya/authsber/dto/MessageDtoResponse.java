@@ -12,7 +12,7 @@ import lombok.*;
 public class MessageDtoResponse {
     private Long id;
     private MessageType type;
-    private String accessCode;
+    private Long accessCode;
     private Long userId;
     private Long createTime;
 }

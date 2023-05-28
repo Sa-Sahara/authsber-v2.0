@@ -16,6 +16,7 @@ import java.util.Set;
 public final class Service {
 
     @Id
+    @Setter(AccessLevel.NONE)
     @SequenceGenerator(name = "service_seq", sequenceName = "service_seq", allocationSize = 1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="service_seq")
     private Long id;

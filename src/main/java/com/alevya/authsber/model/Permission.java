@@ -13,8 +13,8 @@ import java.util.Set;
 @Getter
 @Setter
 public final class Permission {
-
     @Id
+    @Setter(AccessLevel.NONE)
     @SequenceGenerator(name = "permission_seq", sequenceName = "permission_seq", allocationSize = 1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="permission_seq")
     private Long id;

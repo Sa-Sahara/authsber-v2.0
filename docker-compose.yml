@@ -1,0 +1,39 @@
+version: "3.9"
+services:
+  deploy:
+    depends_on:
+      - postgresqldb
+    container_name: deployProject
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - 9090:9090
+
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresqldb:5432/sber_project_db_v2.0
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - spring.jpa.hibernate.ddl-auto=none
+
+  postgresqldb:
+    container_name: postgresqldb
+    image: postgres
+    environment:
+      POSTGRES_DB: "sber_project_db_v2.0"
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+    ports:
+      - 5432:5432
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U habrpguser -d habrdb" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#      start_period: 10s
+#    restart: unless-stopped
+#    deploy:
+#        resources:
+#          limits:
+#            cpus: '1'
+#            memory: 4G

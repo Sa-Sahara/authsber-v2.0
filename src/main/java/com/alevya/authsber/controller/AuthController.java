@@ -41,8 +41,8 @@ public class AuthController{
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AuthDtoResponse> authenticate(@RequestBody AuthDtoRequest request) {
         try {
-            UsernamePasswordAuthenticationToken up = new UsernamePasswordAuthenticationToken(request.getPhoneEmail()
-                    , request.getPassword());
+            UsernamePasswordAuthenticationToken up = new UsernamePasswordAuthenticationToken(request.getPhoneEmail(),
+                    request.getPassword());
             authenticationManager.authenticate(up);
             User user = userService.getUserByPhoneEmail(request.getPhoneEmail());
             String token = jwtTokenProvider.createToken(request.getPhoneEmail(), user);
@@ -51,8 +51,8 @@ public class AuthController{
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
             log.error("Invalid phone-email/password combination" + e.getMessage());
-            return new ResponseEntity<>(new AuthDtoResponse(null, "Invalid phone-email/password combination")
-                    , HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(new AuthDtoResponse(null, "Invalid phone-email/password combination"),
+                    HttpStatus.FORBIDDEN);
         }
     }
 }

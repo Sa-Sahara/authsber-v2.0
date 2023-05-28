@@ -14,6 +14,7 @@ import java.util.Objects;
 public final class Message {
 
     @Id
+    @Setter(AccessLevel.NONE)
     @SequenceGenerator(name = "message_seq", sequenceName = "message_seq", allocationSize = 1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="message_seq")
     private Long id;
@@ -23,7 +24,7 @@ public final class Message {
     private MessageType type;
 
     @NotNull
-    private String accessCode;
+    private Long accessCode;
 
     @Column(name = "user_id", nullable = false)
     @NotNull
@@ -39,7 +40,7 @@ public final class Message {
     @Builder
     public Message(Long id,
                    MessageType type,
-                   String accessCode,
+                   Long accessCode,
                    Long userId,
                    Long createTime) {
         this.id = id;

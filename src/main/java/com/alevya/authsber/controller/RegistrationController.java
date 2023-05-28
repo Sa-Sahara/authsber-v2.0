@@ -53,7 +53,7 @@ public class RegistrationController {
 //    @Secured("ROLE_NOVERY")
     @GetMapping(value = "/phone/check/{code}")
     public ResponseEntity<String> checkPhoneCode(@RequestHeader("Authorization") String jwtToken,
-             @PathVariable @Parameter(description = "Code for check phone") String code) {
+             @PathVariable @Parameter(description = "Code for check phone") Long code) {
         log.info("checkPhone JWT: " + jwtToken);
         UserPrincipal userPrincipal = (UserPrincipal) userDetailsService
                 .loadUserByUsername(jwtTokenProvider.getPhoneEmail(jwtToken));

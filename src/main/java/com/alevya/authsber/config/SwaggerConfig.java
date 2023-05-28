@@ -9,8 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@SecurityScheme(name = "JWT Authentication"
-        , scheme = "bearer", type = SecuritySchemeType.HTTP, bearerFormat = "JWT")
+@SecurityScheme(
+        name = "JWT Authentication",
+        scheme = "bearer",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT")
 public class SwaggerConfig {
     //url
     //http://localhost:8080/swagger-ui/index.html

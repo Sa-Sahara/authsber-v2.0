@@ -12,14 +12,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
-import java.util.Date;
-import java.util.UUID;
 
 @Service
 public class RegistrationService {
     @Value("${url.check.phone}")
     private String URL_CHECK_PHONE;
-    private static final long CODE_DURATION_MILLIS = 900000;
+    private static final long CODE_DURATION_MILLIS = 18_000_000;
     private final MessageService messageService;
     private final RoleService roleService;
     private final UserRepository userRepository;
@@ -44,11 +42,12 @@ public class RegistrationService {
         if (StringUtils.isBlank(user.getPhone())) {
             throw new BadRequestException("Invalid user's phone");
         }
+        if (user.getPhoneVerified()) {
+            throw new BadRequestException("Phone already verified");
+        }
         String phone = user.getPhone();
         //generate code
-        Date date = new Date();
-        String codeSend = (long) (Math.random() * 153 * date.getTime()) + "";
-        codeSend = codeSend.substring(codeSend.length() - 6);
+        Long codeSend = generateCode();
         //save in DB
         MessageDtoRequest messageDtoRequest = new MessageDtoRequest(
                 MessageType.SMS_CHECK_PHONE,
@@ -76,7 +75,7 @@ public class RegistrationService {
         }
         String email = user.getEmail();
         //generate code
-        String codeSend = UUID.randomUUID().toString();
+        Long codeSend = generateCode();
         //save in DB
         MessageDtoRequest messageDtoRequest = new MessageDtoRequest(
                 MessageType.EMAIL_CHECK_CODE,
@@ -93,7 +92,7 @@ public class RegistrationService {
                 buildEmail(user.getName(), link));
     }
 
-    boolean sendPhoneCode(String phone, String code) {
+    boolean sendPhoneCode(String phone, Long code) {
         String keyString = "" + code + "/" + phone;
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
@@ -114,36 +113,38 @@ public class RegistrationService {
         }
     }
 
-    public String checkPhoneRegistration(User user, String code) {
+    private Long generateCode() {
+        return Math.round(Math.random() * 10_000_000);
+    }
+
+    public String checkPhoneRegistration(User user, Long code) {
         if (user.getId() == null) {
             throw new BadRequestException("Invalid user");
         }
-        if (StringUtils.isBlank(code)) {
+        if (code == null) {
             throw new BadRequestException("Invalid code");
         }
         //give code from DB
-        String codeFromDb = messageService
+        Long codeFromDb = messageService
                 .getLastMessageByUserIdAndMessageType(user.getId(), MessageType.SMS_CHECK_PHONE)
-                .getAccessCode()
-                .replaceAll("[^0-9]", "");
-        String codeOnlyNumber = code.replaceAll("[^0-9]", "");
-        if (codeFromDb.equals(codeOnlyNumber)) {
+                .getAccessCode();
+        if (codeFromDb.equals(code)) {
             //set user role
             user.addRole(roleService.getRoleUser());
             userRepository.saveAndFlush(user);
             return "OK";
         }
-        throw new BadRequestException("codes do not match");
+        throw new BadRequestException("Incorrect code");
     }
 
-    public String checkEmailRegistration(User user, String code) {
-        if (StringUtils.isBlank(code)) {
+    public String checkEmailRegistration(User user, Long code) {
+        if (code == null) {
             throw new BadRequestException("Invalid code");
         }
         //give code from DB
         MessageDtoResponse messageFromDb = messageService
                 .getLastMessageByUserIdAndMessageType(user.getId(), MessageType.EMAIL_CHECK_CODE);
-        String codeFromDb = messageFromDb.getAccessCode();
+        Long codeFromDb = messageFromDb.getAccessCode();
         if (codeFromDb.equals(code)) {
             //set user role
             user.setEmailVerified(true);
