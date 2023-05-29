@@ -8,8 +8,6 @@ import com.alevya.authsber.service.UserService;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/registration")
 public class RegistrationController {
 
-    private static final Log log = LogFactory.getLog(RegistrationController.class);
     private final UserService userService;
     private final RegistrationService registrationService;
     private final UserDetailsServiceImpl userDetailsService;
@@ -43,7 +40,6 @@ public class RegistrationController {
 //    @Secured("ROLE_NOVERY")
     @GetMapping(value = "/phone/send")
     public ResponseEntity<String> sendPhoneCode(@RequestHeader("Authorization") String jwtToken) {
-        log.info("checkPhone JWT: " + jwtToken);
         UserPrincipal userPrincipal = (UserPrincipal) userDetailsService
                 .loadUserByUsername(jwtTokenProvider.getPhoneEmail(jwtToken));
         return ResponseEntity.ok(registrationService.sendPhoneRegistration(userPrincipal.getUser()));
@@ -54,7 +50,6 @@ public class RegistrationController {
     @GetMapping(value = "/phone/check/{code}")
     public ResponseEntity<String> checkPhoneCode(@RequestHeader("Authorization") String jwtToken,
              @PathVariable @Parameter(description = "Code for check phone") Long code) {
-        log.info("checkPhone JWT: " + jwtToken);
         UserPrincipal userPrincipal = (UserPrincipal) userDetailsService
                 .loadUserByUsername(jwtTokenProvider.getPhoneEmail(jwtToken));
         return ResponseEntity.ok(registrationService.checkPhoneRegistration(userPrincipal.getUser(), code));

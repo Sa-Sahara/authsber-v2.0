@@ -6,8 +6,6 @@ import com.alevya.authsber.model.User;
 import com.alevya.authsber.security.JwtTokenProvider;
 import com.alevya.authsber.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +26,6 @@ public class AuthController{
     private final UserService userService;
     private final JwtTokenProvider jwtTokenProvider;
 
-    private static final Log log = LogFactory.getLog(AuthController.class);
-
     public AuthController(AuthenticationManager authenticationManager,
              UserService userService,
              JwtTokenProvider jwtTokenProvider) {
@@ -47,10 +43,8 @@ public class AuthController{
             User user = userService.getUserByPhoneEmail(request.getPhoneEmail());
             String token = jwtTokenProvider.createToken(request.getPhoneEmail(), user);
             AuthDtoResponse response = new AuthDtoResponse(token, null);
-            log.info("login user id: " + user.getId() + " email: " + user.getEmail() + " phone: " + user.getPhone());
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
-            log.error("Invalid phone-email/password combination" + e.getMessage());
             return new ResponseEntity<>(new AuthDtoResponse(null, "Invalid phone-email/password combination"),
                     HttpStatus.FORBIDDEN);
         }

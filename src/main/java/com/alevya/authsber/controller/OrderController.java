@@ -5,10 +5,7 @@ import com.alevya.authsber.dto.OrderDtoResponse;
 import com.alevya.authsber.security.JwtTokenProvider;
 import com.alevya.authsber.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -27,7 +24,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/order")
 public class OrderController {
-    private static final Log log = LogFactory.getLog(OrderController.class);
     private final OrderService orderService;
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -43,7 +39,6 @@ public class OrderController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderDtoResponse> createOrder(
             @RequestBody OrderDtoRequest orderDtoRequest) {
-        log.info("createOrder by orderDtoRequest: " + orderDtoRequest);
         return ResponseEntity.ok(orderService.createOrder(orderDtoRequest));
     }
 
@@ -51,7 +46,6 @@ public class OrderController {
     @Operation(summary = "Get order by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderDtoResponse> getOrderById(@PathVariable Long id) {
-        log.info("getOrderById: " + id);
         return ResponseEntity.ok(orderService.getOrderById(id));
     }
 
@@ -60,7 +54,6 @@ public class OrderController {
     @GetMapping(value = "/user/id", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDtoResponse> getOrderByUserId(@RequestHeader("Authorization") String jwtToken) {
         Long idJwt = jwtTokenProvider.getUserId(jwtToken);
-        log.info("getOrderByUserId: " + idJwt);
         return orderService.getOrderByUserId(idJwt);
     }
 
@@ -68,7 +61,6 @@ public class OrderController {
     @Operation(summary = "Get order by worker id")
     @GetMapping(value = "/worker/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDtoResponse> getOrderByWorkerId(@PathVariable Long id) {
-        log.info("getOrderByWorkerId: " + id);
         return orderService.getOrderByWorkerId(id);
     }
 
@@ -76,7 +68,6 @@ public class OrderController {
     @Operation(summary = "Get order by workplace id")
     @GetMapping(value = "/workplace/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDtoResponse> getOrderByWorkplaceId(@PathVariable Long id) {
-        log.info("getOrderByWorkerId: " + id);
         return orderService.getOrderByWorkplaceId(id);
     }
 
@@ -85,7 +76,6 @@ public class OrderController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<OrderDtoResponse> getAllOrders() {
-        log.info("getAllOrders");
         return orderService.getAllOrders();
     }
 
@@ -95,7 +85,6 @@ public class OrderController {
     public ResponseEntity<OrderDtoResponse> updateOrder(
             @PathVariable Long id,
             @RequestBody @Validated OrderDtoRequest orderDtoRequest) {
-        log.info("updateOrder id: " + id + " orderDtoRequest: " + orderDtoRequest);
         return ResponseEntity.ok(orderService.updateOrder(id, orderDtoRequest));
     }
 
@@ -103,7 +92,6 @@ public class OrderController {
     @Operation(summary = "Delete order")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteOrder(@PathVariable Long id) {
-        log.info("deleteOrder id: " + id);
         orderService.deleteOrder(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }

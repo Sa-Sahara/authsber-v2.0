@@ -34,7 +34,6 @@ public class RegistrationService {
         this.emailSender = emailSender;
     }
 
-
     public String sendPhoneRegistration(User user) {
         if (user == null) {
             throw new BadRequestException("Invalid user");

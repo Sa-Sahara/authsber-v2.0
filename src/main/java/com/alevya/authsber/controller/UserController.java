@@ -10,8 +10,6 @@ import com.alevya.authsber.security.UserPrincipal;
 import com.alevya.authsber.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -36,7 +34,6 @@ public class UserController {
     private final UserService userService;
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtTokenProvider jwtTokenProvider;
-    private static final Log log = LogFactory.getLog(UserController.class);
 
     public UserController(UserService userService,
              UserDetailsServiceImpl userDetailsService,
@@ -50,7 +47,6 @@ public class UserController {
     @Operation(summary = "Create User")
     @PostMapping(value = "/my", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserGeneralInfoDtoResponse> createUserWithoutSettings(@RequestBody UserGeneralInfoDtoRequest userGeneralInfoDto) {
-        log.info("registrationUser userDtoRequest: " + userGeneralInfoDto);
         return ResponseEntity.ok(userService.createMyUser(userGeneralInfoDto));
     }
 
@@ -58,7 +54,6 @@ public class UserController {
     @Operation(summary = "Create User With Settings")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserWithSettingsDtoResponse> createUserWithSettings(@RequestBody UserWithSettingsDtoRequest userWithSettingsDtoRequest) {
-        log.info("createUser userDtoRequest: " + userWithSettingsDtoRequest);
         return ResponseEntity.ok(userService.createUserWithSettings(userWithSettingsDtoRequest));
     }
 
@@ -66,7 +61,6 @@ public class UserController {
     @Operation(summary = "Get User By Id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserWithSettingsDtoResponse> getUserById(@PathVariable Long id) {
-        log.info("getUserById id: " + id);
         return  ResponseEntity.ok(userService.getUserById(id));
     }
 
@@ -74,7 +68,6 @@ public class UserController {
     @Operation(summary = "Get My User for change profile")
     @GetMapping(value = "/my", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserGeneralInfoDtoResponse> getMyUser(@RequestHeader("Authorization") String jwtToken) {
-        log.info("getMyUser jwtToken:" + jwtToken);
         UserPrincipal userPrincipal = (UserPrincipal) userDetailsService
                 .loadUserByUsername(jwtTokenProvider.getPhoneEmail(jwtToken));
         return  ResponseEntity.ok(userService.mapToUserGeneralInfoDto(userPrincipal.getUser()));
@@ -85,7 +78,6 @@ public class UserController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<UserWithSettingsDtoResponse> getAllUsers() {
-        log.info("getAllUsers");
         return userService.getAllUsers();
     }
 
@@ -98,7 +90,6 @@ public class UserController {
                                                              @RequestParam(defaultValue = "DESC") Sort.Direction sortDirection,
                                                              @RequestParam(defaultValue = "id") String sort
                                                  ) {
-        log.info("getAllUsersPage page: " + page + " size: " + size + " sort: " + sort);
         return userService.findAllUsersPageable(PageRequest.of(page, size, sortDirection, sort));
     }
 
@@ -108,7 +99,6 @@ public class UserController {
     public ResponseEntity<UserGeneralInfoDtoResponse> updateMyUser(
             @RequestHeader("Authorization") String jwtToken,
             @RequestBody @Validated UserGeneralInfoDtoRequest dto) {
-        log.info("getMyUser jwtToken:" + jwtToken);
         UserPrincipal userPrincipal = (UserPrincipal) userDetailsService
                 .loadUserByUsername(jwtTokenProvider.getPhoneEmail(jwtToken));
         return  ResponseEntity.ok(userService.updateUserNoSettings(
@@ -120,7 +110,6 @@ public class UserController {
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserWithSettingsDtoResponse> updateUser(@PathVariable Long id,
                                                                   @RequestBody @Validated UserWithSettingsDtoRequest dto) {
-        log.info("updateUser id: " + id + " userDtoRequest: " + dto);
         return ResponseEntity.ok(userService.updateUserWithSettings(id, dto));
     }
 
@@ -128,7 +117,6 @@ public class UserController {
     @Operation(summary = "Delete User")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
-        log.info("deleteUser id: " + id);
         userService.deleteUser(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }

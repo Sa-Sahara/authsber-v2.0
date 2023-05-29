@@ -7,8 +7,6 @@ import com.alevya.authsber.exception.NotFoundException;
 import com.alevya.authsber.model.Role;
 import com.alevya.authsber.repository.RoleRepository;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +18,6 @@ import java.util.stream.Collectors;
 @Service
 public class RoleService {
 
-    private static final Log log = LogFactory.getLog(RoleService.class);
     private static final int MAX_LENGTH = 255;
 
     private final RoleRepository roleRepository;
@@ -30,7 +27,6 @@ public class RoleService {
     }
 
     public RoleDtoResponse createRole(RoleDtoRequest roleDtoRequest) {
-        log.info("createRole roleDtoRequest: " + roleDtoRequest);
         //checking fields
         if (roleDtoRequest == null) {
             throw new BadRequestException("Invalid role");
@@ -55,7 +51,6 @@ public class RoleService {
     }
 
     public RoleDtoResponse getRoleById(Long id) {
-        log.info("getRoleById id: " + id);
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }
@@ -64,7 +59,6 @@ public class RoleService {
     }
 
     public RoleDtoResponse getRoleByName(String name) {
-        log.info("getRoleByName name: " + name);
         if (name == null) {
             throw new BadRequestException("Invalid name");
         }
@@ -76,21 +70,18 @@ public class RoleService {
     }
 
     public List<RoleDtoResponse> getAllRoles() {
-        log.info("getAllRoles");
         return roleRepository.findAll().stream()
                 .map(this::mapToRoleDto)
                 .collect(Collectors.toList());
     }
 
     public Page<RoleDtoResponse> findAllRolesPageable(Pageable pageable) {
-        log.info("findAllRolesPageable pageable:" + pageable);
         Page<Role> page = roleRepository.findAll(pageable);
         return new PageImpl<>(page.stream().map(this::mapToRoleDto)
                 .collect(Collectors.toList()), page.getPageable(), page.getTotalElements());
     }
 
     public RoleDtoResponse updateRole(Long id, RoleDtoRequest roleDtoRequest) {
-        log.info("updateRole id: " + id + " roleDtoRequest: " + roleDtoRequest);
         if (roleDtoRequest == null) {
             throw new BadRequestException("Invalid role");
         }
@@ -126,7 +117,6 @@ public class RoleService {
     }
 
     public void deleteRole(Long id) {
-        log.info("deleteRole id: " + id);
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }

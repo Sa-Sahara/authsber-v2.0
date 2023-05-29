@@ -7,8 +7,6 @@ import com.alevya.authsber.exception.NotFoundException;
 import com.alevya.authsber.model.Permission;
 import com.alevya.authsber.repository.PermissionRepository;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +18,6 @@ import java.util.stream.Collectors;
 @Service
 public class PermissionService{
 
-    private static final Log log = LogFactory.getLog(PermissionService.class);
     private static final int MAX_LENGTH = 255;
 
     private final PermissionRepository permissionRepository;
@@ -30,7 +27,6 @@ public class PermissionService{
     }
 
     public PermissionDtoResponse createPermission(PermissionDtoRequest permissionDtoRequest) {
-        log.info("createPermission permissionDtoRequest: " + permissionDtoRequest);
         //checking fields
         if (permissionDtoRequest == null) {
             throw new BadRequestException("Invalid permission");
@@ -55,7 +51,6 @@ public class PermissionService{
     }
 
     public PermissionDtoResponse getPermissionById(Long id) {
-        log.info("getPermissionById id: " + id);
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }
@@ -64,7 +59,6 @@ public class PermissionService{
     }
 
     public PermissionDtoResponse getPermissionByName(String name) {
-        log.info("getPermissionByName name: " + name);
         if (name == null) {
             throw new BadRequestException("Invalid name");
         }
@@ -76,21 +70,18 @@ public class PermissionService{
     }
 
     public List<PermissionDtoResponse> getAllPermissions() {
-        log.info("getAllPermissions");
         return permissionRepository.findAll().stream()
                 .map(this::mapToPermissionDto)
                 .collect(Collectors.toList());
     }
 
     public Page<PermissionDtoResponse> findAllPermissionsPageable(Pageable pageable) {
-        log.info("findAllPermissionsPageable pageable:"  + pageable);
         Page<Permission> page = permissionRepository.findAll(pageable);
         return new PageImpl<>(page.stream().map(this::mapToPermissionDto)
                 .collect(Collectors.toList()), page.getPageable(), page.getTotalElements());
     }
 
     public PermissionDtoResponse updatePermission(Long id, PermissionDtoRequest permissionDtoRequest) {
-        log.info("updatePermission id: " + id + " permissionDtoRequest: " + permissionDtoRequest);
         if (permissionDtoRequest == null) {
             throw new BadRequestException("Invalid permission");
         }
@@ -121,7 +112,6 @@ public class PermissionService{
     }
 
     public void deletePermission(Long id) {
-        log.info("deletePermission id: " + id);
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }

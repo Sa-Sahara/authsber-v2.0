@@ -11,8 +11,6 @@ import com.alevya.authsber.model.User;
 import com.alevya.authsber.repository.RoleRepository;
 import com.alevya.authsber.repository.UserRepository;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +25,6 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
 
-    private static final Log log = LogFactory.getLog(UserService.class);
     private static final int MAX_LENGTH_NAME = 150;
     private static final int MIN_LENGTH_PASSWORD = 6;
     private static final int MAX_LENGTH_PASSWORD = 100;
@@ -48,7 +45,6 @@ public class UserService {
     }
 
     public UserGeneralInfoDtoResponse createMyUser(UserGeneralInfoDtoRequest dto) {
-        log.info("registrationUser userDtoRequest: " + dto);
         //checking fields
         checkIfExists(dto);
         checkDtoFields(dto);
@@ -73,7 +69,6 @@ public class UserService {
     }
 
     public UserWithSettingsDtoResponse createUserWithSettings(UserWithSettingsDtoRequest dto) {
-        log.info("createUser userDtoRequest: " + dto);
         //checking fields
         checkIfExists(dto);
         checkDtoFields(dto);
@@ -92,7 +87,6 @@ public class UserService {
     }
 
     public UserWithSettingsDtoResponse getUserById(Long id) {
-        log.info("getUserById id: " + id);
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }
@@ -101,7 +95,6 @@ public class UserService {
     }
 
     public UserWithSettingsDtoResponse getUserByPhone(String phone) {
-        log.info("getUserByPhone phone: " + phone);
         if (phone == null) {
             throw new BadRequestException("Invalid phone");
         }
@@ -113,7 +106,6 @@ public class UserService {
     }
 
     public UserWithSettingsDtoResponse getUserByEmail(String email) {
-        log.info("getUserByEmail email: " + email);
         if (StringUtils.isBlank(email)) {
             throw new BadRequestException("Invalid email");
         }
@@ -125,7 +117,6 @@ public class UserService {
     }
 
     public User getUserByPhoneEmail(String phoneEmail) { //todo
-        log.info("getUserByPhoneEmail phoneEmail: " + phoneEmail);
         if (StringUtils.isBlank(phoneEmail)) {
             throw new BadRequestException("Invalid phoneEmail");
         }
@@ -145,14 +136,12 @@ public class UserService {
     }
 
     public List<UserWithSettingsDtoResponse> getAllUsers() {
-        log.info("getAllUsers");
         return userRepository.findAll().stream()
                 .map(this::mapToUserWithSettingsDto)
                 .collect(Collectors.toList());
     }
 
     public Page<UserWithSettingsDtoResponse> findAllUsersPageable(Pageable pageable) {
-        log.info("findAllUsersPageable pageable:" + pageable);
         Page<User> page = userRepository.findAll(pageable);
         return new PageImpl<>(page.stream().map(this::mapToUserWithSettingsDto)
                 .collect(Collectors.toList()), page.getPageable(), page.getTotalElements());
@@ -160,8 +149,6 @@ public class UserService {
 
     public UserGeneralInfoDtoResponse updateUserNoSettings(
             Long id, UserGeneralInfoDtoRequest dto) {
-        log.info("updateMyUser id: " + id + " UserGeneralInfoDtoRequest: " + dto);
-        checkDtoFields(dto);
 
         User oldUser = userRepository.findById(id).orElseThrow(()
                 -> new NotFoundException("User not found!"));
@@ -208,7 +195,6 @@ public class UserService {
     }
 
     public void deleteUser(Long id) {
-        log.info("deleteUser id: " + id);
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }

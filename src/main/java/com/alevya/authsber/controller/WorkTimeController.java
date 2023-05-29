@@ -5,8 +5,6 @@ import com.alevya.authsber.dto.WorkTimeDtoResponse;
 import com.alevya.authsber.service.WorkTimeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -25,7 +23,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/worktime")
 public class WorkTimeController {
-    private static final Log log = LogFactory.getLog(WorkTimeController.class);
     private final WorkTimeService workTimeService;
 
     public WorkTimeController(WorkTimeService workTimeService) {
@@ -38,7 +35,6 @@ public class WorkTimeController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WorkTimeDtoResponse> createWorkTime(
             @RequestBody WorkTimeDtoRequest workTimeDtoRequest) {
-        log.info("createMessage by workTimeRequest: " + workTimeDtoRequest);
         return ResponseEntity.ok(workTimeService.createWorkTime(workTimeDtoRequest));
     }
 
@@ -46,7 +42,6 @@ public class WorkTimeController {
     @Operation(summary = "Get workTime by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WorkTimeDtoResponse> getWorkTimeById(@PathVariable Long id) {
-        log.info("getWorkTimeById: " + id);
         return ResponseEntity.ok(workTimeService.getWorkTimeById(id));
     }
 
@@ -55,7 +50,6 @@ public class WorkTimeController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<WorkTimeDtoResponse> getAllWorkTimes() {
-        log.info("getAllWorkTimes");
         return workTimeService.getAllWorkTimes();
     }
 
@@ -65,7 +59,6 @@ public class WorkTimeController {
     public ResponseEntity<WorkTimeDtoResponse> updateWorkTime(
             @PathVariable Long id,
             @RequestBody @Validated WorkTimeDtoRequest workTimeDtoRequest) {
-        log.info("updateWorkTime id: " + id + " workTimeDtoRequest: " + workTimeDtoRequest);
         return ResponseEntity.ok(workTimeService.updateWorkTime(id, workTimeDtoRequest));
     }
 
@@ -73,7 +66,6 @@ public class WorkTimeController {
     @Operation(summary = "Delete WorkTime")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteWorkTime(@PathVariable Long id) {
-        log.info("deleteWorkTime id: " + id);
         workTimeService.deleteWorkTime(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }

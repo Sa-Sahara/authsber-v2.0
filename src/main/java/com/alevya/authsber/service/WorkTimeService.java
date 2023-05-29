@@ -10,8 +10,6 @@ import com.alevya.authsber.model.Workplace;
 import com.alevya.authsber.repository.UserRepository;
 import com.alevya.authsber.repository.WorkTimeRepository;
 import com.alevya.authsber.repository.WorkplaceRepository;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +23,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class WorkTimeService {
-    private static final Log log = LogFactory.getLog(WorkTimeService.class);
     private static final int MAX_WORK_HOURS = 24;
     private final WorkTimeRepository workTimeRepository;
     private final WorkplaceRepository workplaceRepository;
@@ -41,7 +38,6 @@ public class WorkTimeService {
     }
 
     public WorkTimeDtoResponse createWorkTime(WorkTimeDtoRequest dto) {
-        log.info("createWorkTime workTimeDtoRequest: " + dto);
         //fields check
         checkDto(dto);
         // check that this worker has not booked this time
@@ -54,7 +50,6 @@ public class WorkTimeService {
     }
 
     public WorkTimeDtoResponse getWorkTimeById(Long id) {
-        log.info("getWorkTimeById id: " + id);
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }
@@ -63,7 +58,6 @@ public class WorkTimeService {
     }
 
     public List<WorkTimeDtoResponse> getAllWorkTimes() {
-        log.info("getAllWorkTimes");
         return workTimeRepository.findAll().stream()
                 .map(this::mapToWorkTimeDto)
                 .collect(Collectors.toList());
@@ -71,8 +65,6 @@ public class WorkTimeService {
 
     public List<WorkTimeDtoResponse> getBookedWorkTimesByUserAndDate(
             User user, LocalDate localDate) {
-        log.info("getBookedWorkTimesByUserAfterDate by User id "
-                + user.getId() + " by date " + localDate);
         return workTimeRepository.findAllByWorkerAndDate(user.getId(), localDate)
                 .stream()
                 .map(this::mapToWorkTimeDto)
@@ -81,8 +73,6 @@ public class WorkTimeService {
 
     public List<WorkTimeDtoResponse> getBookedWorkTimesByWorkplaceAndDate(
             Workplace workplace, LocalDate localDate) {
-        log.info("getBookedWorkTimesByWorkplaceForDate by Workplace id "
-                + workplace.getId() + " by date " + localDate);
         return workTimeRepository.findAllByWorkplaceAndDate(workplace.getId(), localDate)
                 .stream()
                 .map(this::mapToWorkTimeDto)
@@ -93,7 +83,6 @@ public class WorkTimeService {
     public WorkTimeDtoResponse updateWorkTime(
             Long id,
             WorkTimeDtoRequest dto) {
-        log.info("updateWorkTime id: " + id + " workTimeDtoRequest: " + dto);
 
         checkDto(dto);
         WorkTime oldWorkTime = workTimeRepository.findById(id).orElseThrow(()
@@ -119,7 +108,6 @@ public class WorkTimeService {
     }
 
     public void deleteWorkTime(Long id) {
-        log.info("deleteWorkTime id: " + id);
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }
@@ -180,7 +168,6 @@ public class WorkTimeService {
     }
 
     public Page<WorkTimeDtoResponse> findAllWorkTimesPageable(Pageable pageable) {
-        log.info("findAllWorkTimesPageable pageable:" + pageable);
         Page<WorkTime> page = workTimeRepository.findAll(pageable);
         return new PageImpl<>(page.stream().map(this::mapToWorkTimeDto)
                 .collect(Collectors.toList()), page.getPageable(), page.getTotalElements());

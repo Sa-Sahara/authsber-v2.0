@@ -1,8 +1,5 @@
-package com.alevya.authsber.registration;
+package com.alevya.authsber.email;
 
-import com.alevya.authsber.email.EmailSender;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -12,9 +9,8 @@ import javax.mail.internet.MimeMessage;
 
 @Service
 public class EmailService implements EmailSender {
-    private static final Log log = LogFactory.getLog(EmailService.class);
 
-    private JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
     public EmailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
@@ -32,7 +28,6 @@ public class EmailService implements EmailSender {
             helper.setFrom("hello@hello.ru");
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            log.error("failed to send email");
             throw new IllegalStateException("failed to send email");
         }
     }

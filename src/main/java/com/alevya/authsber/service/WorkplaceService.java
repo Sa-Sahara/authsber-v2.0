@@ -7,8 +7,6 @@ import com.alevya.authsber.exception.NotFoundException;
 import com.alevya.authsber.model.Workplace;
 import com.alevya.authsber.repository.CompanyRepository;
 import com.alevya.authsber.repository.WorkplaceRepository;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -19,8 +17,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class WorkplaceService {
-
-    private static final Log log = LogFactory.getLog(WorkplaceService.class);
 
     private final WorkplaceRepository workplaceRepository;
     private final CompanyRepository companyRepository;
@@ -35,7 +31,6 @@ public class WorkplaceService {
         if (dto == null) {
             throw new BadRequestException("Invalid workplace");
         }
-        log.info("createWorkplace: " + dto);
         return mapToWorkplaceDto(workplaceRepository.save(
                 mapToWorkplace(dto)));
     }
@@ -44,20 +39,17 @@ public class WorkplaceService {
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }
-        log.info("getWorkplaceById: " + id);
         return mapToWorkplaceDto(workplaceRepository.findById(id).orElseThrow(()
                 -> new NotFoundException("Workplace not found!")));
     }
 
     public List<WorkplaceDtoResponse> getAllWorkplaces() {
-        log.info("getAllWorkplaces");
         return workplaceRepository.findAll().stream()
                 .map(this::mapToWorkplaceDto)
                 .collect(Collectors.toList());
     }
 
     public WorkplaceDtoResponse updateWorkplace(Long id, WorkplaceDtoRequest dto) {
-        log.info("updateWorkplace id: " + id + " workplaceDtoRequest: " + dto);
         if (dto == null) {
             throw new BadRequestException("Invalid workplace");
         }
@@ -74,7 +66,6 @@ public class WorkplaceService {
     }
 
     public void deleteWorkplace(Long id) {
-        log.info("deleteWorkplace id: " + id);
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }

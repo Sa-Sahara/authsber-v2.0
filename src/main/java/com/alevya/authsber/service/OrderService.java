@@ -10,8 +10,6 @@ import com.alevya.authsber.model.Workplace;
 import com.alevya.authsber.repository.OrderRepository;
 import com.alevya.authsber.repository.ServiceRepository;
 import com.alevya.authsber.repository.WorkplaceRepository;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -24,8 +22,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
-
-    private static final Log log = LogFactory.getLog(OrderService.class);
 
     private final OrderRepository orderRepository;
     private final WorkplaceRepository workplaceRepository;
@@ -43,7 +39,6 @@ public class OrderService {
         if (orderDtoRequest == null) {
             throw new BadRequestException("Invalid order");
         }
-        log.info("createOrder: " + orderDtoRequest);
         return mapToOrderDto(orderRepository.save(
                 mapToOrder(orderDtoRequest)));
     }
@@ -65,7 +60,6 @@ public class OrderService {
         Set<com.alevya.authsber.model.Service> services = new HashSet<>();
         services.add(service);
 
-        log.info("createOrder: " + slot);
         return mapToOrderDto(
                 orderRepository.save(
                         Order.builder()
@@ -86,7 +80,6 @@ public class OrderService {
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }
-        log.info("getOrderById: " + id);
         return mapToOrderDto(orderRepository.findById(id).orElseThrow(()
                 -> new NotFoundException("Order not found!")));
     }
@@ -95,7 +88,6 @@ public class OrderService {
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }
-        log.info("getOrderByUserId: " + id);
         return orderRepository.findAllByClientId(id).stream()
                 .map(this::mapToOrderDto)
                 .collect(Collectors.toList());
@@ -105,7 +97,6 @@ public class OrderService {
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }
-        log.info("getOrderByWorkerId: " + id);
         return orderRepository.findAllByWorkerId(id).stream()
                 .map(this::mapToOrderDto)
                 .collect(Collectors.toList());
@@ -115,21 +106,18 @@ public class OrderService {
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }
-        log.info("getOrderByWorkplaceId: " + id);
         return orderRepository.findAllByWorkplaceId(id).stream()
                 .map(this::mapToOrderDto)
                 .collect(Collectors.toList());
     }
 
     public List<OrderDtoResponse> getAllOrders() {
-        log.info("getAllOrders");
         return orderRepository.findAll().stream()
                 .map(this::mapToOrderDto)
                 .collect(Collectors.toList());
     }
 
     public OrderDtoResponse updateOrder(Long id, OrderDtoRequest orderDtoRequest) {
-        log.info("updateOrder id: " + id + " orderDtoRequest: " + orderDtoRequest);
         if (orderDtoRequest == null) {
             throw new BadRequestException("Invalid order");
         }
@@ -162,7 +150,6 @@ public class OrderService {
     }
 
     public void deleteOrder(Long id) {
-        log.info("deleteOrder id: " + id);
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }

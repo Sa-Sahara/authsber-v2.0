@@ -4,10 +4,7 @@ import com.alevya.authsber.dto.WorkplaceDtoRequest;
 import com.alevya.authsber.dto.WorkplaceDtoResponse;
 import com.alevya.authsber.service.WorkplaceService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -26,7 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/workplace")
 public class WorkplaceController {
-    private static final Log log = LogFactory.getLog(WorkplaceController.class);
+
     private final WorkplaceService workplaceService;
 
     public WorkplaceController(WorkplaceService workplaceService) {
@@ -40,7 +37,6 @@ public class WorkplaceController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WorkplaceDtoResponse> createWorkplace(
             @RequestBody WorkplaceDtoRequest workplaceDtoRequest) {
-        log.info("createMessage by workplaceDtoRequest: " + workplaceDtoRequest);
         return ResponseEntity.ok(workplaceService.createWorkplace(workplaceDtoRequest));
     }
 
@@ -48,7 +44,6 @@ public class WorkplaceController {
     @Operation(summary = "Get workplace by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WorkplaceDtoResponse> getWorkplaceById(@PathVariable Long id) {
-        log.info("getWorkplaceById: " + id);
         return ResponseEntity.ok(workplaceService.getWorkplaceById(id));
     }
 
@@ -57,7 +52,6 @@ public class WorkplaceController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<WorkplaceDtoResponse> getAllWorkplaces() {
-        log.info("getAllWorkplaces");
         return workplaceService.getAllWorkplaces();
     }
 
@@ -67,7 +61,6 @@ public class WorkplaceController {
     public ResponseEntity<WorkplaceDtoResponse> updateWorkplace(
             @PathVariable Long id,
             @RequestBody @Validated WorkplaceDtoRequest workplaceDtoRequest) {
-        log.info("updateWorkplace id: " + id + " workplaceDtoRequest: " + workplaceDtoRequest);
         return ResponseEntity.ok(workplaceService.updateWorkplace(id, workplaceDtoRequest));
     }
 
@@ -75,7 +68,6 @@ public class WorkplaceController {
     @Operation(summary = "Delete Workplace")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteWorkplace(@PathVariable Long id) {
-        log.info("deleteWorkplace id: " + id);
         workplaceService.deleteWorkplace(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }

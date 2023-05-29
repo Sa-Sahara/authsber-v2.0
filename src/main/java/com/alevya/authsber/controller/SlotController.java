@@ -6,10 +6,7 @@ import com.alevya.authsber.security.JwtTokenProvider;
 import com.alevya.authsber.service.OrderService;
 import com.alevya.authsber.service.SlotService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/slot")
 public class SlotController {
-    private static final Log log = LogFactory.getLog(SlotController.class);
 
     private final SlotService slotService;
     private final JwtTokenProvider jwtTokenProvider;
@@ -38,7 +34,6 @@ public class SlotController {
     @Operation(summary = "Get all slots for company")
     @GetMapping(value = "/company/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getSlots(@PathVariable Long id) {
-        log.info("getSlots for company id: " + id);
         return ResponseEntity.ok(slotService.getSlots(id));
     }
 
@@ -47,7 +42,6 @@ public class SlotController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderDtoResponse> createOrder(@RequestHeader("Authorization") String jwtToken,
              @RequestBody Slot slot) {
-        log.info("createOrder by slot: " + slot);
         Long idJwt = jwtTokenProvider.getUserId(jwtToken);
         return ResponseEntity.ok(orderService.createOrderBySlot(slot, idJwt));
     }

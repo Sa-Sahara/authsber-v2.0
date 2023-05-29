@@ -5,8 +5,6 @@ import com.alevya.authsber.dto.PermissionDtoResponse;
 import com.alevya.authsber.service.PermissionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -26,7 +24,6 @@ import java.util.List;
 @RequestMapping("/api/v1/permission")
 public class PermissionController {
 
-    private static final Log log = LogFactory.getLog(PermissionController.class);
     private final PermissionService permissionService;
 
     public PermissionController(PermissionService permissionService) {
@@ -37,7 +34,6 @@ public class PermissionController {
     @Operation(summary = "Create permission")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PermissionDtoResponse> createPermission(@RequestBody PermissionDtoRequest permissionDtoRequest) {
-        log.info("createPermission permissionDtoRequest: " + permissionDtoRequest);
         return ResponseEntity.ok(permissionService.createPermission(permissionDtoRequest));
     }
 
@@ -45,7 +41,6 @@ public class PermissionController {
     @Operation(summary = "Get permission by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PermissionDtoResponse> getPermissionById(@PathVariable Long id) {
-        log.info("getPermissionById id: " + id);
         return ResponseEntity.ok(permissionService.getPermissionById(id));
     }
 
@@ -54,7 +49,6 @@ public class PermissionController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<PermissionDtoResponse> getAllPermissions() {
-        log.info("getAllPermissions");
         return permissionService.getAllPermissions();
     }
 
@@ -68,7 +62,6 @@ public class PermissionController {
             @RequestParam(defaultValue = "DESC") Sort.Direction sortDirection,
             @RequestParam(defaultValue = "id") String sort
     ) {
-        log.info("getAllPermissionsPage page: " + page + " size: " + size + " sort: " + sort);
         return permissionService.findAllPermissionsPageable(PageRequest.of(page, size, sortDirection, sort));
     }
 
@@ -77,7 +70,6 @@ public class PermissionController {
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PermissionDtoResponse> updatePermission(@PathVariable Long id,
              @RequestBody @Validated PermissionDtoRequest permissionDtoRequest) {
-        log.info("updatePermission id: " + id + " permissionDtoRequest: " + permissionDtoRequest);
         return ResponseEntity.ok(permissionService.updatePermission(id, permissionDtoRequest));
     }
 
@@ -85,7 +77,6 @@ public class PermissionController {
     @Operation(summary = "Delete permission")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deletePermission(@PathVariable Long id) {
-        log.info("updatePermission id: " + id);
         permissionService.deletePermission(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
