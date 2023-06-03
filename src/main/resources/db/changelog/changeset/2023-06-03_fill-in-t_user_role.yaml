@@ -1,0 +1,140 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill_in-t_user_role
+      author: Aleksandra
+      changes:
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "1"
+              - column:
+                  name: role_id
+                  value: "1"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "2"
+              - column:
+                  name: role_id
+                  value: "2"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "3"
+              - column:
+                  name: role_id
+                  value: "3"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "4"
+              - column:
+                  name: role_id
+                  value: "4"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "5"
+              - column:
+                  name: role_id
+                  value: "5"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "6"
+              - column:
+                  name: role_id
+                  value: "6"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "7"
+              - column:
+                  name: role_id
+                  value: "7"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "8"
+              - column:
+                  name: role_id
+                  value: "8"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "9"
+              - column:
+                  name: role_id
+                  value: "6"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "10"
+              - column:
+                  name: role_id
+                  value: "6"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "11"
+              - column:
+                  name: role_id
+                  value: "6"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "12"
+              - column:
+                  name: role_id
+                  value: "6"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "13"
+              - column:
+                  name: role_id
+                  value: "6"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "14"
+              - column:
+                  name: role_id
+                  value: "6"
+        - insert:
+            tableName: t_user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: "15"
+              - column:
+                  name: role_id
+                  value: "6"

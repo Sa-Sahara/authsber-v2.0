@@ -94,31 +94,9 @@ public class UserService {
                 -> new NotFoundException("User not found!")));
     }
 
-    public UserWithSettingsDtoResponse getUserByPhone(String phone) {
-        if (phone == null) {
-            throw new BadRequestException("Invalid phone");
-        }
-        User user = userRepository.findByPhone(phone);
-        if (user == null) {
-            throw new NotFoundException("User not found!");
-        }
-        return mapToUserWithSettingsDto(user);
-    }
-
-    public UserWithSettingsDtoResponse getUserByEmail(String email) {
-        if (StringUtils.isBlank(email)) {
-            throw new BadRequestException("Invalid email");
-        }
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new NotFoundException("User not found!");
-        }
-        return mapToUserWithSettingsDto(user);
-    }
-
-    public User getUserByPhoneEmail(String phoneEmail) { //todo
+    public User getUserByPhoneEmail(String phoneEmail) {
         if (StringUtils.isBlank(phoneEmail)) {
-            throw new BadRequestException("Invalid phoneEmail");
+            throw new BadRequestException("Invalid phone/email");
         }
         if (phoneEmail.contains("@")) {
             User user = userRepository.findByEmail(phoneEmail);
@@ -149,6 +127,7 @@ public class UserService {
 
     public UserGeneralInfoDtoResponse updateUserNoSettings(
             Long id, UserGeneralInfoDtoRequest dto) {
+        checkDtoFields(dto);
 
         User oldUser = userRepository.findById(id).orElseThrow(()
                 -> new NotFoundException("User not found!"));

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
+@CrossOrigin(value = "http://localhost:3000")
 @Tag(name = "Company controller",
         description = "Give CRUD functions for company: " +
         "/api/v1/company/**")

@@ -1,11 +1,9 @@
 package com.alevya.authsber.dto;
 
-import com.alevya.authsber.model.Service;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,10 +15,9 @@ public class OrderDtoResponse {
     private LocalDate date;
     private LocalTime timeStart;
     private LocalTime timeFinish;
-    private Long workerId;
+    private Long workTimeId;
     private Long workplaceId;
-    @Singular("service")
-    private Set<Service> services;
+    private Long serviceId;
     private String comment;
     private Long clientId;
 }

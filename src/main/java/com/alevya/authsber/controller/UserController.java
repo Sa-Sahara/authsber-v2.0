@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@CrossOrigin(value = "http://localhost:3000")
 @Tag(name="User controller"
         , description="Give CRUD functional for user:" +
         "/api/v1/user/**")

@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
@@ -35,7 +34,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         if (user == null) {
             throw new BadCredentialsException("Unknown user " + phoneEmail);
         }
-        if (!bCryptPasswordEncoder.matches(password, user.getPassword())) {
+//        if (!bCryptPasswordEncoder.matches(password, user.getPassword())) { //TODO
+        if (!password.equals(user.getPassword())) {
             throw new BadCredentialsException("Bad password");
         }
         UserDetails principal = new UserPrincipal(user);

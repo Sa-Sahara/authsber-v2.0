@@ -1,0 +1,155 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill_in-t_message
+      author: Aleksandra
+      changes:
+        - insert:
+            tableName: t_message
+            columns:
+              - column:
+                  name: type
+                  value: "SMS"
+              - column:
+                  name: accessCode
+                  value: "123456"
+              - column:
+                  name: user_id
+                  value: "2"
+              - column:
+                  name: create_time_millis
+                  value: "1685788066"
+        - insert:
+            tableName: t_message
+            columns:
+              - column:
+                  name: type
+                  value: "SMS"
+              - column:
+                  name: accessCode
+                  value: "message 2"
+              - column:
+                  name: user_id
+                  value: "2"
+              - column:
+                  name: create_time_millis
+                  value: "1685788066"
+        - insert:
+            tableName: t_message
+            columns:
+              - column:
+                  name: type
+                  value: "SMS"
+              - column:
+                  name: accessCode
+                  value: "message 3"
+              - column:
+                  name: user_id
+                  value: "2"
+              - column:
+                  name: create_time_millis
+                  value: "1685788066"
+        - insert:
+            tableName: t_message
+            columns:
+              - column:
+                  name: type
+                  value: "SMS"
+              - column:
+                  name: accessCode
+                  value: "message 4"
+              - column:
+                  name: user_id
+                  value: "6"
+              - column:
+                  name: create_time_millis
+                  value: "1685788066"
+        - insert:
+            tableName: t_message
+            columns:
+              - column:
+                  name: type
+                  value: "SMS"
+              - column:
+                  name: accessCode
+                  value: "message 5"
+              - column:
+                  name: user_id
+                  value: "7"
+              - column:
+                  name: create_time_millis
+                  value: "1685788066"
+        - insert:
+            tableName: t_message
+            columns:
+              - column:
+                  name: type
+                  value: "SMS"
+              - column:
+                  name: accessCode
+                  value: "message 6"
+              - column:
+                  name: user_id
+                  value: "8"
+              - column:
+                  name: create_time_millis
+                  value: "1685788066"
+        - insert:
+            tableName: t_message
+            columns:
+              - column:
+                  name: type
+                  value: "SMS"
+              - column:
+                  name: accessCode
+                  value: "message 7"
+              - column:
+                  name: user_id
+                  value: "9"
+              - column:
+                  name: create_time_millis
+                  value: "1685788066"
+        - insert:
+            tableName: t_message
+            columns:
+              - column:
+                  name: type
+                  value: "SMS"
+              - column:
+                  name: accessCode
+                  value: "message 8"
+              - column:
+                  name: user_id
+                  value: "10"
+              - column:
+                  name: create_time_millis
+                  value: "1685788066"
+        - insert:
+            tableName: t_message
+            columns:
+              - column:
+                  name: type
+                  value: "SMS"
+              - column:
+                  name: accessCode
+                  value: "message 9"
+              - column:
+                  name: user_id
+                  value: "11"
+              - column:
+                  name: create_time_millis
+                  value: "1685788066"
+        - insert:
+            tableName: t_message
+            columns:
+              - column:
+                  name: type
+                  value: "SMS"
+              - column:
+                  name: accessCode
+                  value: "message 10"
+              - column:
+                  name: user_id
+                  value: "12"
+              - column:
+                  name: create_time_millis
+                  value: "1685788066"

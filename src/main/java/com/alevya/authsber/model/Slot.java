@@ -12,7 +12,7 @@ public final class Slot {
     private LocalDate date;
     private LocalTime timeStart;
     private LocalTime timeFinish;
-    private Long workerId;
+    private Long workTimeId;
     private Long workplaceId;
     private Long serviceId;
     private String comment;
@@ -24,14 +24,14 @@ public final class Slot {
     public Slot(LocalDate date,
                 LocalTime timeStart,
                 LocalTime timeFinish,
-                Long workerId,
+                Long workTimeId,
                 Long workplaceId,
                 Long serviceId,
                 String comment) {
         this.date = date;
         this.timeStart = timeStart;
         this.timeFinish = timeFinish;
-        this.workerId = workerId;
+        this.workTimeId = workTimeId;
         this.workplaceId = workplaceId;
         this.serviceId = serviceId;
         this.comment = comment;
@@ -47,7 +47,7 @@ public final class Slot {
         if (!Objects.equals(date, slot.date)) return false;
         if (!Objects.equals(timeStart, slot.timeStart)) return false;
         if (!Objects.equals(timeFinish, slot.timeFinish)) return false;
-        if (!Objects.equals(workerId, slot.workerId)) return false;
+        if (!Objects.equals(workTimeId, slot.workTimeId)) return false;
         if (!Objects.equals(workplaceId, slot.workplaceId)) return false;
         return Objects.equals(serviceId, slot.serviceId);
     }
@@ -58,7 +58,7 @@ public final class Slot {
                 date,
                 timeStart,
                 timeFinish,
-                workerId,
+                workTimeId,
                 workplaceId,
                 serviceId
         );
@@ -70,7 +70,7 @@ public final class Slot {
                 "date=" + date +
                 ", timeStart=" + timeStart +
                 ", timeFinish=" + timeFinish +
-                ", workerId=" + workerId +
+                ", workerId=" + workTimeId +
                 ", workplaceId=" + workplaceId +
                 ", serviceId=" + serviceId +
                 ", description='" + comment + '\'' +

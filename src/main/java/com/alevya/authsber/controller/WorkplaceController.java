@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(value = "http://localhost:3000")
 @Tag(name = "Workplace controller"
         , description = "Give CRUD functional for Workplace:" +
         "/api/v1/workplace/**")

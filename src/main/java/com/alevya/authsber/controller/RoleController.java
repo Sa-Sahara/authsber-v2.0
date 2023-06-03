@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(value = "http://localhost:3000")
 @Tag(name = "Role controller"
         , description = "Give CRUD functional for role:" +
         "/api/v1/role/**")
@@ -51,7 +52,7 @@ public class RoleController {
         return ResponseEntity.ok(roleService.getRoleByName(name));
     }
 
-//    //    @Secured("GET_ROLE")
+//    @Secured("GET_ROLE")
 //    @Operation(summary = "Get role for not verified user")
 //    @GetMapping(value = "/guest", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<RoleDtoResponse> getRoleGuest() {

@@ -9,12 +9,12 @@ import com.alevya.authsber.model.Workplace;
 import com.alevya.authsber.repository.OrderRepository;
 import com.alevya.authsber.repository.WorkTimeRepository;
 import com.alevya.authsber.repository.WorkplaceRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Service
 public class SlotService {
@@ -22,6 +22,11 @@ public class SlotService {
     private final WorkplaceRepository workplaceRepository;
     private final WorkTimeRepository workTimeRepository;
     private final OrderRepository orderRepository;
+    private final long MINUTES_PER_HOUR = 60;
+    @Value("${slot.horizon}")
+    private long slotHorizon;
+    @Value("${slot.duration}")
+    private long slotDuration;
 
     public SlotService(WorkplaceRepository workplaceRepository,
                        WorkTimeRepository workTimeRepository,
@@ -30,7 +35,6 @@ public class SlotService {
         this.workTimeRepository = workTimeRepository;
         this.orderRepository = orderRepository;
     }
-
 
     public List<Slot> getSlots(Long companyId) {
         if (companyId == null) {
@@ -41,29 +45,31 @@ public class SlotService {
             throw new NotFoundException("Workplace not found");
         }
         List<Slot> slots = new ArrayList<>();
+        int slotsPerHour = (int)(MINUTES_PER_HOUR/slotDuration);
         for (Workplace workplace : workplaceByCompanyId) {
             List<WorkTime> workTimes = workTimeRepository
                     .findAllByDateBetweenAndWorkplaceId(
                             LocalDate.now(),
-                            LocalDate.now().plusDays(7),
+                            LocalDate.now().plusDays(slotHorizon),
                             workplace.getId()
                     );
             for (WorkTime workTime : workTimes) {
-                int slotNumber = (workTime.getFinish().getHour() - workTime.getStart().getHour()) * 4;
-                slotNumber += workTime.getFinish().getMinute() / 15;
-                slotNumber -= workTime.getStart().getMinute() / 15;
+                int slotNumber = (workTime.getFinish().getHour() - workTime.getStart().getHour())
+                        * slotsPerHour;
+                slotNumber += workTime.getFinish().getMinute() / slotDuration;
+                slotNumber -= workTime.getStart().getMinute() / slotDuration;
                 for (int i = 0; i < slotNumber; i++) {
                     slots.add(new Slot(workTime.getDate(),
-                            workTime.getStart().plusMinutes(i * 15L),
-                            workTime.getStart().plusMinutes((i + 1) * 15L),
+                            workTime.getStart().plusMinutes(i * slotDuration),
+                            workTime.getStart().plusMinutes((i + 1) * slotDuration),
                             workTime.getWorker().getId(),
                             workTime.getWorkplace().getId(),
                             workplace.getId(),
                             workplace.getDescription()));
                 }
                 List<Order> orders = orderRepository.findAllByWorkplaceIdAndDate(
-                        workplace.getId()
-                        , workTime.getDate());
+                        workplace.getId(),
+                        workTime.getDate());
                 for (Order order : orders) {
                     slots.remove(new Slot(workTime.getDate(),
                             order.getTimeStart(),

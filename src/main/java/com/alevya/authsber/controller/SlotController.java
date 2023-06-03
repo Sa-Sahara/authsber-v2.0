@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(value = "http://localhost:3000")
 @Tag(name = "Slot controller",
         description = "Give slots for company:" +
                 "/api/v1/slot/**")

@@ -12,12 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-
+@CrossOrigin(value = "http://localhost:3000")
 @Tag(name = "Auth Controller")
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -45,7 +42,7 @@ public class AuthController{
             AuthDtoResponse response = new AuthDtoResponse(token, null);
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
-            return new ResponseEntity<>(new AuthDtoResponse(null, "Invalid phone-email/password combination"),
+            return new ResponseEntity<>(new AuthDtoResponse(null, "Invalid credentials"),
                     HttpStatus.FORBIDDEN);
         }
     }

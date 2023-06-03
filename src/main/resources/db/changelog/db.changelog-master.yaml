@@ -27,13 +27,13 @@ databaseChangeLog:
       file: db/changelog/changeset/2023-05-02_00-50_fill_in-t_workplace.yaml
   - include:
       file: db/changelog/changeset/2023-05-04_23-37_fill_in-t_user.yaml
-#  - include:
-#      file: db/changelog/changeset/
-#  - include:
-#      file: db/changelog/changeset/
-#  - include:
-#      file: db/changelog/changeset/
-#  - include:
-#      file: db/changelog/changeset/
+  - include:
+      file: db/changelog/changeset/2023-06-03_fill-in-t_user_role.yaml
+  - include:
+      file: db/changelog/changeset/2023-06-03_fill_in-t_message.yaml
+  - include:
+      file: db/changelog/changeset/2023-06-03_fill_in-t_order.yaml
+  - include:
+      file: db/changelog/changeset/2023-06-03_fill_in-t_role_permission.yaml
 #  - include:
 #      file: db/changelog/changeset/

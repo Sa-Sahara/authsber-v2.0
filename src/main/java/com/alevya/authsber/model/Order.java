@@ -1,14 +1,15 @@
 package com.alevya.authsber.model;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "t_order")
@@ -33,20 +34,15 @@ public final class Order {
     @Column(name = "time_finish")
     private LocalTime timeFinish;
 
-    @Column(name = "worker_id")
-    private Long workerId;
+    @Column(name = "worktime_id")
+    private Long workTimeId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "workplace_id")
     private Workplace workplace;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "t_order_service",
-            joinColumns = @JoinColumn(name = "service_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
-    @Singular("service")
-    private Set<Service> services = new HashSet<>();
+    @Column(name = "service_id")
+    private Long serviceId;
 
     private String comment;
 
@@ -61,28 +57,20 @@ public final class Order {
                  LocalDate date,
                  LocalTime timeStart,
                  LocalTime timeFinish,
-                 Long workerId,
+                 Long workTimeId,
                  Workplace workplace,
-                 Set<Service> services,
+                 Long serviceId,
                  String comment,
                  Long clientId) {
         this.id = id;
         this.date = date;
         this.timeStart = timeStart;
         this.timeFinish = timeFinish;
-        this.workerId = workerId;
+        this.workTimeId = workTimeId;
         this.workplace = workplace;
-        this.services = services;
+        this.serviceId = serviceId;
         this.comment = comment;
         this.clientId = clientId;
-    }
-
-    public boolean addService(Service service) {
-        return services.add(service);
-    }
-
-    public boolean removeService(Service service) {
-        return services.remove(service);
     }
 
     @Override
@@ -95,8 +83,9 @@ public final class Order {
         if (!Objects.equals(date, order.date)) return false;
         if (!Objects.equals(timeStart, order.timeStart)) return false;
         if (!Objects.equals(timeFinish, order.timeFinish)) return false;
-        if (!Objects.equals(workerId, order.workerId)) return false;
+        if (!Objects.equals(workTimeId, order.workTimeId)) return false;
         if (!Objects.equals(workplace, order.workplace)) return false;
+        if (!Objects.equals(serviceId, order.getServiceId())) return false;
         return Objects.equals(clientId, order.clientId);
     }
 
@@ -106,8 +95,9 @@ public final class Order {
                 date,
                 timeStart,
                 timeFinish,
-                workerId,
+                workTimeId,
                 workplace,
+                serviceId,
                 clientId);
     }
 
@@ -118,8 +108,9 @@ public final class Order {
                 ", date=" + date +
                 ", timeStart=" + timeStart +
                 ", timeFinish=" + timeFinish +
-                ", workerId=" + workerId +
+                ", workerId=" + workTimeId +
                 ", workplaceId=" + workplace.getId() +
+                ", serviceId=" + serviceId +
                 ", description='" + comment + '\'' +
                 ", clientId=" + clientId +
                 '}';

@@ -2,6 +2,8 @@ package com.alevya.authsber.controller;
 
 import com.alevya.authsber.dto.WorkTimeDtoRequest;
 import com.alevya.authsber.dto.WorkTimeDtoResponse;
+import com.alevya.authsber.exception.BadRequestException;
+import com.alevya.authsber.service.OrderService;
 import com.alevya.authsber.service.WorkTimeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(value = "http://localhost:3000")
 @Tag(name = "WorkTime controller"
         , description = "Give CRUD functional for s WorkTime:" +
         "/api/v1/workTime/**")
@@ -24,9 +27,13 @@ import java.util.List;
 @RequestMapping("/api/v1/worktime")
 public class WorkTimeController {
     private final WorkTimeService workTimeService;
+    private final OrderService orderService;
 
-    public WorkTimeController(WorkTimeService workTimeService) {
+    public WorkTimeController(
+            WorkTimeService workTimeService,
+            OrderService orderService) {
         this.workTimeService = workTimeService;
+        this.orderService = orderService;
     }
 
     //    @Secured("CREATE_WORKTIME")
@@ -66,7 +73,11 @@ public class WorkTimeController {
     @Operation(summary = "Delete WorkTime")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteWorkTime(@PathVariable Long id) {
-        workTimeService.deleteWorkTime(id);
+        if (!orderService.getOrderByWorktimeId(id).isEmpty()) {
+            throw new BadRequestException("There are bookings for this WorkTime");
+        } else {
+            workTimeService.deleteWorkTime(id);
+        }
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

@@ -13,8 +13,6 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByClientId(Long id);
-    List<Order> findByWorkerId(Long id);
-    List<Order> findByWorkplaceId(Long id);
     List<Order> findAllByWorkplaceIdAndDate(Long workplaceId, @NotNull LocalDate date);
     List<Order> findAllByClientId(Long client_id);
     @Query(value = "select * from t_order o " +
@@ -28,8 +26,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findOrderByWorkplaceIdAndDate(@NotNull Long workplace_id, @NotNull LocalDate date);
 
     @Query(value = "select * from t_order o " +
-            "where o.worker_id = ?1 ", nativeQuery = true)
-    List<Order> findAllByWorkerId(Long worker_id);
+            "where o.worktime_id = ?1 ", nativeQuery = true)
+    List<Order> findAllByWorktimeId(Long worktime_id);
 
     @Query(value = "select * from t_order o " +
             "where o.workplace_id = ?1 ", nativeQuery = true)

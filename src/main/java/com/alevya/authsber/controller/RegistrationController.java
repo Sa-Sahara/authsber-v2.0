@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Controller for receiving main data
  */
+@CrossOrigin(value = "http://localhost:3000")
 @Hidden
 @RestController
 //@SecurityRequirement(name = "JWT Authentication")

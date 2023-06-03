@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(value = "http://localhost:3000")
 @Tag(name = "Order controller",
         description = "Give CRUD functional for Order:" +
                 "/api/v1/order/**")
@@ -58,10 +59,10 @@ public class OrderController {
     }
 
 //    @Secured("GET_ORDER")
-    @Operation(summary = "Get order by worker id")
-    @GetMapping(value = "/worker/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<OrderDtoResponse> getOrderByWorkerId(@PathVariable Long id) {
-        return orderService.getOrderByWorkerId(id);
+    @Operation(summary = "Get order by worktime id")
+    @GetMapping(value = "/worktime/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<OrderDtoResponse> getOrderByWorktimeId(@PathVariable Long id) {
+        return orderService.getOrderByWorktimeId(id);
     }
 
 //    @Secured("GET_ORDER")

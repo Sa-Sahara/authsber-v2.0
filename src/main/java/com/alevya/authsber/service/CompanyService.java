@@ -88,12 +88,6 @@ public class CompanyService {
                 .collect(Collectors.toSet());
     }
 
-    public Set<CompanyDtoResponse> getAllRelativeCompanyIds(Long parentId) {
-        Set<CompanyDtoResponse> result = getAllParentCompanies(parentId);
-        result.addAll(getAllChildCompanies(parentId));
-        return result;
-    }
-
     public Page<CompanyDtoResponse> findAllCompaniesPageable(Pageable pageable) {
         Page<Company> page = companyRepository.findAll(pageable);
         return new PageImpl<>(page.stream().map(this::mapToDto)

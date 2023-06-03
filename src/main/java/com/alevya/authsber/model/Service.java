@@ -1,13 +1,13 @@
 package com.alevya.authsber.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "t_service")
@@ -25,15 +25,13 @@ public final class Service {
     @NotNull
     private String name;
 
+    @Column(name = "length_slots")
+    private int lengthSlots;
+
     private String description;
 
     @NotNull
     private int price;
-
-    @ManyToMany(mappedBy = "services", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("services")
-    @Singular
-    private Set<Order> orders = new HashSet<>();
 
     public Service() {
     }
@@ -41,14 +39,15 @@ public final class Service {
     @Builder
     public Service(Long id,
                    String name,
+                   int lengthSlots,
                    String description,
-                   int price,
-                   Set<Order> orders) {
+                   int price
+                   ) {
         this.id = id;
         this.name = name;
+        this.lengthSlots = lengthSlots;
         this.description = description;
         this.price = price;
-        this.orders = orders;
     }
 
     @Override

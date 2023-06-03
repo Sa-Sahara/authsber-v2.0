@@ -42,10 +42,13 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: worker_id
+                  name: worktime_id
                   type: bigint
               - column:
                   name: workplace_id
+                  type: bigint
+              - column:
+                  name: service_id
                   type: bigint
               - column:
                   name: comment

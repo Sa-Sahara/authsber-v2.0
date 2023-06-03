@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(value = "http://localhost:3000")
 @Tag(name = "Message controller"
         , description = "Give CRUD functional for message:" +
         "/api/v1/message/**")

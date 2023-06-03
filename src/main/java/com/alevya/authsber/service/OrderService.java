@@ -66,9 +66,9 @@ public class OrderService {
                                 .date(slot.getDate())
                                 .timeStart(slot.getTimeStart())
                                 .timeFinish(slot.getTimeFinish())
-                                .workerId(slot.getWorkerId())
+                                .workTimeId(slot.getWorkTimeId())
                                 .workplace(workplace)
-                                .services(services)
+                                .serviceId(slot.getServiceId())
                                 .comment(slot.getComment())
                                 .clientId(id)
                                 .build()
@@ -93,11 +93,11 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
-    public List<OrderDtoResponse> getOrderByWorkerId(Long id) {
+    public List<OrderDtoResponse> getOrderByWorktimeId(Long id) {
         if (id == null) {
             throw new BadRequestException("Invalid ID");
         }
-        return orderRepository.findAllByWorkerId(id).stream()
+        return orderRepository.findAllByWorktimeId(id).stream()
                 .map(this::mapToOrderDto)
                 .collect(Collectors.toList());
     }
@@ -132,8 +132,8 @@ public class OrderService {
         if (orderDtoRequest.getTimeFinish() != null) {
             oldOrder.setTimeFinish(orderDtoRequest.getTimeFinish());
         }
-        if (orderDtoRequest.getWorkerId() != null) {
-            oldOrder.setWorkerId(orderDtoRequest.getWorkerId());
+        if (orderDtoRequest.getWorkTimeId() != null) {
+            oldOrder.setWorkTimeId(orderDtoRequest.getWorkTimeId());
         }
         if (orderDtoRequest.getWorkplaceId() != null) {
             Workplace workplace = workplaceRepository.findById(orderDtoRequest.getWorkplaceId()).orElseThrow();
@@ -162,24 +162,26 @@ public class OrderService {
                 .date(order.getDate())
                 .timeStart(order.getTimeStart())
                 .timeFinish(order.getTimeFinish())
-                .workerId(order.getWorkerId())
+                .workTimeId(order.getWorkTimeId())
                 .workplaceId(order.getWorkplace().getId())
+                .serviceId(order.getServiceId())
                 .comment(order.getComment())
                 .clientId(order.getClientId())
                 .build();
         return orderDtoResponse;
     }
 
-    public Order mapToOrder(OrderDtoRequest orderDtoRequest) {
+    public Order mapToOrder(OrderDtoRequest dto) {
         Order order = new Order();
-        order.setDate(orderDtoRequest.getDate());
-        order.setTimeStart(orderDtoRequest.getTimeStart());
-        order.setTimeFinish(orderDtoRequest.getTimeFinish());
-        order.setWorkerId(orderDtoRequest.getWorkerId());
-        Workplace workplace = workplaceRepository.findById(orderDtoRequest.getWorkplaceId()).orElseThrow();
+        order.setDate(dto.getDate());
+        order.setTimeStart(dto.getTimeStart());
+        order.setTimeFinish(dto.getTimeFinish());
+        order.setWorkTimeId(dto.getWorkTimeId());
+        Workplace workplace = workplaceRepository.findById(dto.getWorkplaceId()).orElseThrow();
         order.setWorkplace(workplace);
-        order.setComment(orderDtoRequest.getComment());
-        order.setClientId(orderDtoRequest.getClientId());
+        order.setServiceId(dto.getServiceId());
+        order.setComment(dto.getComment());
+        order.setClientId(dto.getClientId());
 
         return order;
     }

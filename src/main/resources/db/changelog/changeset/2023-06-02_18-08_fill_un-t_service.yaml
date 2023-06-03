@@ -1,0 +1,65 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill_in-t_service
+      author: Aleksandra
+      changes:
+        - insert:
+            tableName: t_service
+            columns:
+              - column:
+                  name: name
+                  value: "Diagnostic test"
+              - column:
+                  name: length_slots
+                  value: "3"
+              - column:
+                  name: description
+                  value: "overall diagnostic"
+              - column:
+                  name: price
+                  value: "1000"
+        - insert:
+            tableName: t_service
+            columns:
+              - column:
+                  name: name
+                  value: "Tires Replacement"
+              - column:
+                  name: length_slots
+                  value: "2"
+              - column:
+                  name: description
+                  value: "Very Fast Tires Replacement"
+              - column:
+                  name: price
+                  value: "2000"
+        - insert:
+            tableName: t_service
+            columns:
+              - column:
+                  name: name
+                  value: "Engine Servicing"
+              - column:
+                  name: length_slots
+                  value: "4"
+              - column:
+                  name: description
+                  value: "Professional deep engine servicing"
+              - column:
+                  name: price
+                  value: "5000"
+        - insert:
+            tableName: t_service
+            columns:
+              - column:
+                  name: name
+                  value: "Oil Changing"
+              - column:
+                  name: length_slots
+                  value: "1"
+              - column:
+                  name: description
+                  value: "Very Fast Oil Changing"
+              - column:
+                  name: price
+                  value: "3000"
