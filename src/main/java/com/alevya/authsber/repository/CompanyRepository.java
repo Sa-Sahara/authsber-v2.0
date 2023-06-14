@@ -12,6 +12,7 @@ import java.util.Set;
 public interface CompanyRepository extends JpaRepository<Company, Long> {
     Company findByShortName(String shortName);
     Company findByFullName(String fullName);
+    Company findByAddress(String address);
     boolean existsByShortName(String shortName);
     boolean existsByFullName(String fullName);
     @Query(

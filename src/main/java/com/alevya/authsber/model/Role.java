@@ -1,6 +1,5 @@
 package com.alevya.authsber.model;
 
-import com.alevya.authsber.exception.BadRequestException;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -34,9 +33,6 @@ public final class Role {
     @Singular
     private Set<User> users;
 
-    /**
-     * Role permissions.
-     */
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "t_role_permission",
@@ -91,9 +87,9 @@ public final class Role {
     }
 
     public void setName(String name) {
-        if (this.name == null || Objects.equals(this.name, name)) {
+//        if (this.name == null || Objects.equals(this.name, name)) {
             this.name = name;
-        } else throw new BadRequestException("name cannot be changed");
+//        } else throw new BadRequestException("name cannot be changed");
     }
 
     @Override

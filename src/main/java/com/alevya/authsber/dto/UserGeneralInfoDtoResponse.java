@@ -19,6 +19,4 @@ public class UserGeneralInfoDtoResponse {
     private String phone;
     private String address;
     private LocalDate birthday;
-
-
 }

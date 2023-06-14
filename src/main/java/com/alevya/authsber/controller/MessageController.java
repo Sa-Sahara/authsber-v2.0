@@ -28,8 +28,8 @@ public class MessageController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MessageDtoResponse> createMessage(
-            @RequestBody MessageDtoRequest messageDtoRequest) {
-        return ResponseEntity.ok(messageService.createMessage(messageDtoRequest));
+            @RequestBody MessageDtoRequest dto) {
+        return ResponseEntity.ok(messageService.createMessage(dto));
     }
 
     @Operation(summary = "Get message by id")

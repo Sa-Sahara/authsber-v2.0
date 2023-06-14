@@ -2,6 +2,7 @@ package com.alevya.authsber.email;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -16,7 +17,7 @@ public class EmailService implements EmailSender {
     }
 
     @Override
-//    @Async
+    @Async
     public void send(String to, String email) {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();

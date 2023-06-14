@@ -34,8 +34,8 @@ public class PermissionController {
     //    @Secured("CREATE_PERMISSION")
     @Operation(summary = "Create permission")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PermissionDtoResponse> createPermission(@RequestBody PermissionDtoRequest permissionDtoRequest) {
-        return ResponseEntity.ok(permissionService.createPermission(permissionDtoRequest));
+    public ResponseEntity<PermissionDtoResponse> createPermission(@RequestBody PermissionDtoRequest dto) {
+        return ResponseEntity.ok(permissionService.createPermission(dto));
     }
 
     //    @Secured("GET_PERMISSION")
@@ -70,8 +70,8 @@ public class PermissionController {
     @Operation(summary = "Update permission")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PermissionDtoResponse> updatePermission(@PathVariable Long id,
-             @RequestBody @Validated PermissionDtoRequest permissionDtoRequest) {
-        return ResponseEntity.ok(permissionService.updatePermission(id, permissionDtoRequest));
+             @RequestBody @Validated PermissionDtoRequest dto) {
+        return ResponseEntity.ok(permissionService.updatePermission(id, dto));
     }
 
     //    @Secured("DELETE_PERMISSION")

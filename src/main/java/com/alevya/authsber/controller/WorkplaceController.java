@@ -37,8 +37,8 @@ public class WorkplaceController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WorkplaceDtoResponse> createWorkplace(
-            @RequestBody WorkplaceDtoRequest workplaceDtoRequest) {
-        return ResponseEntity.ok(workplaceService.createWorkplace(workplaceDtoRequest));
+            @RequestBody WorkplaceDtoRequest dto) {
+        return ResponseEntity.ok(workplaceService.createWorkplace(dto));
     }
 
     //    @Secured("GET_WORKPLACE")
@@ -61,8 +61,8 @@ public class WorkplaceController {
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WorkplaceDtoResponse> updateWorkplace(
             @PathVariable Long id,
-            @RequestBody @Validated WorkplaceDtoRequest workplaceDtoRequest) {
-        return ResponseEntity.ok(workplaceService.updateWorkplace(id, workplaceDtoRequest));
+            @RequestBody @Validated WorkplaceDtoRequest dto) {
+        return ResponseEntity.ok(workplaceService.updateWorkplace(id, dto));
     }
 
     //    @Secured("DELETE_WORKPLACE")

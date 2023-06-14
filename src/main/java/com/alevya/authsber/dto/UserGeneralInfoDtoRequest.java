@@ -15,11 +15,9 @@ public class UserGeneralInfoDtoRequest {
     private String surname;
     private String patronymic;
     @Setter
-    private String password; //todo
+    private String password;
     private String email;
     private String phone;
     private LocalDate birthday;
     private String address;
-
-
 }

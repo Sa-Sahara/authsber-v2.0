@@ -39,8 +39,8 @@ public class OrderController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderDtoResponse> createOrder(
-            @RequestBody OrderDtoRequest orderDtoRequest) {
-        return ResponseEntity.ok(orderService.createOrder(orderDtoRequest));
+            @RequestBody OrderDtoRequest dto) {
+        return ResponseEntity.ok(orderService.createOrder(dto));
     }
 
 //    @Secured("GET_ORDER")
@@ -85,8 +85,8 @@ public class OrderController {
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderDtoResponse> updateOrder(
             @PathVariable Long id,
-            @RequestBody @Validated OrderDtoRequest orderDtoRequest) {
-        return ResponseEntity.ok(orderService.updateOrder(id, orderDtoRequest));
+            @RequestBody @Validated OrderDtoRequest dto) {
+        return ResponseEntity.ok(orderService.updateOrder(id, dto));
     }
 
 //    @Secured("DELETE_ORDER")

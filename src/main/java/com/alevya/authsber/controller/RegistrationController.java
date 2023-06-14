@@ -4,7 +4,6 @@ import com.alevya.authsber.security.JwtTokenProvider;
 import com.alevya.authsber.security.UserDetailsServiceImpl;
 import com.alevya.authsber.security.UserPrincipal;
 import com.alevya.authsber.service.RegistrationService;
-import com.alevya.authsber.service.UserService;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,17 +20,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/registration")
 public class RegistrationController {
 
-    private final UserService userService;
     private final RegistrationService registrationService;
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtTokenProvider jwtTokenProvider;
 
 
-    public RegistrationController(UserService userService,
-                                  UserDetailsServiceImpl userDetailsService,
+    public RegistrationController(UserDetailsServiceImpl userDetailsService,
                                   RegistrationService registrationService,
                                   JwtTokenProvider jwtTokenProvider) {
-        this.userService = userService;
         this.userDetailsService = userDetailsService;
         this.registrationService = registrationService;
         this.jwtTokenProvider = jwtTokenProvider;

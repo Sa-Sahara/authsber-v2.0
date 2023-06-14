@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class WorkTimeService {
+
     private static final int MAX_WORK_HOURS = 24;
     private final WorkTimeRepository workTimeRepository;
     private final WorkplaceRepository workplaceRepository;
@@ -38,11 +39,8 @@ public class WorkTimeService {
     }
 
     public WorkTimeDtoResponse createWorkTime(WorkTimeDtoRequest dto) {
-        //fields check
         checkDto(dto);
-        // check that this worker has not booked this time
         checkIfWorkerBusy(dto);
-        // check that this workplace is not booked
         checkIfWorkplaceBooked(dto);
 
         return mapToWorkTimeDto(workTimeRepository.save(

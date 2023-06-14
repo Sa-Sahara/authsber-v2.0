@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @CrossOrigin(value = "http://localhost:3000")
 @Tag(name = "Slot controller",
         description = "Give slots for company:" +
@@ -36,6 +38,15 @@ public class SlotController {
     @GetMapping(value = "/company/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getSlots(@PathVariable Long id) {
         return ResponseEntity.ok(slotService.getSlots(id));
+    }
+
+    @Operation(summary = "Get all slots for service, company, date")
+    @GetMapping(value = "/sendForm", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getSlotsByServiceCompanyDay(
+            @RequestParam String service,
+            @RequestParam String address,
+            @RequestParam LocalDate date) {
+        return ResponseEntity.ok(slotService.getSlotsByServiceCompanyDay(service, address, date));
     }
 
     @Operation(summary = "Create order by slot")

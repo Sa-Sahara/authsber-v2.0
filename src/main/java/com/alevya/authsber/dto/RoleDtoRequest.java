@@ -11,6 +11,4 @@ public class RoleDtoRequest {
     private String name;
     private String description;
     private Integer level;
-//    private Set<User> users;
-//    private Set<Role> permissions;
 }

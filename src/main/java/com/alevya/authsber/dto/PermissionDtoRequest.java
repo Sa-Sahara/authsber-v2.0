@@ -10,5 +10,4 @@ import lombok.*;
 public class PermissionDtoRequest {
     private String name;
     private String description;
-//    private Set<Role> roles;
 }

@@ -34,8 +34,8 @@ public class RoleController {
     //    @Secured("CREATE_ROLE")
     @Operation(summary = "Create role")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RoleDtoResponse> createRole(@RequestBody RoleDtoRequest roleDtoRequest) {
-        return ResponseEntity.ok(roleService.createRole(roleDtoRequest));
+    public ResponseEntity<RoleDtoResponse> createRole(@RequestBody RoleDtoRequest dto) {
+        return ResponseEntity.ok(roleService.createRole(dto));
     }
 
     //    @Secured("GET_ROLE")
@@ -47,17 +47,10 @@ public class RoleController {
 
     //    @Secured("GET_ROLE")
     @Operation(summary = "Get role by name")
-    @GetMapping(value = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RoleDtoResponse> getRoleByName(@PathVariable String name) {
         return ResponseEntity.ok(roleService.getRoleByName(name));
     }
-
-//    @Secured("GET_ROLE")
-//    @Operation(summary = "Get role for not verified user")
-//    @GetMapping(value = "/guest", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<RoleDtoResponse> getRoleGuest() {
-//        return getRoleByName("GUEST");
-//    }
 
     //    @Secured("GET_ROLES")
     @Operation(summary = "Get all roles")
@@ -81,11 +74,11 @@ public class RoleController {
 
     //    @Secured("UPDATE_ROLE")
     @Operation(summary = "Update role")
-    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RoleDtoResponse> updateRole(
             @PathVariable Long id,
-            @RequestBody @Validated RoleDtoRequest roleDtoRequest) {
-        return ResponseEntity.ok(roleService.updateRole(id, roleDtoRequest));
+            @RequestBody @Validated RoleDtoRequest dto) {
+        return ResponseEntity.ok(roleService.updateRole(id, dto));
     }
 
     //    @Secured("DELETE_ROLE")

@@ -99,3 +99,39 @@ databaseChangeLog:
               - column:
                   name: level
                   value: "30"
+        - insert:
+            tableName: t_role
+            columns:
+              - column:
+                  name: name
+                  value: "tmp1"
+              - column:
+                  name: description
+                  value: "tmp1"
+              - column:
+                  name: level
+                  value: "30"
+        - insert:
+            tableName: t_role
+            columns:
+              - column:
+                  name: name
+                  value: "tmp2"
+              - column:
+                  name: description
+                  value: "tmp1"
+              - column:
+                  name: level
+                  value: "30"
+        - insert:
+            tableName: t_role
+            columns:
+              - column:
+                  name: name
+                  value: "tmp3"
+              - column:
+                  name: description
+                  value: "tmp1"
+              - column:
+                  name: level
+                  value: "30"

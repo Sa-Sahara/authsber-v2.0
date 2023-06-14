@@ -59,12 +59,23 @@ public class CompanyService {
         return mapToDto(company);
     }
 
+    public CompanyDtoResponse getCompanyByAddress(String address) {
+        if (StringUtils.isBlank(address)) {
+            throw new BadRequestException("Invalid name");
+        }
+        Company company = companyRepository.findByAddress(address);
+        if (company == null) {
+            throw new NotFoundException("Company not found!");
+        }
+        return mapToDto(company);
+    }
+
     public CompanyDtoResponse getCompanyByShortName(String shortName) {
         if (StringUtils.isBlank(shortName)) {
             throw new BadRequestException("Invalid name");
         }
         Company company = companyRepository.findByShortName(shortName);
-        if (company == null) { //todo - is it possible
+        if (company == null) {
             throw new NotFoundException("Company not found!");
         }
         return mapToDto(company);
@@ -73,6 +84,12 @@ public class CompanyService {
     public Set<CompanyDtoResponse> getAllCompanies() {
         return companyRepository.findAll().stream()
                 .map(this::mapToDto)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<String> getAllCompaniesAddresses() {
+        return companyRepository.findAll().stream()
+                .map(Company::getAddress)
                 .collect(Collectors.toSet());
     }
 

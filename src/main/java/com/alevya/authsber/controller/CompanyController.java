@@ -34,8 +34,8 @@ public class CompanyController {
     //    @Secured("CREATE_COMPANY")
     @Operation(summary = "Create company")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CompanyDtoResponse> createCompany(@RequestBody CompanyDtoRequest companyDtoRequest) {
-        return ResponseEntity.ok(companyService.createCompany(companyDtoRequest));
+    public ResponseEntity<CompanyDtoResponse> createCompany(@RequestBody CompanyDtoRequest dto) {
+        return ResponseEntity.ok(companyService.createCompany(dto));
     }
 
     //    @Secured("GET_COMPANY")
@@ -67,6 +67,13 @@ public class CompanyController {
         return companyService.getAllCompanies();
     }
 
+    @Operation(summary = "Get companies addresses")
+    @GetMapping(value = "/addresses", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Set<String> getAllCompaniesAddresses() {
+        return companyService.getAllCompaniesAddresses();
+    }
+
     //    @Secured("GET_COMPANIES")
     @Operation(summary = "Get All Companies Page")
     @GetMapping(value = "/pages", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -83,8 +90,8 @@ public class CompanyController {
     @Operation(summary = "Update company")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CompanyDtoResponse> updateCompany(@PathVariable Long id,
-            @RequestBody @Validated CompanyDtoRequest companyDtoRequest) {
-        return ResponseEntity.ok(companyService.updateCompany(id, companyDtoRequest));
+            @RequestBody @Validated CompanyDtoRequest dto) {
+        return ResponseEntity.ok(companyService.updateCompany(id, dto));
     }
 
     //    @Secured("DELETE_COMPANY")

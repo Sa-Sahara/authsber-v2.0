@@ -11,5 +11,4 @@ public class PermissionDtoResponse {
     private Long id;
     private String name;
     private String description;
-//    private Set<Role> roles;
 }

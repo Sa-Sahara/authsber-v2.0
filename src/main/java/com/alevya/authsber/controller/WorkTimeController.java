@@ -41,8 +41,8 @@ public class WorkTimeController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WorkTimeDtoResponse> createWorkTime(
-            @RequestBody WorkTimeDtoRequest workTimeDtoRequest) {
-        return ResponseEntity.ok(workTimeService.createWorkTime(workTimeDtoRequest));
+            @RequestBody WorkTimeDtoRequest dto) {
+        return ResponseEntity.ok(workTimeService.createWorkTime(dto));
     }
 
     //    @Secured("GET_WORKTIME")
@@ -65,8 +65,8 @@ public class WorkTimeController {
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WorkTimeDtoResponse> updateWorkTime(
             @PathVariable Long id,
-            @RequestBody @Validated WorkTimeDtoRequest workTimeDtoRequest) {
-        return ResponseEntity.ok(workTimeService.updateWorkTime(id, workTimeDtoRequest));
+            @RequestBody @Validated WorkTimeDtoRequest dto) {
+        return ResponseEntity.ok(workTimeService.updateWorkTime(id, dto));
     }
 
     //    @Secured("DELETE_WORKTIME")

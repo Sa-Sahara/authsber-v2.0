@@ -28,7 +28,7 @@ public class EmailConfig implements WebMvcConfigurer {
     @Value("${spring.mail.protocol}")
     private String protocol;
 
-    @Value("true") //todo
+    @Value("true")
     private Boolean debug;
 
     @Bean

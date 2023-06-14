@@ -6,9 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Objects;
-import java.util.Set;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
@@ -21,16 +18,4 @@ public class CompanyDtoRequest {
     private String address;
     private String phone;
     private Long parentCompanyId;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CompanyDtoRequest that)) return false;
-        return fullName.equals(that.fullName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(fullName);
-    }
 }
