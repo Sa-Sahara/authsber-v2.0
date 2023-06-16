@@ -5,6 +5,7 @@ import com.alevya.authsber.dto.OrderDtoResponse;
 import com.alevya.authsber.security.JwtTokenProvider;
 import com.alevya.authsber.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +23,7 @@ import java.util.List;
 @Tag(name = "Order controller",
         description = "Give CRUD functional for Order:" +
                 "/api/v1/order/**")
-//@SecurityRequirement(name = "JWT Authentication")
+@SecurityRequirement(name = "JWT Authentication")
 @RestController
 @RequestMapping("/api/v1/order")
 public class OrderController {
@@ -34,7 +36,7 @@ public class OrderController {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-//    @Secured("CREATE_ORDER")
+    @Secured("CREATE_ORDER")
     @Operation(summary = "Create order")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -43,14 +45,14 @@ public class OrderController {
         return ResponseEntity.ok(orderService.createOrder(dto));
     }
 
-//    @Secured("GET_ORDER")
+    @Secured("GET_ORDER")
     @Operation(summary = "Get order by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderDtoResponse> getOrderById(@PathVariable Long id) {
         return ResponseEntity.ok(orderService.getOrderById(id));
     }
 
-//    @Secured("GET_ORDER")
+    @Secured("GET_ORDER")
     @Operation(summary = "Get order by user id")
     @GetMapping(value = "/user/id", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDtoResponse> getOrderByUserId(@RequestHeader("Authorization") String jwtToken) {
@@ -58,21 +60,21 @@ public class OrderController {
         return orderService.getOrderByUserId(idJwt);
     }
 
-//    @Secured("GET_ORDER")
+    @Secured("GET_ORDER")
     @Operation(summary = "Get order by worktime id")
     @GetMapping(value = "/worktime/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDtoResponse> getOrderByWorktimeId(@PathVariable Long id) {
         return orderService.getOrderByWorktimeId(id);
     }
 
-//    @Secured("GET_ORDER")
+    @Secured("GET_ORDER")
     @Operation(summary = "Get order by workplace id")
     @GetMapping(value = "/workplace/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDtoResponse> getOrderByWorkplaceId(@PathVariable Long id) {
         return orderService.getOrderByWorkplaceId(id);
     }
 
-//    @Secured("GET_ORDERS")
+    @Secured("GET_ORDERS")
     @Operation(summary = "Get all orders")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -80,7 +82,7 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
-//    @Secured("UPDATE_ORDER")
+    @Secured("UPDATE_ORDER")
     @Operation(summary = "Update order")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderDtoResponse> updateOrder(
@@ -89,7 +91,7 @@ public class OrderController {
         return ResponseEntity.ok(orderService.updateOrder(id, dto));
     }
 
-//    @Secured("DELETE_ORDER")
+    @Secured("DELETE_ORDER")
     @Operation(summary = "Delete order")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteOrder(@PathVariable Long id) {
@@ -97,7 +99,7 @@ public class OrderController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-//    @Secured("GET_ORDERS")
+    @Secured("GET_ORDERS")
     @Operation(summary = "Get All orders Page")
     @GetMapping(value = "/pages", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

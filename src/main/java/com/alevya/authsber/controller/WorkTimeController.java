@@ -36,7 +36,7 @@ public class WorkTimeController {
         this.orderService = orderService;
     }
 
-    //    @Secured("CREATE_WORKTIME")
+    @Secured("CREATE_WORKTIME")
     @Operation(summary = "Create workTime")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -45,14 +45,14 @@ public class WorkTimeController {
         return ResponseEntity.ok(workTimeService.createWorkTime(dto));
     }
 
-    //    @Secured("GET_WORKTIME")
+    @Secured("GET_WORKTIME")
     @Operation(summary = "Get workTime by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WorkTimeDtoResponse> getWorkTimeById(@PathVariable Long id) {
         return ResponseEntity.ok(workTimeService.getWorkTimeById(id));
     }
 
-    //    @Secured("GET_WORKTIMES")
+    @Secured("GET_WORKTIMES")
     @Operation(summary = "Get all WorkTimes")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -60,7 +60,7 @@ public class WorkTimeController {
         return workTimeService.getAllWorkTimes();
     }
 
-    //    @Secured("UPDATE_WORKTIME")
+    @Secured("UPDATE_WORKTIME")
     @Operation(summary = "Update WorkTime")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WorkTimeDtoResponse> updateWorkTime(
@@ -69,7 +69,7 @@ public class WorkTimeController {
         return ResponseEntity.ok(workTimeService.updateWorkTime(id, dto));
     }
 
-    //    @Secured("DELETE_WORKTIME")
+    @Secured("DELETE_WORKTIME")
     @Operation(summary = "Delete WorkTime")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteWorkTime(@PathVariable Long id) {
@@ -81,7 +81,7 @@ public class WorkTimeController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    //    @Secured("GET_WORKTIMES")
+    @Secured("GET_WORKTIMES")
     @Operation(summary = "Get All WorkTimes Page")
     @GetMapping(value = "/pages", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

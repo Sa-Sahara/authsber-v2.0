@@ -4,6 +4,7 @@ import com.alevya.authsber.dto.RoleDtoRequest;
 import com.alevya.authsber.dto.RoleDtoResponse;
 import com.alevya.authsber.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +22,7 @@ import java.util.List;
 @Tag(name = "Role controller"
         , description = "Give CRUD functional for role:" +
         "/api/v1/role/**")
-//@SecurityRequirement(name = "JWT Authentication")
+@SecurityRequirement(name = "JWT Authentication")
 @RestController
 @RequestMapping("/api/v1/role")
 public class RoleController {
@@ -31,28 +33,28 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    //    @Secured("CREATE_ROLE")
+    @Secured("CREATE_ROLE")
     @Operation(summary = "Create role")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RoleDtoResponse> createRole(@RequestBody RoleDtoRequest dto) {
         return ResponseEntity.ok(roleService.createRole(dto));
     }
 
-    //    @Secured("GET_ROLE")
+    @Secured("GET_ROLE")
     @Operation(summary = "Get role by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RoleDtoResponse> getRoleById(@PathVariable Long id) {
         return ResponseEntity.ok(roleService.getRoleById(id));
     }
 
-    //    @Secured("GET_ROLE")
+    @Secured("GET_ROLE")
     @Operation(summary = "Get role by name")
     @GetMapping(value = "/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RoleDtoResponse> getRoleByName(@PathVariable String name) {
         return ResponseEntity.ok(roleService.getRoleByName(name));
     }
 
-    //    @Secured("GET_ROLES")
+    @Secured("GET_ROLES")
     @Operation(summary = "Get all roles")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -60,7 +62,7 @@ public class RoleController {
         return roleService.getAllRoles();
     }
 
-    //    @Secured("GET_ROLES")
+    @Secured("GET_ROLES")
     @Operation(summary = "Get All Roles Page")
     @GetMapping(value = "/pages", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -72,7 +74,7 @@ public class RoleController {
         return roleService.findAllRolesPageable(PageRequest.of(page, size, sortDirection, sort));
     }
 
-    //    @Secured("UPDATE_ROLE")
+    @Secured("UPDATE_ROLE")
     @Operation(summary = "Update role")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RoleDtoResponse> updateRole(
@@ -81,7 +83,7 @@ public class RoleController {
         return ResponseEntity.ok(roleService.updateRole(id, dto));
     }
 
-    //    @Secured("DELETE_ROLE")
+    @Secured("DELETE_ROLE")
     @Operation(summary = "Delete role")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteRole(@PathVariable Long id) {

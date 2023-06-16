@@ -31,21 +31,21 @@ public class PermissionController {
         this.permissionService = permissionService;
     }
 
-    //    @Secured("CREATE_PERMISSION")
+    @Secured("CREATE_PERMISSION")
     @Operation(summary = "Create permission")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PermissionDtoResponse> createPermission(@RequestBody PermissionDtoRequest dto) {
         return ResponseEntity.ok(permissionService.createPermission(dto));
     }
 
-    //    @Secured("GET_PERMISSION")
+    @Secured("GET_PERMISSION")
     @Operation(summary = "Get permission by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PermissionDtoResponse> getPermissionById(@PathVariable Long id) {
         return ResponseEntity.ok(permissionService.getPermissionById(id));
     }
 
-    //    @Secured("GET_PERMISSIONS")
+    @Secured("GET_PERMISSIONS")
     @Operation(summary = "Get all permissions")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -53,7 +53,7 @@ public class PermissionController {
         return permissionService.getAllPermissions();
     }
 
-    //    @Secured("GET_PERMISSIONS")
+    @Secured("GET_PERMISSIONS")
     @Operation(summary = "Get All Permissions Page")
     @GetMapping(value = "/pages", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -66,7 +66,7 @@ public class PermissionController {
         return permissionService.findAllPermissionsPageable(PageRequest.of(page, size, sortDirection, sort));
     }
 
-    //    @Secured("UPDATE_PERMISSION")
+    @Secured("UPDATE_PERMISSION")
     @Operation(summary = "Update permission")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PermissionDtoResponse> updatePermission(@PathVariable Long id,
@@ -74,7 +74,7 @@ public class PermissionController {
         return ResponseEntity.ok(permissionService.updatePermission(id, dto));
     }
 
-    //    @Secured("DELETE_PERMISSION")
+    @Secured("DELETE_PERMISSION")
     @Operation(summary = "Delete permission")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deletePermission(@PathVariable Long id) {

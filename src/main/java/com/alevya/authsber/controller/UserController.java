@@ -43,7 +43,7 @@ public class UserController {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    //    @Secured("MYUSER")
+    @Secured("MYUSER")
     @Operation(summary = "Create User")
     @PostMapping(
             value = "/my",
@@ -54,7 +54,7 @@ public class UserController {
         return ResponseEntity.ok(userService.createMyUser(dto));
     }
 
-    //    @Secured("CREATE_USER")
+    @Secured("CREATE_USER")
     @Operation(summary = "Create User With Settings")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserWithSettingsDtoResponse> createUserWithSettings(
@@ -62,14 +62,14 @@ public class UserController {
         return ResponseEntity.ok(userService.createUserWithSettings(dto));
     }
 
-    //    @Secured("GET_USER")
+    @Secured("GET_USER")
     @Operation(summary = "Get User By Id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserWithSettingsDtoResponse> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
-    //    @Secured("MYUSER")
+    @Secured("MYUSER")
     @Operation(summary = "Get My User for change profile")
     @GetMapping(value = "/my", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserGeneralInfoDtoResponse> getMyUser(
@@ -79,7 +79,7 @@ public class UserController {
         return ResponseEntity.ok(userService.mapToUserGeneralInfoDto(userPrincipal.getUser()));
     }
 
-    //    @Secured("GET_USERS")
+    @Secured("GET_USERS")
     @Operation(summary = "Get All Users")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -87,7 +87,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    //    @Secured("GET_USERS")
+    @Secured("GET_USERS")
     @Operation(summary = "Get All Users Page")
     @GetMapping(value = "/pages", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -111,7 +111,7 @@ public class UserController {
                 userPrincipal.getUser().getId(), dto));
     }
 
-    //    @Secured("UPDATE_USER")
+    @Secured("UPDATE_USER")
     @Operation(summary = "Update User")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserWithSettingsDtoResponse> updateUser(@PathVariable Long id,
@@ -119,7 +119,7 @@ public class UserController {
         return ResponseEntity.ok(userService.updateUserWithSettings(id, dto));
     }
 
-    //    @Secured("DELETE_USER")
+    @Secured("DELETE_USER")
     @Operation(summary = "Delete User")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {

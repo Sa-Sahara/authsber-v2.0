@@ -32,7 +32,7 @@ public class WorkplaceController {
     }
 
 
-    //    @Secured("CREATE_WORKPLACE")
+    @Secured("CREATE_WORKPLACE")
     @Operation(summary = "Create workplace")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -41,14 +41,14 @@ public class WorkplaceController {
         return ResponseEntity.ok(workplaceService.createWorkplace(dto));
     }
 
-    //    @Secured("GET_WORKPLACE")
+    @Secured("GET_WORKPLACE")
     @Operation(summary = "Get workplace by id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WorkplaceDtoResponse> getWorkplaceById(@PathVariable Long id) {
         return ResponseEntity.ok(workplaceService.getWorkplaceById(id));
     }
 
-    //    @Secured("GET_WORKPLACES")
+    @Secured("GET_WORKPLACES")
     @Operation(summary = "Get all Workplaces")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -56,7 +56,7 @@ public class WorkplaceController {
         return workplaceService.getAllWorkplaces();
     }
 
-    //    @Secured("UPDATE_WORKPLACE")
+    @Secured("UPDATE_WORKPLACE")
     @Operation(summary = "Update Workplace")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WorkplaceDtoResponse> updateWorkplace(
@@ -65,7 +65,7 @@ public class WorkplaceController {
         return ResponseEntity.ok(workplaceService.updateWorkplace(id, dto));
     }
 
-    //    @Secured("DELETE_WORKPLACE")
+    @Secured("DELETE_WORKPLACE")
     @Operation(summary = "Delete Workplace")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteWorkplace(@PathVariable Long id) {
@@ -73,7 +73,7 @@ public class WorkplaceController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    //    @Secured("GET_WORKPLACES")
+    @Secured("GET_WORKPLACES")
     @Operation(summary = "Get All workplaces Page")
     @GetMapping(value = "/pages", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

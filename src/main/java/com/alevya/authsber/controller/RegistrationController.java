@@ -34,7 +34,7 @@ public class RegistrationController {
     }
 
     @Operation(summary = "Request for generate security code and send user by sms")
-//    @Secured("ROLE_NOVERY")
+@Secured("ROLE_NOVERY")
     @GetMapping(value = "/phone/send")
     public ResponseEntity<String> sendPhoneCode(@RequestHeader("Authorization") String jwtToken) {
         UserPrincipal userPrincipal = (UserPrincipal) userDetailsService
@@ -43,7 +43,7 @@ public class RegistrationController {
     }
 
     @Operation(summary = "Check security code and do status verification user")
-//    @Secured("ROLE_NOVERY")
+@Secured("ROLE_NOVERY")
     @GetMapping(value = "/phone/check/{code}")
     public ResponseEntity<String> checkPhoneCode(@RequestHeader("Authorization") String jwtToken,
              @PathVariable @Parameter(description = "Code for check phone") Long code) {
