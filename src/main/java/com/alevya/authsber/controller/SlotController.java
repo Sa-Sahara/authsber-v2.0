@@ -7,6 +7,7 @@ import com.alevya.authsber.service.OrderService;
 import com.alevya.authsber.service.SlotService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,10 +44,10 @@ public class SlotController {
     @Operation(summary = "Get all slots for service, company, date")
     @GetMapping(value = "/sendForm", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getSlotsByServiceCompanyDay(
-            @RequestParam String service,
+            @RequestParam Long serviceId,
             @RequestParam String address,
-            @RequestParam LocalDate date) {
-        return ResponseEntity.ok(slotService.getSlotsByServiceCompanyDay(service, address, date));
+            @RequestParam @DateTimeFormat(pattern= "yyyy-MM-dd") LocalDate date) {
+        return ResponseEntity.ok(slotService.getSlotsByServiceCompanyDay(serviceId, address, date));
     }
 
     @Operation(summary = "Create order by slot")

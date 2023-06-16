@@ -35,12 +35,12 @@ public class OrderService {
         this.serviceRepository = serviceRepository;
     }
 
-    public OrderDtoResponse createOrder(OrderDtoRequest orderDtoRequest) {
-        if (orderDtoRequest == null) {
+    public OrderDtoResponse createOrder(OrderDtoRequest dto) {
+        if (dto == null) {
             throw new BadRequestException("Invalid order");
         }
         return mapToOrderDto(orderRepository.save(
-                mapToOrder(orderDtoRequest)));
+                mapToOrder(dto)));
     }
 
     public OrderDtoResponse createOrderBySlot(Slot slot, Long id) {

@@ -89,16 +89,8 @@ public class RoleService {
                 -> new NotFoundException("Role not found!"));
         //name
         final String name = roleDtoRequest.getName();
-        if (StringUtils.isBlank(name)) {
-            throw new BadRequestException("Invalid role's name");
-        } else if (name.length() > MAX_LENGTH) {
-            throw new BadRequestException("Too long role's name");
-        } else {
-            oldRole.setName(name);
-        }
-        if (roleRepository.existsByName(roleDtoRequest.getName())) {
-            throw new BadRequestException("Exist role with this name");
-        }
+        oldRole.setName(name);
+
         //level
         final Integer level = roleDtoRequest.getLevel();
         if (level != null) {

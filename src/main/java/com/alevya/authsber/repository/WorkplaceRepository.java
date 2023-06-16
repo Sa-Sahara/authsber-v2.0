@@ -12,7 +12,7 @@ import java.util.List;
 public interface WorkplaceRepository extends JpaRepository<Workplace, Long> {
     Workplace findByName(String name);
     boolean existsByName(String name);
-    @Query(value = "select * from workplace w " +
+    @Query(value = "select * from t_workplace w " +
             "where w.company_id = ?1", nativeQuery = true)
     List<Workplace> findAllByCompanyId(@NonNull Long companyId);
 }

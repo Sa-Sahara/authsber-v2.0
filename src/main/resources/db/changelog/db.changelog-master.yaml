@@ -28,6 +28,8 @@ databaseChangeLog:
   - include:
       file: db/changelog/changeset/2023-05-04_23-37_fill_in-t_user.yaml
   - include:
+      file: db/changelog/changeset/2023-06-02_18-08_fill_in-t_service.yaml
+  - include:
       file: db/changelog/changeset/2023-06-03_fill-in-t_user_role.yaml
   - include:
       file: db/changelog/changeset/2023-06-03_fill_in-t_message.yaml

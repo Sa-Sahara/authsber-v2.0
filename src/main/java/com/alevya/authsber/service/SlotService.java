@@ -89,8 +89,8 @@ public class SlotService {
         return slots;
     }
 
-    public List<Slot> getSlotsByServiceCompanyDay(String serviceName, String address, LocalDate date) {
-        if (serviceName.isBlank() || address.isBlank() || date == null) {
+    public List<Slot> getSlotsByServiceCompanyDay(Long serviceId, String address, LocalDate date) {
+        if (serviceId == null || address.isBlank() || date == null) {
             throw new BadRequestException("service, address, date should not be empty");
         }
 
@@ -101,9 +101,6 @@ public class SlotService {
         if (workplaceByCompanyId.size() == 0) {
             throw new NotFoundException("Workplace not found");
         }
-
-        com.alevya.authsber.model.Service service = serviceRepository.findByName(serviceName);
-        long serviceId = service.getId();
 
         List<Slot> slots = new ArrayList<>();
         int slotsPerHour = (int) (MINUTES_PER_HOUR / slotDuration);
